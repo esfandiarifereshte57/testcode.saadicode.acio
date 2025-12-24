@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>Patronus Messenger</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#7c3aed">
+<link rel="icon" href="https://uploadkon.ir/uploads/867323_25IMG-4467.jpeg">
+
+<style>
+/* ================= RESET ================= */
+*{box-sizing:border-box;font-family:system-ui;margin:0;padding:0}
+body{height:100vh;background:#0f172a;color:#fff;overflow:hidden}
+button,input,select{border:none;outline:none}
+img{max-width:100%}
+
+/* ================= VARIABLES ================= */
+:root{
+--primary:#7c3aed;
+--bg:#0f172a;
+--card:#111827;
+--muted:#9ca3af;
+--border:rgba(255,255,255,.08);
+--radius:18px;
+--shadow:0 20px 40px rgba(0,0,0,.4);
+}
+
+/* ================= SPLASH ================= */
+#splash{position:fixed;inset:0;background:linear-gradient(135deg,#7c3aed,#4f46e5);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;animation:fadeOut 1s 2.5s forwards}
+#splash img{width:120px;border-radius:30px;margin-bottom:16px}
+#splash h1{color:#fff;font-size:34px}
+@keyframes fadeOut{to{opacity:0;visibility:hidden}}
+
+/* ================= AUTH ================= */
+#auth{height:100%;display:flex;align-items:center;justify-content:center}
+.auth-box{background:var(--card);padding:30px;width:360px;border-radius:var(--radius);box-shadow:var(--shadow)}
+.auth-box h2{text-align:center;margin-bottom:20px}
+.auth-box input{width:100%;padding:14px;margin-bottom:12px;border-radius:14px;background:#1f2937;color:#fff}
+.auth-box button{width:100%;padding:14px;border-radius:14px;background:var(--primary);color:#fff;font-weight:700;cursor:pointer}
+.switch{text-align:center;margin-top:12px;color:var(--muted);cursor:pointer}
+#authMsg{text-align:center;margin-top:10px;color:#ef4444}
+
+/* ================= APP ================= */
+#app{display:none;height:100%}
+.layout{display:flex;height:100%}
+
+/* ================= SIDEBAR ================= */
+.sidebar{width:320px;background:var(--card);display:flex;flex-direction:column;border-left:1px solid var(--border)}
+.sidebar header{padding:16px;display:flex;align-items:center;justify-content:space-between;font-weight:700}
+.chat-list{flex:1;overflow:auto}
+.chat-item{padding:14px 16px;display:flex;gap:12px;cursor:pointer;transition:.2s}
+.chat-item:hover{background:rgba(255,255,255,.05)}
+.avatar{width:48px;height:48px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:700}
+.chat-info{flex:1}.chat-info .name{font-weight:700}.chat-info .last{font-size:12px;color:var(--muted)}
+
+/* ================= CHAT ================= */
+.chat{flex:1;display:flex;flex-direction:column}
+.chat header{padding:16px;border-bottom:1px solid var(--border)}
+#typing{font-size:12px;color:var(--muted);display:none;margin-top:4px}
+.messages{flex:1;overflow:auto;padding:20px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:70%;padding:12px 16px;border-radius:18px;font-size:14px}
+.me{align-self:flex-end;background:var(--primary)}
+.other{align-self:flex-start;background:var(--card)}
+.time{font-size:10px;color:var(--muted);margin-top:4px}
+
+/* ================= INPUT ================= */
+.input{padding:10px;display:flex;gap:8px;border-top:1px solid var(--border);align-items:center}
+.input input{flex:1;padding:12px;border-radius:14px;background:#1f2937;color:#fff}
+.input button{padding:12px;border-radius:14px;background:#1f2937;color:#fff;cursor:pointer}
+.send{background:var(--primary)!important}
+
+/* ================= EMOJI ================= */
+#emojiPanel{position:absolute;bottom:80px;right:20px;width:260px;height:300px;background:var(--card);border-radius:20px;box-shadow:var(--shadow);display:none;flex-direction:column}
+.emoji-grid{flex:1;overflow:auto;display:grid;grid-template-columns:repeat(6,1fr);padding:10px;gap:6px;font-size:22px}
+.emoji-grid span{cursor:pointer;text-align:center;border-radius:8px}
+.emoji-grid span:hover{background:rgba(255,255,255,.1)}
+
+/* ================= ATTACH ================= */
+#attachPanel{position:absolute;bottom:80px;left:20px;background:var(--card);border-radius:20px;padding:14px;display:none;box-shadow:var(--shadow)}
+.attach-item{padding:8px;cursor:pointer}.attach-item:hover{background:rgba(255,255,255,.05)}
+
+footer{text-align:center;padding:8px;font-size:12px;color:var(--muted)}
+footer a{color:var(--primary);text-decoration:none}
+
+@media(max-width:768px){.sidebar{display:none}}
+</style>
+</head>
+
+<body>
+<!-- SPLASH -->
+<div id="splash"><img src="https://uploadkon.ir/uploads/867323_25IMG-4467.jpeg"><h1>Patronus</h1></div>
+
+<!-- AUTH -->
+<div id="auth">
+<div class="auth-box">
+<h2 id="authTitle">ورود</h2>
+<input id="username" placeholder="نام کاربری یا آیدی">
+<input id="password" type="password" placeholder="رمز عبور">
+<button onclick="submitAuth()">ورود</button>
+<div class="switch" onclick="toggleAuth()">ثبت‌نام</div>
+<div id="authMsg"></div>
+</div>
+</div>
+
+<!-- APP -->
+<div id="app">
+<div class="layout">
+<div class="sidebar">
+<header><span>💬 چت‌ها</span></header>
+<div class="chat-list" id="chatList"></div>
+<footer>طراحی و توسعه توسط <a href="https://aciocode.vercel.app" target="_blank">تیم آکیو</a></footer>
+</div>
+
+<div class="chat">
+<header>
+<div id="chatHeader">انتخاب چت</div>
+<div id="typing">در حال نوشتن...</div>
+</header>
+
+<div class="messages" id="messages"></div>
+
+<div class="input">
+<button onclick="toggleAttach()">📎</button>
+<button onclick="toggleEmoji()">😊</button>
+<input id="msgInput" placeholder="پیام..." oninput="onTyping()">
+<button class="send" onclick="sendMessage()">➤</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- EMOJI -->
+<div id="emojiPanel"><div class="emoji-grid" id="emojiGrid"></div></div>
+
+<!-- ATTACH -->
+<div id="attachPanel">
+<div class="attach-item">📷 عکس</div>
+<div class="attach-item">🎥 ویدیو</div>
+<div class="attach-item">📄 فایل</div>
+</div>
+
+<script>
+/* ================= CONFIG ================= */
+const API="https://script.google.com/macros/s/AKfycbx58pC2wvnCrM4a_3XeIESwR1lW_Wn7Qcw7J6jtOXozGITO3JLu4tTzFUE_iBUQxoPh/exec";
+let isRegister=false,currentUser=null,currentChat=null,lastMsgCount=0,lastTyping=0;
+
+/* ================= AUTH ================= */
+function toggleAuth(){isRegister=!isRegister;authTitle.innerText=isRegister?"ثبت‌نام":"ورود";}
+async function submitAuth(){
+authMsg.innerText="";
+const payload=isRegister?
+{action:"register",username:username.value,userid:username.value,password:password.value}:
+{action:"login",userid:username.value,password:password.value};
+const r=await fetch(API,{method:"POST",body:JSON.stringify(payload)});
+const j=await r.json();
+if(j.ok){currentUser=j.user;auth.style.display="none";app.style.display="block";loadChats();}
+else authMsg.innerText=j.error;
+}
+
+/* ================= CHATS ================= */
+async function loadChats(){
+const r=await fetch(API,{method:"POST",body:JSON.stringify({action:"getChats",userId:currentUser.userid})});
+const j=await r.json();
+chatList.innerHTML="";
+j.chats.forEach(c=>{
+const d=document.createElement("div");
+d.className="chat-item";
+d.innerHTML=`<div class="avatar">${c.name[0]||"?"}</div><div class="chat-info"><div class="name">${c.name}</div><div class="last">${c.lastMessage||""}</div></div>`;
+d.onclick=()=>openChat(c);
+chatList.appendChild(d);
+});
+}
+
+/* ================= CHAT ================= */
+async function openChat(c){currentChat=c;chatHeader.innerText=c.name;messages.innerHTML="";
+const r=await fetch(API,{method:"POST",body:JSON.stringify({action:"getMessages",chatId:c.id})});
+const j=await r.json();lastMsgCount=j.messages.length;j.messages.forEach(renderMsg);}
+function renderMsg(m){
+const d=document.createElement("div");d.className="msg "+(m.senderId===currentUser.userid?"me":"other");
+d.innerHTML=`${m.text}<div class="time">${new Date(m.timestamp).toLocaleTimeString()}</div>`;
+messages.appendChild(d);messages.scrollTop=messages.scrollHeight;}
+async function sendMessage(){if(!currentChat)return;const t=msgInput.value.trim();if(!t)return;msgInput.value="";renderMsg({text:t,senderId:currentUser.userid,timestamp:new Date()});
+await fetch(API,{method:"POST",body:JSON.stringify({action:"sendMessage",chatId:currentChat.id,senderId:currentUser.userid,text:t})});lastTyping=0;}
+
+/* ================= TYPING ================= */
+function onTyping(){lastTyping=Date.now();}
+setInterval(async()=>{if(!currentChat)return;const r=await fetch(API,{method:"POST",body:JSON.stringify({action:"getMessages",chatId:currentChat.id})});const j=await r.json();
+if(j.messages.length>lastMsgCount){lastMsgCount=j.messages.length;messages.innerHTML="";j.messages.forEach(renderMsg);typing.style.display="none";}
+else{typing.style.display=(Date.now()-lastTyping<3000)?"block":"none";}},1500);
+
+/* ================= EMOJI ================= */
+const emojis="😀😁😂🤣😊😍😘😎🤔😴😭😡👍👎🙏🔥💔❤️🎉✨⚡🌈".split("");
+emojis.forEach(e=>{const s=document.createElement("span");s.textContent=e;s.onclick=()=>msgInput.value+=e;emojiGrid.appendChild(s);});
+function toggleEmoji(){emojiPanel.style.display=emojiPanel.style.display==="flex"?"none":"flex";attachPanel.style.display="none";}
+
+/* ================= ATTACH ================= */
+function toggleAttach(){attachPanel.style.display=attachPanel.style.display==="block"?"none":"block";emojiPanel.style.display="none";}
+</script>
+</body>
+</html>
