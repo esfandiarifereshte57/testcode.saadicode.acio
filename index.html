@@ -3,38 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acioai 1.0.0 | هوش مصنوعی تیم آکیو</title>
+    <title>Acioai | هوش مصنوعی تیم آکیو</title>
     
-    <!-- فونت فارسی Vazirmatn -->
+    <!-- فونت اصلی DeepSeek -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Reset و متغیرها */
+        /* Reset و متغیرهای دقیق DeepSeek */
         :root {
-            --primary-color: #4361ee;
-            --secondary-color: #3a0ca3;
-            --success-color: #2ecc71;
-            --danger-color: #e74c3c;
-            --warning-color: #f39c12;
-            --dark-color: #121826;
-            --light-color: #f8f9fa;
-            --gray-color: #6c757d;
-            --border-radius: 12px;
-            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            --ds-background-primary: #ffffff;
+            --ds-background-secondary: #f7f7f8;
+            --ds-background-tertiary: #ececf1;
+            --ds-surface-primary: #ffffff;
+            --ds-surface-secondary: #f7f7f8;
+            --ds-border-light: #e5e5e5;
+            --ds-border-medium: #d9d9e3;
+            --ds-text-primary: #000000;
+            --ds-text-secondary: #565869;
+            --ds-text-tertiary: #8e8ea0;
+            --ds-green-primary: #10a37f;
+            --ds-green-hover: #1a7f64;
+            --ds-gray-light: #f7f7f8;
+            --ds-gray-medium: #ececf1;
+            --ds-gray-dark: #d9d9e3;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         [data-theme="dark"] {
-            --primary-color: #5a7dff;
-            --secondary-color: #4a1fb8;
-            --dark-color: #f8f9fa;
-            --light-color: #121826;
-            --gray-color: #a0a0a0;
+            --ds-background-primary: #343541;
+            --ds-background-secondary: #444654;
+            --ds-background-tertiary: #40414f;
+            --ds-surface-primary: #343541;
+            --ds-surface-secondary: #444654;
+            --ds-border-light: #565869;
+            --ds-border-medium: #40414f;
+            --ds-text-primary: #ececf1;
+            --ds-text-secondary: #c5c5d2;
+            --ds-text-tertiary: #8e8ea0;
+            --ds-green-primary: #10a37f;
+            --ds-green-hover: #1a7f64;
+            --ds-gray-light: #444654;
+            --ds-gray-medium: #40414f;
+            --ds-gray-dark: #343541;
         }
 
         * {
@@ -43,157 +64,305 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Vazirmatn', sans-serif;
-            background-color: var(--light-color);
-            color: var(--dark-color);
-            transition: var(--transition);
-            min-height: 100vh;
-            overflow-x: hidden;
+        html, body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--ds-background-primary);
+            color: var(--ds-text-primary);
+            line-height: 1.5;
+            height: 100%;
+            overflow: hidden;
+            transition: background-color var(--transition-base), color var(--transition-base);
         }
 
-        /* هدر */
-        .app-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .header-content {
+        /* Layout اصلی */
+        .app-container {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
+            flex-direction: column;
+            height: 100vh;
+            max-width: 100%;
             margin: 0 auto;
         }
 
-        .logo-section {
+        /* هدر دقیق DeepSeek */
+        .header {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--ds-border-light);
+            background: var(--ds-background-primary);
             display: flex;
             align-items: center;
-            gap: 1rem;
+            justify-content: space-between;
+            height: 56px;
+            flex-shrink: 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
         }
 
         .logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--ds-green-primary), #0d8c6d);
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            font-size: 1.5rem;
-            font-weight: 700;
+            justify-content: center;
         }
 
-        .logo i {
-            font-size: 2rem;
-            color: #ffd166;
+        .logo img {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
         }
 
-        .version {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
+        .logo-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--ds-text-primary);
+            letter-spacing: -0.01em;
         }
 
         .header-controls {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 8px;
         }
 
-        /* بخش احراز هویت */
-        .auth-section {
+        /* دکمه‌های هدر */
+        .header-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            color: var(--ds-text-secondary);
+            cursor: pointer;
             display: flex;
+            align-items: center;
             justify-content: center;
-            align-items: center;
-            min-height: calc(100vh - 80px);
-            padding: 2rem;
+            transition: all var(--transition-fast);
+            position: relative;
         }
 
-        .auth-container {
-            max-width: 500px;
-            width: 100%;
+        .header-btn:hover {
+            background: var(--ds-background-secondary);
+            color: var(--ds-text-primary);
         }
 
-        .auth-card {
-            background: var(--light-color);
-            border-radius: var(--border-radius);
-            padding: 2.5rem;
-            box-shadow: var(--box-shadow);
-            border: 1px solid rgba(0, 0, 0, 0.1);
+        .header-btn.active {
+            background: var(--ds-background-secondary);
+            color: var(--ds-green-primary);
         }
 
-        .auth-card h2 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .auth-description {
-            color: var(--gray-color);
-            margin-bottom: 2rem;
-            line-height: 1.6;
+        .header-btn i {
+            font-size: 18px;
         }
 
         /* بخش چت */
-        .chat-section {
-            display: none;
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
         .chat-container {
-            display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 2rem;
-            height: calc(100vh - 180px);
-        }
-
-        /* جریان چت */
-        .chat-flow {
+            flex: 1;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            background: var(--light-color);
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            overflow: hidden;
+            background: var(--ds-background-primary);
         }
 
-        .chat-header {
-            background: var(--primary-color);
-            color: white;
-            padding: 1rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chat-header h3 {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+        .messages-wrapper {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px 16px;
+            scroll-behavior: smooth;
         }
 
         .messages-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1.5rem;
-            background: var(--light-color);
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* پیام‌ها */
+        .message-group {
+            margin-bottom: 32px;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .message {
-            margin-bottom: 1.5rem;
-            max-width: 80%;
-            animation: slideIn 0.3s ease-out;
+            display: flex;
+            gap: 16px;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--ds-border-light);
         }
 
-        @keyframes slideIn {
+        .message:last-child {
+            border-bottom: none;
+        }
+
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, var(--ds-green-primary), #0d8c6d);
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .message.ai .message-avatar {
+            background: var(--ds-background-secondary);
+            color: var(--ds-text-secondary);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .message-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .message-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--ds-text-primary);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .message-text.typing {
+            opacity: 0.9;
+        }
+
+        .message-text .typing-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 20px;
+            background: var(--ds-green-primary);
+            margin-left: 2px;
+            vertical-align: middle;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* ناحیه ورود */
+        .input-container {
+            padding: 20px 16px;
+            background: var(--ds-background-primary);
+            border-top: 1px solid var(--ds-border-light);
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .input-wrapper {
+            position: relative;
+            background: var(--ds-background-secondary);
+            border: 1px solid var(--ds-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 12px 16px;
+            transition: all var(--transition-fast);
+        }
+
+        .input-wrapper:focus-within {
+            border-color: var(--ds-green-primary);
+            box-shadow: 0 0 0 2px rgba(16, 163, 127, 0.1);
+        }
+
+        .message-input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: var(--ds-text-primary);
+            font-size: 15px;
+            line-height: 1.5;
+            resize: none;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            min-height: 24px;
+            max-height: 200px;
+        }
+
+        .message-input::placeholder {
+            color: var(--ds-text-tertiary);
+        }
+
+        .input-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 8px;
+        }
+
+        .send-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--ds-green-primary);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .send-btn:hover:not(:disabled) {
+            background: var(--ds-green-hover);
+            transform: scale(1.05);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* صفحه احراز هویت */
+        .auth-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: var(--ds-background-primary);
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 400px;
+            background: var(--ds-background-primary);
+            border: 1px solid var(--ds-border-light);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
             from {
                 opacity: 0;
                 transform: translateY(20px);
@@ -204,506 +373,265 @@
             }
         }
 
-        .message.user {
-            margin-right: auto;
+        .auth-header {
+            text-align: center;
+            margin-bottom: 32px;
         }
 
-        .message.ai {
-            margin-left: auto;
-        }
-
-        .message.admin {
-            margin-left: auto;
-            border-right: 3px solid var(--primary-color);
-        }
-
-        .message-content {
-            padding: 1rem 1.25rem;
-            border-radius: var(--border-radius);
-            position: relative;
-            line-height: 1.6;
-        }
-
-        .message.user .message-content {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-bottom-right-radius: 4px;
-        }
-
-        .message.ai .message-content {
-            background: #f0f0f0;
-            color: var(--dark-color);
-            border-bottom-left-radius: 4px;
-        }
-
-        .message.admin .message-content {
-            background: #e3f2fd;
-            color: var(--dark-color);
-            border-bottom-left-radius: 4px;
-        }
-
-        .message-timestamp {
-            font-size: 0.75rem;
-            color: var(--gray-color);
-            margin-top: 0.5rem;
-            text-align: left;
-        }
-
-        .typing-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-            padding: 0.5rem 1rem;
-            background: #f0f0f0;
-            border-radius: var(--border-radius);
-        }
-
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--gray-color);
-            border-radius: 50%;
-            animation: typing 1.4s infinite;
-        }
-
-        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-5px); }
-        }
-
-        /* فرم ارسال پیام */
-        .message-form {
-            padding: 1.5rem;
-            background: var(--light-color);
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .input-group {
+        .auth-logo {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 16px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--ds-green-primary), #0d8c6d);
             display: flex;
-            gap: 0.75rem;
+            align-items: center;
+            justify-content: center;
         }
 
-        .message-input {
-            flex: 1;
-            padding: 1rem 1.25rem;
-            border: 2px solid #ddd;
-            border-radius: var(--border-radius);
-            font-family: 'Vazirmatn', sans-serif;
-            font-size: 1rem;
-            transition: var(--transition);
-            background: var(--light-color);
-            color: var(--dark-color);
+        .auth-logo img {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
         }
 
-        .message-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        .auth-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--ds-text-primary);
+            margin-bottom: 8px;
         }
 
-        /* سایدبار */
-        .sidebar {
-            background: var(--light-color);
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 1.5rem;
+        .auth-subtitle {
+            font-size: 14px;
+            color: var(--ds-text-secondary);
+            line-height: 1.5;
+        }
+
+        .auth-form {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 16px;
         }
 
-        .user-card {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            text-align: center;
-        }
-
-        .user-avatar {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 50%;
-            margin: 0 auto 1rem;
+        .form-group {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: var(--primary-color);
+            flex-direction: column;
+            gap: 6px;
         }
 
-        .user-name {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+        .form-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ds-text-secondary);
         }
 
-        .subscription-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
+        .form-input {
+            padding: 12px 16px;
+            border: 1px solid var(--ds-border-medium);
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            background: var(--ds-background-primary);
+            color: var(--ds-text-primary);
+            font-family: 'Inter', sans-serif;
+            transition: all var(--transition-fast);
         }
 
-        .subscription-badge.go { background: linear-gradient(135deg, #ff9a00, #ff5e00); }
-        .subscription-badge.pro { background: linear-gradient(135deg, #00b09b, #96c93d); }
-        .subscription-badge.plus { background: linear-gradient(135deg, #667eea, #764ba2); }
-
-        .days-left {
-            background: rgba(255, 255, 255, 0.3);
-            padding: 0.25rem 0.5rem;
-            border-radius: 10px;
+        .form-input:focus {
+            outline: none;
+            border-color: var(--ds-green-primary);
+            box-shadow: 0 0 0 3px rgba(16, 163, 127, 0.1);
         }
 
-        /* پشتیبانی */
-        .support-section {
-            background: var(--light-color);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-        }
-
-        .support-section h4 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+        .form-actions {
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            gap: 12px;
+            margin-top: 8px;
         }
 
-        .support-form {
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .support-input {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            border: 2px solid #ddd;
-            border-radius: var(--border-radius);
-            font-family: 'Vazirmatn', sans-serif;
-            background: var(--light-color);
-            color: var(--dark-color);
-        }
-
-        /* دکمه‌ها */
         .btn {
-            padding: 0.875rem 1.75rem;
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: var(--radius-md);
             border: none;
-            border-radius: var(--border-radius);
-            font-family: 'Vazirmatn', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 15px;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
+            transition: all var(--transition-fast);
+            display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 8px;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--ds-green-primary);
             color: white;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.3);
+        .btn-primary:hover:not(:disabled) {
+            background: var(--ds-green-hover);
+            transform: translateY(-1px);
         }
 
-        .btn-success {
-            background: linear-gradient(135deg, var(--success-color), #27ae60);
-            color: white;
+        .btn-secondary {
+            background: var(--ds-background-secondary);
+            color: var(--ds-text-primary);
+            border: 1px solid var(--ds-border-medium);
         }
 
-        .btn-danger {
-            background: linear-gradient(135deg, var(--danger-color), #c0392b);
-            color: white;
+        .btn-secondary:hover:not(:disabled) {
+            background: var(--ds-background-tertiary);
         }
 
-        .btn-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            padding: 0;
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* صفحه پشتیبانی */
+        .support-container {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 24px 16px;
+            height: 100%;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .support-header {
+            margin-bottom: 24px;
+        }
+
+        .support-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--ds-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .support-subtitle {
+            font-size: 14px;
+            color: var(--ds-text-secondary);
+            line-height: 1.5;
+        }
+
+        .support-form {
+            background: var(--ds-background-secondary);
+            border: 1px solid var(--ds-border-medium);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .support-form textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 16px;
+            border: 1px solid var(--ds-border-medium);
+            border-radius: var(--radius-md);
+            background: var(--ds-background-primary);
+            color: var(--ds-text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            resize: vertical;
+            margin-bottom: 16px;
+            transition: all var(--transition-fast);
+        }
+
+        .support-form textarea:focus {
+            outline: none;
+            border-color: var(--ds-green-primary);
+            box-shadow: 0 0 0 3px rgba(16, 163, 127, 0.1);
+        }
+
+        /* فوتر */
+        .footer {
+            padding: 16px;
+            text-align: center;
+            border-top: 1px solid var(--ds-border-light);
+            background: var(--ds-background-primary);
+            color: var(--ds-text-tertiary);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .footer-content {
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
-        /* مودال */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
+        .footer-link {
+            color: var(--ds-text-secondary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
         }
 
-        .modal-content {
-            background: var(--light-color);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: var(--box-shadow);
-            animation: modalIn 0.3s ease;
+        .footer-link:hover {
+            color: var(--ds-green-primary);
+            text-decoration: underline;
         }
 
-        @keyframes modalIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* اطلاعیه‌ها */
+        /* نوتیفیکیشن */
         .notification {
             position: fixed;
-            top: 100px;
+            top: 20px;
             left: 50%;
-            transform: translateX(-50%);
-            padding: 1rem 1.5rem;
-            border-radius: var(--border-radius);
-            color: white;
-            font-weight: 500;
-            z-index: 3000;
-            animation: slideDown 0.3s ease;
+            transform: translateX(-50%) translateY(-100%);
+            background: var(--ds-background-primary);
+            border: 1px solid var(--ds-border-medium);
+            border-radius: var(--radius-md);
+            padding: 12px 20px;
+            box-shadow: var(--shadow-md);
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 12px;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            max-width: 400px;
+            width: 90%;
         }
 
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
+        .notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
 
-        .notification.success { background: var(--success-color); }
-        .notification.error { background: var(--danger-color); }
-        .notification.warning { background: var(--warning-color); }
-
-        /* پنل ادمین */
-        .admin-panel {
-            display: none;
-            max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        .admin-header {
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-            color: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .admin-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .admin-card {
-            background: var(--light-color);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: var(--box-shadow);
-        }
-
-        .admin-card h4 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+        .notification-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
-        /* آمار */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+        .notification.success .notification-icon {
+            background: rgba(16, 163, 127, 0.1);
+            color: var(--ds-green-primary);
         }
 
-        .stat-card {
-            background: var(--light-color);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
+        .notification.error .notification-icon {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
+        .notification-text {
+            font-size: 14px;
+            color: var(--ds-text-primary);
+            flex: 1;
         }
 
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--gray-color);
-            font-size: 0.875rem;
-        }
-
-        /* لیست پیام‌ها */
-        .messages-list {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .message-item {
-            background: var(--light-color);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: var(--border-radius);
-            padding: 1rem;
-            margin-bottom: 0.75rem;
-            transition: var(--transition);
-        }
-
-        .message-item:hover {
-            background: rgba(67, 97, 238, 0.05);
-        }
-
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .message-sender {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .message-time {
-            font-size: 0.75rem;
-            color: var(--gray-color);
-        }
-
-        .message-text {
-            line-height: 1.5;
-            color: var(--dark-color);
-        }
-
-        /* ناوبری */
-        .nav-tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            overflow-x: auto;
-            padding-bottom: 0.5rem;
-        }
-
-        .nav-tab {
-            padding: 0.75rem 1.5rem;
-            background: var(--light-color);
-            border: 2px solid transparent;
-            border-radius: var(--border-radius);
-            color: var(--dark-color);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-tab.active {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
-        .nav-tab:hover:not(.active) {
-            border-color: var(--primary-color);
-        }
-
-        /* قابلیت‌های واکنش‌گرا */
-        @media (max-width: 1024px) {
-            .chat-container {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
-            
-            .sidebar {
-                order: -1;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .app-header {
-                padding: 1rem;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .nav-tabs {
-                flex-wrap: wrap;
-            }
-            
-            .input-group {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-            }
-            
-            .message {
-                max-width: 100%;
-            }
-        }
-
-        /* کلاس‌های کمکی */
+        /* استایل‌های کمکی */
         .hidden {
             display: none !important;
-        }
-
-        .visible {
-            display: block !important;
-        }
-
-        .flex {
-            display: flex !important;
         }
 
         .loading {
@@ -711,323 +639,288 @@
             pointer-events: none;
         }
 
-        .text-center {
-            text-align: center;
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 0;
         }
 
-        .mb-2 { margin-bottom: 0.5rem; }
-        .mb-3 { margin-bottom: 1rem; }
-        .mb-4 { margin-bottom: 1.5rem; }
-        .mt-2 { margin-top: 0.5rem; }
-        .mt-3 { margin-top: 1rem; }
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--ds-text-tertiary);
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
 
         /* اسکرول بار */
-        ::-webkit-scrollbar {
+        .messages-wrapper::-webkit-scrollbar {
             width: 8px;
         }
 
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.1);
+        .messages-wrapper::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .messages-wrapper::-webkit-scrollbar-thumb {
+            background: var(--ds-border-medium);
             border-radius: 4px;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 4px;
+        .messages-wrapper::-webkit-scrollbar-thumb:hover {
+            background: var(--ds-border-light);
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary-color);
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 12px;
+            }
+            
+            .auth-card {
+                padding: 24px;
+                border: none;
+                box-shadow: none;
+            }
+            
+            .message {
+                padding: 20px 0;
+            }
+            
+            .input-container {
+                padding: 16px;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                display: none;
+            }
+            
+            .auth-title {
+                font-size: 20px;
+            }
+            
+            .message-avatar {
+                width: 32px;
+                height: 32px;
+            }
         }
     </style>
 </head>
 <body data-theme="light">
-    <!-- هدر -->
-    <header class="app-header">
-        <div class="header-content">
-            <div class="logo-section">
+    <div class="app-container">
+        <!-- هدر -->
+        <header class="header">
+            <div class="logo-container">
                 <div class="logo">
-                    <i class="fas fa-robot"></i>
-                    <h1>Acioai</h1>
+                    <img src="https://uploadkon.ir/do.php?imgf=626204_26photo-output.jpeg" alt="Acioai Logo">
                 </div>
-                <span class="version">نسخه 1.0.0</span>
+                <div class="logo-text">Acioai</div>
             </div>
             
             <div class="header-controls">
-                <!-- کلید تغییر حالت تاریک/روشن -->
-                <button id="darkModeToggle" class="btn btn-icon" title="تغییر حالت">
+                <!-- دکمه پشتیبانی -->
+                <button class="header-btn" id="supportBtn" title="پشتیبانی">
+                    <i class="fas fa-headset"></i>
+                </button>
+                
+                <!-- دکمه تغییر حالت -->
+                <button class="header-btn" id="themeToggle" title="تغییر حالت">
                     <i class="fas fa-moon"></i>
                 </button>
                 
                 <!-- اطلاعات کاربر -->
                 <div id="userInfo" class="hidden">
-                    <div class="user-info">
-                        <span id="userName" class="user-name"></span>
-                        <div class="subscription-badge plus" id="subscriptionBadge">
-                            <span id="subscriptionType">Plus</span>
-                            <span id="daysLeft" class="days-left">۰ روز</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- دکمه خروج -->
-                <button id="logoutBtn" class="btn btn-danger btn-icon hidden" title="خروج">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- ناوبری -->
-    <nav class="nav-tabs hidden" id="navTabs">
-        <button class="nav-tab active" data-tab="chat">
-            <i class="fas fa-comments"></i> چت هوش مصنوعی
-        </button>
-        <button class="nav-tab" data-tab="admin">
-            <i class="fas fa-user-shield"></i> پنل ادمین
-        </button>
-        <button class="nav-tab" data-tab="support">
-            <i class="fas fa-headset"></i> پشتیبانی
-        </button>
-        <button class="nav-tab" data-tab="stats">
-            <i class="fas fa-chart-bar"></i> آمار و گزارشات
-        </button>
-    </nav>
-
-    <!-- بخش احراز هویت -->
-    <main id="authSection" class="auth-section">
-        <div class="auth-container">
-            <div class="auth-card">
-                <h2><i class="fas fa-user-circle"></i> خوش آمدید به Acioai</h2>
-                <p class="auth-description">
-                    هوش مصنوعی پیشرفته تیم آکیو | Acio برای پاسخ به سوالات شما آماده است.
-                    لطفاً برای شروع، ثبت‌نام کنید یا وارد شوید.
-                </p>
-                
-                <form id="authForm" class="auth-form">
-                    <div class="form-group mb-3">
-                        <label for="nameInput" class="mb-2">
-                            <i class="fas fa-user"></i> نام کامل
-                        </label>
-                        <input type="text" id="nameInput" class="message-input" placeholder="نام و نام خانوادگی خود را وارد کنید" required>
-                    </div>
-                    
-                    <div class="form-group mb-4">
-                        <label for="emailInput" class="mb-2">
-                            <i class="fas fa-envelope"></i> ایمیل
-                        </label>
-                        <input type="email" id="emailInput" class="message-input" placeholder="example@email.com" required>
-                    </div>
-                    
-                    <div class="form-buttons">
-                        <button type="button" id="registerBtn" class="btn btn-primary mb-2">
-                            <i class="fas fa-user-plus"></i> ثبت‌نام جدید
-                        </button>
-                        <button type="button" id="loginBtn" class="btn btn-success">
-                            <i class="fas fa-sign-in-alt"></i> ورود با ایمیل
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </main>
-
-    <!-- بخش چت اصلی -->
-    <section id="chatSection" class="chat-section hidden">
-        <div class="chat-container">
-            <!-- جریان چت -->
-            <div class="chat-flow">
-                <div class="chat-header">
-                    <h3><i class="fas fa-robot"></i> Acioai هوش مصنوعی</h3>
-                    <div class="chat-status">
-                        <span id="connectionStatus" class="connection-status">
-                            <i class="fas fa-circle" style="color: #2ecc71;"></i> متصل
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="messages-container" id="messagesContainer">
-                    <!-- پیام‌ها اینجا نمایش داده می‌شوند -->
-                    <div class="message ai">
-                        <div class="message-content">
-                            سلام! من Acioai هستم، هوش مصنوعی توسعه‌یافته توسط تیم آکیو | Acio.
-                            چطور می‌توانم به شما کمک کنم؟
-                        </div>
-                        <div class="message-timestamp">هم اکنون</div>
-                    </div>
-                </div>
-                
-                <form class="message-form" id="chatForm">
-                    <div class="input-group">
-                        <input type="text" class="message-input" id="messageInput" 
-                               placeholder="پیام خود را بنویسید..." required>
-                        <button type="submit" class="btn btn-primary btn-icon">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-            
-            <!-- سایدبار -->
-            <div class="sidebar">
-                <!-- کارت کاربر -->
-                <div class="user-card">
-                    <div class="user-avatar">
+                    <div class="header-btn" title="پروفایل کاربر">
                         <i class="fas fa-user"></i>
                     </div>
-                    <div class="user-name" id="sidebarUserName">کاربر</div>
-                    <div class="subscription-badge plus" id="sidebarSubscription">
-                        <span>Plus</span>
-                        <span class="days-left" id="sidebarDaysLeft">۰ روز</span>
-                    </div>
-                </div>
-                
-                <!-- آمار استفاده -->
-                <div class="support-section">
-                    <h4><i class="fas fa-chart-line"></i> آمار استفاده امروز</h4>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-value" id="dailyUsage">۰</div>
-                            <div class="stat-label">پیام‌های امروز</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="totalMessages">۰</div>
-                            <div class="stat-label">کل پیام‌ها</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- ارسال به پشتیبانی -->
-                <div class="support-section">
-                    <h4><i class="fas fa-headset"></i> ارتباط با پشتیبانی</h4>
-                    <form class="support-form" id="supportForm">
-                        <input type="text" class="support-input" id="supportMessage" 
-                               placeholder="پیام به پشتیبانی...">
-                        <button type="submit" class="btn btn-warning btn-icon">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
                 </div>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <!-- پنل ادمین -->
-    <section id="adminPanel" class="admin-panel hidden">
-        <div class="admin-header">
-            <h2><i class="fas fa-user-shield"></i> پنل مدیریت Acioai</h2>
-            <div class="admin-controls">
-                <button id="refreshAdmin" class="btn btn-primary">
-                    <i class="fas fa-sync-alt"></i> بروزرسانی
-                </button>
+        <!-- صفحه اصلی احراز هویت -->
+        <section class="auth-container" id="authContainer">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <div class="auth-logo">
+                        <img src="https://uploadkon.ir/do.php?imgf=626204_26photo-output.jpeg" alt="Acioai Logo">
+                    </div>
+                    <h1 class="auth-title">Acioai</h1>
+                    <p class="auth-subtitle">هوش مصنوعی توسعه‌یافته توسط تیم آکیو</p>
+                </div>
+                <form class="auth-form" id="authForm">
+                    <div class="form-group">
+                        <label for="nameInput" class="form-label">نام کامل</label>
+                        <input type="text" id="nameInput" class="form-input" placeholder="نام و نام خانوادگی" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailInput" class="form-label">ایمیل</label>
+                        <input type="email" id="emailInput" class="form-input" placeholder="example@email.com" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="loginBtn">
+                            <i class="fas fa-sign-in-alt"></i>
+                            ورود
+                        </button>
+                        <button type="button" class="btn btn-primary" id="registerBtn">
+                            <i class="fas fa-user-plus"></i>
+                            ثبت‌نام
+                        </button>
+                    </div>
+                </form>
             </div>
-        </div>
-        
-        <!-- آمار کلی -->
-        <div class="stats-grid mb-4">
-            <div class="stat-card">
-                <div class="stat-value" id="adminTotalUsers">۰</div>
-                <div class="stat-label">کاربران فعال</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="adminTotalMessages">۰</div>
-                <div class="stat-label">پیام‌های امروز</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="adminPendingSupport">۰</div>
-                <div class="stat-label">پیام‌های پشتیبانی</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" id="adminFAQCount">۰</div>
-                <div class="stat-label">سوالات FAQ</div>
-            </div>
-        </div>
-        
-        <!-- پیام‌های پشتیبانی -->
-        <div class="admin-grid">
-            <div class="admin-card">
-                <h4><i class="fas fa-comments"></i> آخرین پیام‌های پشتیبانی</h4>
-                <div class="messages-list" id="adminMessages">
-                    <!-- پیام‌های پشتیبانی اینجا نمایش داده می‌شوند -->
-                    <div class="text-center mt-3">
-                        <div class="typing-indicator">
-                            <div class="typing-dot"></div>
-                            <div class="typing-dot"></div>
-                            <div class="typing-dot"></div>
+        </section>
+
+        <!-- صفحه چت اصلی -->
+        <section class="chat-container hidden" id="chatContainer">
+            <div class="messages-wrapper">
+                <div class="messages-container" id="messagesContainer">
+                    <!-- پیام اولیه -->
+                    <div class="message-group">
+                        <div class="message ai">
+                            <div class="message-avatar">AI</div>
+                            <div class="message-content">
+                                <div class="message-text">
+                                    سلام! 👋<br><br>
+                                    من <strong>Acioai</strong> هستم، هوش مصنوعی توسعه‌یافته توسط <strong>تیم آکیو | Acio</strong>.<br><br>
+                                    چطور می‌تونم کمکتون کنم؟
+                                </div>
+                            </div>
                         </div>
-                        <p>در حال بارگذاری پیام‌ها...</p>
                     </div>
                 </div>
             </div>
             
-            <!-- کاربران آنلاین -->
-            <div class="admin-card">
-                <h4><i class="fas fa-users"></i> کاربران فعال</h4>
-                <div class="messages-list" id="activeUsers">
-                    <!-- لیست کاربران -->
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <textarea 
+                        class="message-input" 
+                        id="messageInput" 
+                        placeholder="پیام خود را اینجا بنویسید... (برای ارسال Enter، برای خط جدید Shift+Enter)"
+                        rows="1"
+                        autocomplete="off"
+                    ></textarea>
+                    <div class="input-actions">
+                        <button class="send-btn" id="sendButton" disabled>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- مودال اطلاعیه -->
-    <div id="notificationModal" class="modal">
-        <div class="modal-content">
-            <h3 id="modalTitle"></h3>
-            <p id="modalMessage"></p>
-            <div class="text-center mt-3">
-                <button id="modalClose" class="btn btn-primary">باشه</button>
+        <!-- صفحه پشتیبانی -->
+        <section class="support-container" id="supportContainer">
+            <div class="support-header">
+                <h1 class="support-title">پشتیبانی Acioai</h1>
+                <p class="support-subtitle">پیام خود را برای تیم پشتیبانی ارسال کنید</p>
             </div>
-        </div>
+            
+            <form class="support-form" id="supportForm">
+                <textarea 
+                    id="supportMessage" 
+                    placeholder="مشکل یا سوال خود را با جزئیات شرح دهید..."
+                ></textarea>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="backToChatBtn">
+                        <i class="fas fa-arrow-right"></i>
+                        بازگشت به چت
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="submitSupportBtn">
+                        <i class="fas fa-paper-plane"></i>
+                        ارسال پیام
+                    </button>
+                </div>
+            </form>
+            
+            <div class="support-info">
+                <h3 class="support-title" style="font-size: 18px; margin-bottom: 16px;">راه‌های ارتباطی دیگر</h3>
+                <div style="display: flex; flex-direction: column; gap: 8px; color: var(--ds-text-secondary); font-size: 14px;">
+                    <div>📧 ایمیل: support@acioai.com</div>
+                    <div>⏰ ساعت پاسخگویی: ۹ صبح تا ۵ عصر</div>
+                    <div>⚡ زمان پاسخگویی: حداکثر ۲۴ ساعت</div>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <!-- اسکریپت‌های جاوااسکریپت -->
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="footer-content">
+            <span>تمامی حقوق محفوظ است © ۲۰۲۶</span>
+            <a href="https://aciocode.vercel.app" target="_blank" class="footer-link">Acio</a>
+            <span>•</span>
+            <span>Acioai v1.0.0</span>
+        </div>
+    </footer>
+
+    <!-- نوتیفیکیشن -->
+    <div id="notification"></div>
+
     <script>
         // API Configuration
         const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbz4hqKZwnFi3L8GOzxYy9SOocjxWq959OBTvvBCGYVGnwYARRMAxuOXMz5f7OmiJnanIw/exec';
         const GPT4_API_URL = 'https://gpt4.api-sina-free.workers.dev/gpt4';
 
-        // State Management
+        // Application State
         let currentUser = null;
         let currentTheme = 'light';
-        let dailyUsage = 0;
-        let isAdminMode = false;
-        let adminPollingInterval = null;
+        let isTyping = false;
+        let typingTimeout = null;
 
         // DOM Elements
         const elements = {
-            authSection: document.getElementById('authSection'),
-            chatSection: document.getElementById('chatSection'),
-            adminPanel: document.getElementById('adminPanel'),
-            navTabs: document.getElementById('navTabs'),
+            authContainer: document.getElementById('authContainer'),
+            chatContainer: document.getElementById('chatContainer'),
+            supportContainer: document.getElementById('supportContainer'),
+            themeToggle: document.getElementById('themeToggle'),
+            supportBtn: document.getElementById('supportBtn'),
+            backToChatBtn: document.getElementById('backToChatBtn'),
             userInfo: document.getElementById('userInfo'),
-            userName: document.getElementById('userName'),
-            logoutBtn: document.getElementById('logoutBtn'),
-            darkModeToggle: document.getElementById('darkModeToggle'),
+            nameInput: document.getElementById('nameInput'),
+            emailInput: document.getElementById('emailInput'),
+            loginBtn: document.getElementById('loginBtn'),
+            registerBtn: document.getElementById('registerBtn'),
             messagesContainer: document.getElementById('messagesContainer'),
             messageInput: document.getElementById('messageInput'),
-            chatForm: document.getElementById('chatForm'),
+            sendButton: document.getElementById('sendButton'),
             supportForm: document.getElementById('supportForm'),
             supportMessage: document.getElementById('supportMessage'),
-            adminMessages: document.getElementById('adminMessages'),
-            notificationModal: document.getElementById('notificationModal'),
-            modalClose: document.getElementById('modalClose'),
-            modalTitle: document.getElementById('modalTitle'),
-            modalMessage: document.getElementById('modalMessage')
+            submitSupportBtn: document.getElementById('submitSupportBtn')
         };
 
         // Initialize Application
-        function initApp() {
+        function init() {
             loadTheme();
-            checkAuth();
+            loadUser();
             setupEventListeners();
-            setupAdminPolling();
+            setupMessageInput();
+            setupSupportForm();
         }
 
         // Theme Management
         function loadTheme() {
-            const savedTheme = localStorage.getItem('acioai_theme') || 'light';
-            setTheme(savedTheme);
+            const savedTheme = localStorage.getItem('acioai_theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                setTheme(prefersDark ? 'dark' : 'light');
+            }
         }
 
         function setTheme(theme) {
@@ -1035,50 +928,100 @@
             document.body.setAttribute('data-theme', theme);
             localStorage.setItem('acioai_theme', theme);
             
-            const icon = elements.darkModeToggle.querySelector('i');
+            const icon = elements.themeToggle.querySelector('i');
             icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            
+            // Update active state
+            elements.themeToggle.classList.toggle('active', theme === 'dark');
         }
 
-        // Authentication Management
-        function checkAuth() {
+        // User Management
+        function loadUser() {
             const userData = localStorage.getItem('acioai_user');
             if (userData) {
-                currentUser = JSON.parse(userData);
-                showChatSection();
-                updateUserInfo();
-                loadChatHistory();
+                try {
+                    currentUser = JSON.parse(userData);
+                    showChatInterface();
+                    updateUserInfo();
+                } catch (error) {
+                    localStorage.removeItem('acioai_user');
+                    showAuthInterface();
+                }
+            } else {
+                showAuthInterface();
             }
         }
 
-        function saveUserData(userId, name, email, subscription = 'Plus', daysLeft = 30) {
-            currentUser = { userId, name, email, subscription, daysLeft };
-            localStorage.setItem('acioai_user', JSON.stringify(currentUser));
+        function saveUser(user) {
+            currentUser = user;
+            localStorage.setItem('acioai_user', JSON.stringify(user));
+            showChatInterface();
+            updateUserInfo();
         }
 
-        // API Calls
+        function clearUser() {
+            currentUser = null;
+            localStorage.removeItem('acioai_user');
+            showAuthInterface();
+        }
+
+        function updateUserInfo() {
+            if (currentUser) {
+                elements.userInfo.classList.remove('hidden');
+            }
+        }
+
+        // Interface Management
+        function showAuthInterface() {
+            elements.authContainer.classList.remove('hidden');
+            elements.chatContainer.classList.add('hidden');
+            elements.supportContainer.classList.add('hidden');
+            elements.userInfo.classList.add('hidden');
+        }
+
+        function showChatInterface() {
+            elements.authContainer.classList.add('hidden');
+            elements.chatContainer.classList.remove('hidden');
+            elements.supportContainer.classList.add('hidden');
+            elements.userInfo.classList.remove('hidden');
+            elements.messageInput.focus();
+        }
+
+        function showSupportInterface() {
+            elements.authContainer.classList.add('hidden');
+            elements.chatContainer.classList.add('hidden');
+            elements.supportContainer.classList.remove('hidden');
+        }
+
+        // API Communication
         async function apiRequest(action, params = {}) {
+            const url = new URL(API_BASE_URL);
+            url.searchParams.append('action', action);
+            
+            Object.entries(params).forEach(([key, value]) => {
+                if (value) url.searchParams.append(key, value);
+            });
+            
             try {
-                const url = new URL(API_BASE_URL);
-                url.searchParams.append('action', action);
-                
-                Object.entries(params).forEach(([key, value]) => {
-                    if (value) url.searchParams.append(key, value);
-                });
-                
                 const response = await fetch(url, {
-                    headers: { 'Accept': 'application/json' }
+                    headers: { 'Accept': 'application/json' },
+                    mode: 'cors'
                 });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 
                 const data = await response.json();
                 
                 if (!data.ok) {
-                    throw new Error(data.error || 'خطا در ارتباط با سرور');
+                    throw new Error(data.error || 'خطا در اجرای درخواست');
                 }
                 
                 return data;
             } catch (error) {
-                console.error('API Error:', error);
-                showNotification('خطا', error.message, 'error');
+                console.error('API Request Error:', error);
+                showNotification('خطا در ارتباط با سرور', 'error');
                 throw error;
             }
         }
@@ -1086,465 +1029,469 @@
         async function callGPT4(text) {
             try {
                 const response = await fetch(`${GPT4_API_URL}?text=${encodeURIComponent(text)}`);
+                if (!response.ok) throw new Error('خطا در ارتباط با سرویس');
+                
                 const data = await response.json();
                 return data.result || data.Result || 'پاسخی دریافت نشد';
             } catch (error) {
                 console.error('GPT4 Error:', error);
-                return 'خطا در ارتباط با سرویس هوش مصنوعی';
+                throw new Error('خطا در دریافت پاسخ از هوش مصنوعی');
             }
         }
 
         // User Actions
         async function registerUser(name, email) {
             try {
+                setLoading(true);
+                
                 const data = await apiRequest('register', { name, email });
-                saveUserData(data.Result.userId, name, email);
-                showChatSection();
-                showNotification('موفقیت', 'ثبت‌نام با موفقیت انجام شد!', 'success');
+                
+                saveUser({
+                    id: data.Result.userId,
+                    name: data.Result.name,
+                    email: email
+                });
+                
+                showNotification('ثبت‌نام با موفقیت انجام شد', 'success');
             } catch (error) {
-                // Already handled by apiRequest
+                showNotification(error.message || 'خطا در ثبت‌نام', 'error');
+            } finally {
+                setLoading(false);
             }
         }
 
         async function loginUser(email) {
             try {
+                setLoading(true);
+                
                 const data = await apiRequest('login', { email });
-                const name = data.Result.name || 'کاربر';
-                saveUserData(data.Result.userId, name, email);
-                showChatSection();
-                showNotification('موفقیت', 'ورود با موفقیت انجام شد!', 'success');
+                
+                saveUser({
+                    id: data.Result.userId,
+                    name: data.Result.name,
+                    email: email
+                });
+                
+                showNotification('ورود با موفقیت انجام شد', 'success');
             } catch (error) {
-                // Already handled by apiRequest
+                showNotification(error.message || 'خطا در ورود', 'error');
+            } finally {
+                setLoading(false);
             }
         }
 
         async function sendMessage(text) {
-            if (!currentUser || !text.trim()) return;
+            if (!text.trim() || !currentUser || isTyping) return;
             
-            // Add user message to chat
-            addMessageToChat(text, 'user');
-            
-            // Clear input
+            // Clear input and disable
             elements.messageInput.value = '';
+            updateSendButton();
+            
+            // Add user message
+            addMessage(text, 'user');
             
             // Show typing indicator
-            showTypingIndicator();
+            const typingId = showTypingIndicator();
             
             try {
-                // First try FAQ search
-                const faqResponse = await apiRequest('chat', {
-                    userid: currentUser.userId,
-                    name: currentUser.name,
-                    text: text
-                });
+                isTyping = true;
+                
+                // Try FAQ first
+                let response;
+                try {
+                    response = await apiRequest('chat', {
+                        userid: currentUser.id,
+                        name: currentUser.name,
+                        text: text
+                    });
+                } catch (faqError) {
+                    // If FAQ fails, try GPT4
+                    response = await callGPT4(text);
+                }
                 
                 // Remove typing indicator
-                removeTypingIndicator();
+                removeTypingIndicator(typingId);
                 
-                // Add AI response
-                addMessageToChat(faqResponse.Result, 'ai');
+                // Get response text
+                const responseText = response.Result || response;
                 
-                // Update usage
-                dailyUsage++;
-                updateUsageStats();
+                // Type response character by character
+                await typeMessage(responseText, 'ai');
                 
             } catch (error) {
-                // If FAQ fails, try GPT4
-                removeTypingIndicator();
-                showTypingIndicator('در حال دریافت پاسخ از هوش مصنوعی...');
-                
-                try {
-                    const gptResponse = await callGPT4(text);
-                    removeTypingIndicator();
-                    
-                    // Check if it's about creator
-                    const lowerText = text.toLowerCase();
-                    if (lowerText.includes('سازنده') || lowerText.includes('تیم') || lowerText.includes('acio') || lowerText.includes('آکیو')) {
-                        addMessageToChat('سازنده من تیم آکیو | Acio است. من Acioai هستم، هوش مصنوعی توسعه‌یافته توسط این تیم.', 'ai');
-                    } else {
-                        addMessageToChat(gptResponse, 'ai');
-                    }
-                    
-                    dailyUsage++;
-                    updateUsageStats();
-                    
-                } catch (gptError) {
-                    removeTypingIndicator();
-                    addMessageToChat('متاسفانه در حال حاضر قادر به پاسخگویی نیستم. لطفاً مجدداً تلاش کنید.', 'ai');
-                }
+                removeTypingIndicator(typingId);
+                addMessage('متأسفانه در دریافت پاسخ مشکلی پیش آمد. لطفاً مجدداً تلاش کنید.', 'ai');
+                showNotification('خطا در دریافت پاسخ', 'error');
+            } finally {
+                isTyping = false;
+                elements.messageInput.focus();
             }
-            
-            // Scroll to bottom
-            scrollToBottom();
         }
 
         async function sendSupportMessage(message) {
-            if (!currentUser || !message.trim()) return;
+            if (!message.trim() || !currentUser) {
+                showNotification('لطفاً پیام خود را وارد کنید', 'error');
+                return;
+            }
             
             try {
+                elements.submitSupportBtn.disabled = true;
+                elements.submitSupportBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ارسال...';
+                
                 await apiRequest('support', {
-                    userid: currentUser.userId,
+                    userid: currentUser.id,
                     message: message
                 });
                 
                 elements.supportMessage.value = '';
-                showNotification('موفقیت', 'پیام شما به پشتیبانی ارسال شد.', 'success');
+                showNotification('پیام شما با موفقیت ارسال شد', 'success');
+                
+                setTimeout(() => {
+                    showChatInterface();
+                }, 1500);
                 
             } catch (error) {
-                // Already handled by apiRequest
+                showNotification(error.message || 'خطا در ارسال پیام', 'error');
+            } finally {
+                elements.submitSupportBtn.disabled = false;
+                elements.submitSupportBtn.innerHTML = '<i class="fas fa-paper-plane"></i> ارسال پیام';
             }
         }
 
-        async function fetchAdminMessages() {
-            if (!currentUser) return;
+        // Message Management
+        function addMessage(text, type = 'ai') {
+            const messageGroup = document.createElement('div');
+            messageGroup.className = 'message-group';
             
-            try {
-                const data = await apiRequest('fetch_admin', {
-                    userid: currentUser.userId
-                });
-                
-                if (data.Result && data.Result.messages) {
-                    updateAdminMessages(data.Result.messages);
-                }
-            } catch (error) {
-                console.error('Failed to fetch admin messages:', error);
-            }
-        }
-
-        // UI Updates
-        function showChatSection() {
-            elements.authSection.classList.add('hidden');
-            elements.chatSection.classList.remove('hidden');
-            elements.navTabs.classList.remove('hidden');
-            elements.userInfo.classList.remove('hidden');
-            elements.logoutBtn.classList.remove('hidden');
-            
-            updateUserInfo();
-            switchTab('chat');
-        }
-
-        function updateUserInfo() {
-            if (!currentUser) return;
-            
-            elements.userName.textContent = currentUser.name;
-            
-            // Update sidebar
-            document.getElementById('sidebarUserName').textContent = currentUser.name;
-            document.getElementById('sidebarDaysLeft').textContent = `${currentUser.daysLeft} روز`;
-            
-            // Update subscription badge
-            const badge = document.getElementById('subscriptionBadge');
-            badge.className = `subscription-badge ${currentUser.subscription.toLowerCase()}`;
-            badge.querySelector('#subscriptionType').textContent = currentUser.subscription;
-            badge.querySelector('#daysLeft').textContent = `${currentUser.daysLeft} روز`;
-            
-            // Update sidebar subscription
-            const sidebarBadge = document.getElementById('sidebarSubscription');
-            sidebarBadge.className = `subscription-badge ${currentUser.subscription.toLowerCase()}`;
-            sidebarBadge.querySelector('span').textContent = currentUser.subscription;
-        }
-
-        function addMessageToChat(text, type = 'user') {
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${type}`;
             
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('fa-IR', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
+            const avatarText = type === 'user' ? 
+                (currentUser?.name?.charAt(0) || 'U') : 'AI';
             
             messageDiv.innerHTML = `
-                <div class="message-content">${escapeHtml(text)}</div>
-                <div class="message-timestamp">${timeString}</div>
+                <div class="message-avatar">${avatarText}</div>
+                <div class="message-content">
+                    <div class="message-text">${formatMessage(text)}</div>
+                </div>
             `;
             
-            elements.messagesContainer.appendChild(messageDiv);
+            messageGroup.appendChild(messageDiv);
+            elements.messagesContainer.appendChild(messageGroup);
             scrollToBottom();
+            
+            return messageDiv;
         }
 
-        function showTypingIndicator(text = 'Acioai در حال تایپ...') {
-            const typingDiv = document.createElement('div');
-            typingDiv.id = 'typingIndicator';
-            typingDiv.className = 'message ai';
-            typingDiv.innerHTML = `
+        async function typeMessage(text, type = 'ai') {
+            const messageGroup = document.createElement('div');
+            messageGroup.className = 'message-group';
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            
+            const avatarText = type === 'user' ? 
+                (currentUser?.name?.charAt(0) || 'U') : 'AI';
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${avatarText}</div>
                 <div class="message-content">
-                    <div class="typing-indicator">
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                        <span>${text}</span>
-                    </div>
+                    <div class="message-text typing"></div>
                 </div>
+            `;
+            
+            messageGroup.appendChild(messageDiv);
+            elements.messagesContainer.appendChild(messageGroup);
+            
+            const textElement = messageDiv.querySelector('.message-text');
+            const chars = text.split('');
+            let currentText = '';
+            
+            // Type character by character
+            for (let i = 0; i < chars.length; i++) {
+                const char = chars[i];
+                
+                // Handle special characters and formatting
+                if (char === '\n') {
+                    currentText += '<br>';
+                } else if (char === ' ' && chars[i - 1] === ' ') {
+                    currentText += '&nbsp;';
+                } else {
+                    currentText += char;
+                }
+                
+                textElement.innerHTML = formatMessage(currentText) + '<span class="typing-cursor"></span>';
+                
+                // Random typing speed for natural feel
+                await delay(Math.random() * 20 + 10);
+                
+                // Scroll to bottom every few characters
+                if (i % 10 === 0) {
+                    scrollToBottom();
+                }
+            }
+            
+            // Remove typing cursor
+            textElement.innerHTML = formatMessage(text);
+            textElement.classList.remove('typing');
+            
+            scrollToBottom();
+            return messageDiv;
+        }
+
+        function formatMessage(text) {
+            // Simple markdown-like formatting
+            return text
+                .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+                .replace(/`([^`]+)`/g, '<code>$1</code>')
+                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+                .replace(/\n/g, '<br>');
+        }
+
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typing-indicator';
+            
+            typingDiv.innerHTML = `
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
             `;
             
             elements.messagesContainer.appendChild(typingDiv);
             scrollToBottom();
+            
+            return typingDiv.id;
         }
 
-        function removeTypingIndicator() {
-            const indicator = document.getElementById('typingIndicator');
+        function removeTypingIndicator(id) {
+            const indicator = document.getElementById(id);
             if (indicator) {
                 indicator.remove();
             }
         }
 
-        function updateUsageStats() {
-            document.getElementById('dailyUsage').textContent = dailyUsage;
-            document.getElementById('totalMessages').textContent = dailyUsage + Math.floor(Math.random() * 50);
-        }
-
-        function updateAdminMessages(messages) {
-            const container = elements.adminMessages;
-            if (!messages || messages.length === 0) {
-                container.innerHTML = '<p class="text-center">پیام پشتیبانی جدیدی وجود ندارد.</p>';
-                return;
-            }
-            
-            let html = '';
-            messages.forEach(msg => {
-                const time = new Date(msg.timestamp || Date.now()).toLocaleString('fa-IR');
-                html += `
-                    <div class="message-item">
-                        <div class="message-header">
-                            <span class="message-sender">کاربر #${msg.userId || 'ناشناس'}</span>
-                            <span class="message-time">${time}</span>
-                        </div>
-                        <div class="message-text">${escapeHtml(msg.text || msg.message || 'بدون متن')}</div>
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = html;
-        }
-
-        function switchTab(tabName) {
-            // Update active tab
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.classList.toggle('active', tab.dataset.tab === tabName);
-            });
-            
-            // Show corresponding section
-            elements.chatSection.classList.toggle('hidden', tabName !== 'chat');
-            elements.adminPanel.classList.toggle('hidden', tabName !== 'admin');
-            
-            // If admin tab, start polling
-            if (tabName === 'admin') {
-                startAdminPolling();
-            } else {
-                stopAdminPolling();
+        // UI Helpers
+        function scrollToBottom() {
+            const wrapper = document.querySelector('.messages-wrapper');
+            if (wrapper) {
+                requestAnimationFrame(() => {
+                    wrapper.scrollTop = wrapper.scrollHeight;
+                });
             }
         }
 
-        function showNotification(title, message, type = 'info') {
+        function showNotification(message, type = 'success') {
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
+            
+            const icon = type === 'success' ? 'check-circle' : 'exclamation-circle';
+            
             notification.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-                <span><strong>${title}:</strong> ${message}</span>
+                <div class="notification-icon">
+                    <i class="fas fa-${icon}"></i>
+                </div>
+                <div class="notification-text">${message}</div>
             `;
             
-            document.body.appendChild(notification);
+            document.getElementById('notification').appendChild(notification);
             
+            // Show notification
+            setTimeout(() => notification.classList.add('show'), 10);
+            
+            // Auto remove after 3 seconds
             setTimeout(() => {
-                notification.remove();
-            }, 5000);
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
         }
 
-        function showModal(title, message) {
-            elements.modalTitle.textContent = title;
-            elements.modalMessage.textContent = message;
-            elements.notificationModal.style.display = 'flex';
-        }
-
-        // Utility Functions
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        function scrollToBottom() {
-            setTimeout(() => {
-                elements.messagesContainer.scrollTo({
-                    top: elements.messagesContainer.scrollHeight,
-                    behavior: 'smooth'
-                });
-            }, 100);
-        }
-
-        function loadChatHistory() {
-            // Load chat history from localStorage if available
-            const history = localStorage.getItem('acioai_chat_history');
-            if (history) {
-                try {
-                    const messages = JSON.parse(history);
-                    messages.forEach(msg => {
-                        addMessageToChat(msg.text, msg.type);
-                    });
-                } catch (e) {
-                    console.error('Failed to load chat history:', e);
+        function setLoading(loading) {
+            const buttons = [elements.loginBtn, elements.registerBtn];
+            
+            buttons.forEach(btn => {
+                if (btn) {
+                    btn.disabled = loading;
+                    if (loading) {
+                        btn.classList.add('loading');
+                        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> لطفاً صبر کنید...';
+                    } else {
+                        btn.classList.remove('loading');
+                        if (btn.id === 'loginBtn') {
+                            btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> ورود';
+                        } else {
+                            btn.innerHTML = '<i class="fas fa-user-plus"></i> ثبت‌نام';
+                        }
+                    }
                 }
-            }
-        }
-
-        function saveChatHistory() {
-            const messages = [];
-            document.querySelectorAll('.message').forEach(msg => {
-                const text = msg.querySelector('.message-content').textContent;
-                const type = msg.classList.contains('user') ? 'user' : 'ai';
-                messages.push({ text, type });
             });
-            localStorage.setItem('acioai_chat_history', JSON.stringify(messages));
         }
 
-        // Admin Polling
-        function setupAdminPolling() {
-            adminPollingInterval = null;
+        function updateSendButton() {
+            const hasText = elements.messageInput.value.trim().length > 0;
+            elements.sendButton.disabled = !hasText || isTyping;
         }
 
-        function startAdminPolling() {
-            fetchAdminMessages();
-            adminPollingInterval = setInterval(fetchAdminMessages, 2000);
-        }
-
-        function stopAdminPolling() {
-            if (adminPollingInterval) {
-                clearInterval(adminPollingInterval);
-                adminPollingInterval = null;
-            }
-        }
-
-        // Event Listeners
+        // Event Listeners Setup
         function setupEventListeners() {
-            // Dark mode toggle
-            elements.darkModeToggle.addEventListener('click', () => {
+            // Theme toggle
+            elements.themeToggle.addEventListener('click', () => {
                 setTheme(currentTheme === 'dark' ? 'light' : 'dark');
             });
             
-            // Registration
-            document.getElementById('registerBtn').addEventListener('click', () => {
-                const name = document.getElementById('nameInput').value.trim();
-                const email = document.getElementById('emailInput').value.trim();
+            // Support button
+            elements.supportBtn.addEventListener('click', () => {
+                if (currentUser) {
+                    showSupportInterface();
+                } else {
+                    showNotification('لطفاً ابتدا وارد شوید', 'error');
+                }
+            });
+            
+            // Back to chat button
+            elements.backToChatBtn.addEventListener('click', showChatInterface);
+            
+            // Login button
+            elements.loginBtn.addEventListener('click', () => {
+                const email = elements.emailInput.value.trim();
+                if (!validateEmail(email)) {
+                    showNotification('لطفاً یک ایمیل معتبر وارد کنید', 'error');
+                    return;
+                }
+                loginUser(email);
+            });
+            
+            // Register button
+            elements.registerBtn.addEventListener('click', () => {
+                const name = elements.nameInput.value.trim();
+                const email = elements.emailInput.value.trim();
                 
                 if (!name || !email) {
-                    showNotification('خطا', 'لطفاً تمام فیلدها را پر کنید.', 'error');
+                    showNotification('لطفاً تمام فیلدها را پر کنید', 'error');
                     return;
                 }
                 
                 if (!validateEmail(email)) {
-                    showNotification('خطا', 'لطفاً یک ایمیل معتبر وارد کنید.', 'error');
+                    showNotification('لطفاً یک ایمیل معتبر وارد کنید', 'error');
                     return;
                 }
                 
                 registerUser(name, email);
             });
             
-            // Login
-            document.getElementById('loginBtn').addEventListener('click', () => {
-                const email = document.getElementById('emailInput').value.trim();
-                
-                if (!email) {
-                    showNotification('خطا', 'لطفاً ایمیل خود را وارد کنید.', 'error');
-                    return;
+            // Send message
+            elements.sendButton.addEventListener('click', () => {
+                if (!isTyping && elements.messageInput.value.trim()) {
+                    sendMessage(elements.messageInput.value.trim());
                 }
-                
-                if (!validateEmail(email)) {
-                    showNotification('خطا', 'لطفاً یک ایمیل معتبر وارد کنید.', 'error');
-                    return;
-                }
-                
-                loginUser(email);
             });
             
-            // Chat form submission
-            elements.chatForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const message = elements.messageInput.value.trim();
-                if (message) {
-                    sendMessage(message);
+            // Enter key in chat
+            elements.messageInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (!isTyping && elements.messageInput.value.trim()) {
+                        sendMessage(elements.messageInput.value.trim());
+                    }
                 }
             });
             
             // Support form submission
             elements.supportForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                const message = elements.supportMessage.value.trim();
-                if (message) {
-                    sendSupportMessage(message);
-                }
+                sendSupportMessage(elements.supportMessage.value.trim());
             });
             
-            // Tab navigation
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    switchTab(tab.dataset.tab);
+            // Enter key in auth form
+            [elements.nameInput, elements.emailInput].forEach(input => {
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        const email = elements.emailInput.value.trim();
+                        if (validateEmail(email)) {
+                            if (elements.nameInput.value.trim()) {
+                                elements.registerBtn.click();
+                            } else {
+                                elements.loginBtn.click();
+                            }
+                        }
+                    }
                 });
             });
             
-            // Logout
-            elements.logoutBtn.addEventListener('click', () => {
-                localStorage.removeItem('acioai_user');
-                currentUser = null;
-                location.reload();
-            });
-            
-            // Modal close
-            elements.modalClose.addEventListener('click', () => {
-                elements.notificationModal.style.display = 'none';
-            });
-            
-            // Close modal on outside click
-            elements.notificationModal.addEventListener('click', (e) => {
-                if (e.target === elements.notificationModal) {
-                    elements.notificationModal.style.display = 'none';
+            // Double click on logo to logout
+            document.querySelector('.logo').addEventListener('dblclick', () => {
+                if (currentUser && confirm('آیا می‌خواهید خارج شوید؟')) {
+                    clearUser();
+                    showNotification('خروج با موفقیت انجام شد', 'success');
                 }
             });
             
-            // Admin refresh
-            document.getElementById('refreshAdmin')?.addEventListener('click', fetchAdminMessages);
-            
-            // Quick access with Enter key (with Ctrl for new line)
-            elements.messageInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' && !e.ctrlKey) {
-                    e.preventDefault();
-                    elements.chatForm.dispatchEvent(new Event('submit'));
-                }
+            // Auto-focus on input when chat is shown
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (!mutation.target.classList.contains('hidden')) {
+                        if (mutation.target.id === 'chatContainer') {
+                            setTimeout(() => elements.messageInput.focus(), 100);
+                        }
+                    }
+                });
             });
             
-            // Auto-focus on input
-            elements.messageInput.addEventListener('focus', () => {
-                elements.messageInput.style.borderColor = 'var(--primary-color)';
-            });
-            
-            elements.messageInput.addEventListener('blur', () => {
-                elements.messageInput.style.borderColor = '#ddd';
+            observer.observe(elements.chatContainer, { attributes: true, attributeFilter: ['class'] });
+        }
+
+        function setupMessageInput() {
+            elements.messageInput.addEventListener('input', () => {
+                // Auto-resize textarea
+                elements.messageInput.style.height = 'auto';
+                elements.messageInput.style.height = Math.min(elements.messageInput.scrollHeight, 200) + 'px';
+                
+                updateSendButton();
             });
         }
 
+        function setupSupportForm() {
+            elements.supportMessage.addEventListener('input', () => {
+                // Auto-resize textarea
+                elements.supportMessage.style.height = 'auto';
+                elements.supportMessage.style.height = Math.min(elements.supportMessage.scrollHeight, 300) + 'px';
+            });
+        }
+
+        // Validation
         function validateEmail(email) {
             const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return re.test(email);
         }
 
-        // Initialize on load
-        window.addEventListener('DOMContentLoaded', initApp);
-        
-        // Save chat history before unload
-        window.addEventListener('beforeunload', saveChatHistory);
-        
-        // Demo data for statistics (replace with real API calls)
-        function updateDemoStats() {
-            // These would come from API in real implementation
-            document.getElementById('adminTotalUsers').textContent = Math.floor(Math.random() * 1000) + 500;
-            document.getElementById('adminTotalMessages').textContent = Math.floor(Math.random() * 5000) + 1000;
-            document.getElementById('adminPendingSupport').textContent = Math.floor(Math.random() * 20) + 5;
-            document.getElementById('adminFAQCount').textContent = Math.floor(Math.random() * 4000) + 1000;
+        // Utility Functions
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
         }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
         
-        // Update demo stats every 30 seconds
-        setInterval(updateDemoStats, 30000);
-        updateDemoStats(); // Initial update
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Ctrl/Cmd + K to focus input
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                if (currentUser) {
+                    elements.messageInput.focus();
+                } else {
+                    elements.emailInput.focus();
+                }
+            }
+            
+            // Escape to go back
+            if (e.key === 'Escape' && !elements.supportContainer.classList.contains('hidden')) {
+                showChatInterface();
+            }
+        });
     </script>
 </body>
 </html>
