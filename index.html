@@ -8,7 +8,7 @@
     <!-- فونت اصلی DeepSeek -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,46 +16,36 @@
     <style>
         /* Reset و متغیرهای دقیق DeepSeek */
         :root {
-            --ds-background-primary: #ffffff;
-            --ds-background-secondary: #f7f7f8;
-            --ds-background-tertiary: #ececf1;
-            --ds-surface-primary: #ffffff;
-            --ds-surface-secondary: #f7f7f8;
-            --ds-border-light: #e5e5e5;
-            --ds-border-medium: #d9d9e3;
-            --ds-text-primary: #000000;
-            --ds-text-secondary: #565869;
-            --ds-text-tertiary: #8e8ea0;
-            --ds-green-primary: #10a37f;
-            --ds-green-hover: #1a7f64;
-            --ds-gray-light: #f7f7f8;
-            --ds-gray-medium: #ececf1;
-            --ds-gray-dark: #d9d9e3;
-            --radius-md: 12px;
-            --radius-lg: 16px;
-            --radius-xl: 20px;
-            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
-            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            --deepseek-bg: #ffffff;
+            --deepseek-bg-secondary: #f7f7f8;
+            --deepseek-bg-tertiary: #ececf1;
+            --deepseek-border: #e5e5e5;
+            --deepseek-text-primary: #202123;
+            --deepseek-text-secondary: #565869;
+            --deepseek-text-tertiary: #8e8ea0;
+            --deepseek-primary: #10a37f;
+            --deepseek-primary-hover: #0d8c6d;
+            --deepseek-user-message: #f7f7f8;
+            --deepseek-ai-message: #ffffff;
+            --deepseek-shadow: 0 0 transparent, 0 0 transparent, 0 0 15px rgba(0,0,0,0.1);
+            --deepseek-radius: 12px;
+            --deepseek-radius-sm: 6px;
+            --deepseek-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         [data-theme="dark"] {
-            --ds-background-primary: #343541;
-            --ds-background-secondary: #444654;
-            --ds-background-tertiary: #40414f;
-            --ds-surface-primary: #343541;
-            --ds-surface-secondary: #444654;
-            --ds-border-light: #565869;
-            --ds-border-medium: #40414f;
-            --ds-text-primary: #ececf1;
-            --ds-text-secondary: #c5c5d2;
-            --ds-text-tertiary: #8e8ea0;
-            --ds-green-primary: #10a37f;
-            --ds-green-hover: #1a7f64;
-            --ds-gray-light: #444654;
-            --ds-gray-medium: #40414f;
-            --ds-gray-dark: #343541;
+            --deepseek-bg: #343541;
+            --deepseek-bg-secondary: #444654;
+            --deepseek-bg-tertiary: #40414f;
+            --deepseek-border: #565869;
+            --deepseek-text-primary: #ececf1;
+            --deepseek-text-secondary: #c5c5d2;
+            --deepseek-text-tertiary: #8e8ea0;
+            --deepseek-primary: #10a37f;
+            --deepseek-primary-hover: #0d8c6d;
+            --deepseek-user-message: #444654;
+            --deepseek-ai-message: #343541;
+            --deepseek-shadow: 0 0 transparent, 0 0 transparent, 0 0 15px rgba(0,0,0,0.3);
         }
 
         * {
@@ -64,133 +54,170 @@
             box-sizing: border-box;
         }
 
-        html, body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: var(--ds-background-primary);
-            color: var(--ds-text-primary);
-            line-height: 1.5;
+        html {
+            scroll-behavior: smooth;
             height: 100%;
-            overflow: hidden;
-            transition: background-color var(--transition-base), color var(--transition-base);
         }
 
-        /* Layout اصلی */
+        body {
+            font-family: 'Inter', 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Segoe UI Emoji', sans-serif;
+            background: var(--deepseek-bg);
+            color: var(--deepseek-text-primary);
+            line-height: 1.5;
+            transition: var(--deepseek-transition);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* اسکرول بار زیبا */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--deepseek-border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--deepseek-text-tertiary);
+        }
+
+        /* Layout اصلی - دقیقاً شبیه DeepSeek */
         .app-container {
             display: flex;
             flex-direction: column;
             height: 100vh;
             max-width: 100%;
             margin: 0 auto;
+            position: relative;
+            background: var(--deepseek-bg);
         }
 
-        /* هدر دقیق DeepSeek */
+        /* هدر DeepSeek Style */
         .header {
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--ds-border-light);
-            background: var(--ds-background-primary);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--deepseek-bg);
+            border-bottom: 1px solid var(--deepseek-border);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 56px;
-            flex-shrink: 0;
+            padding: 0 20px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(var(--deepseek-bg-rgb), 0.95);
         }
 
         .logo-container {
             display: flex;
             align-items: center;
             gap: 12px;
-            flex: 1;
         }
 
-        .logo {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
             overflow: hidden;
-            background: linear-gradient(135deg, var(--ds-green-primary), #0d8c6d);
             display: flex;
             align-items: center;
             justify-content: center;
+            background: linear-gradient(135deg, var(--deepseek-primary), var(--deepseek-primary-hover));
         }
 
-        .logo img {
-            width: 24px;
-            height: 24px;
-            border-radius: 6px;
+        .logo-icon img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
         }
 
         .logo-text {
             font-size: 16px;
             font-weight: 600;
-            color: var(--ds-text-primary);
-            letter-spacing: -0.01em;
+            color: var(--deepseek-text-primary);
+            letter-spacing: -0.02em;
         }
 
         .header-controls {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
         }
 
         /* دکمه‌های هدر */
         .header-btn {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 8px;
             border: none;
             background: transparent;
-            color: var(--ds-text-secondary);
-            cursor: pointer;
+            color: var(--deepseek-text-secondary);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all var(--transition-fast);
+            cursor: pointer;
+            transition: var(--deepseek-transition);
             position: relative;
+            overflow: hidden;
         }
 
         .header-btn:hover {
-            background: var(--ds-background-secondary);
-            color: var(--ds-text-primary);
-        }
-
-        .header-btn.active {
-            background: var(--ds-background-secondary);
-            color: var(--ds-green-primary);
+            background: var(--deepseek-bg-secondary);
+            color: var(--deepseek-text-primary);
+            transform: translateY(-1px);
         }
 
         .header-btn i {
-            font-size: 18px;
+            font-size: 16px;
         }
 
-        /* بخش چت */
-        .chat-container {
+        .header-btn.active {
+            background: var(--deepseek-primary);
+            color: white;
+        }
+
+        /* بخش اصلی چت */
+        .main-content {
             flex: 1;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
-            background: var(--ds-background-primary);
+            padding-top: 60px;
+            overflow: hidden;
         }
 
-        .messages-wrapper {
+        /* کانتینر پیام‌ها */
+        .messages-container {
             flex: 1;
             overflow-y: auto;
-            padding: 24px 16px;
-            scroll-behavior: smooth;
-        }
-
-        .messages-container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
             max-width: 800px;
             margin: 0 auto;
             width: 100%;
+            scroll-behavior: smooth;
         }
 
-        /* پیام‌ها */
-        .message-group {
-            margin-bottom: 32px;
-            animation: fadeInUp 0.3s ease-out;
+        /* پیام‌ها - دقیقاً شبیه DeepSeek */
+        .message {
+            display: flex;
+            gap: 16px;
+            animation: messageAppear 0.3s ease-out;
+            padding: 8px 0;
         }
 
-        @keyframes fadeInUp {
+        @keyframes messageAppear {
             from {
                 opacity: 0;
                 transform: translateY(10px);
@@ -201,171 +228,290 @@
             }
         }
 
-        .message {
-            display: flex;
-            gap: 16px;
-            padding: 24px 0;
-            border-bottom: 1px solid var(--ds-border-light);
+        .message.user {
+            flex-direction: row-reverse;
         }
 
-        .message:last-child {
-            border-bottom: none;
-        }
-
-        .message-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 6px;
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
+            font-size: 14px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
         }
 
-        .message.user .message-avatar {
-            background: linear-gradient(135deg, var(--ds-green-primary), #0d8c6d);
+        .message.user .avatar {
+            background: linear-gradient(135deg, var(--deepseek-primary), var(--deepseek-primary-hover));
             color: white;
-            font-size: 14px;
-            font-weight: 600;
         }
 
-        .message.ai .message-avatar {
-            background: var(--ds-background-secondary);
-            color: var(--ds-text-secondary);
-            font-size: 14px;
-            font-weight: 600;
+        .message.ai .avatar {
+            background: linear-gradient(135deg, #19c37d, #10a37f);
+            color: white;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .message-content {
             flex: 1;
-            min-width: 0;
+            max-width: calc(100% - 48px);
         }
 
         .message-text {
-            font-size: 15px;
-            line-height: 1.7;
-            color: var(--ds-text-primary);
+            padding: 16px;
+            border-radius: var(--deepseek-radius);
+            background: var(--deepseek-user-message);
+            font-size: 16px;
+            line-height: 1.6;
             white-space: pre-wrap;
-            word-wrap: break-word;
+            word-break: break-word;
+            box-shadow: var(--deepseek-shadow);
+            border: 1px solid transparent;
         }
 
-        .message-text.typing {
-            opacity: 0.9;
+        .message.ai .message-text {
+            background: var(--deepseek-ai-message);
+            border: 1px solid var(--deepseek-border);
         }
 
-        .message-text .typing-cursor {
-            display: inline-block;
-            width: 8px;
-            height: 20px;
-            background: var(--ds-green-primary);
-            margin-left: 2px;
-            vertical-align: middle;
-            animation: blink 1s infinite;
+        .message.user .message-text {
+            background: linear-gradient(135deg, var(--deepseek-primary), var(--deepseek-primary-hover));
+            color: white;
+            border: none;
         }
 
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
+        /* تایپینگ انیمیشن */
+        .typing-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 0;
         }
 
-        /* ناحیه ورود */
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--deepseek-text-tertiary);
+            animation: typingDot 1.4s infinite ease-in-out both;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typingDot {
+            0%, 80%, 100% { 
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            40% { 
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* ناحیه ورود متن - دقیقاً شبیه DeepSeek */
         .input-container {
-            padding: 20px 16px;
-            background: var(--ds-background-primary);
-            border-top: 1px solid var(--ds-border-light);
-            max-width: 800px;
-            margin: 0 auto;
-            width: 100%;
+            padding: 20px;
+            border-top: 1px solid var(--deepseek-border);
+            background: var(--deepseek-bg);
+            position: relative;
         }
 
         .input-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
             position: relative;
-            background: var(--ds-background-secondary);
-            border: 1px solid var(--ds-border-medium);
-            border-radius: var(--radius-lg);
-            padding: 12px 16px;
-            transition: all var(--transition-fast);
-        }
-
-        .input-wrapper:focus-within {
-            border-color: var(--ds-green-primary);
-            box-shadow: 0 0 0 2px rgba(16, 163, 127, 0.1);
         }
 
         .message-input {
             width: 100%;
-            border: none;
-            background: transparent;
-            color: var(--ds-text-primary);
-            font-size: 15px;
+            min-height: 56px;
+            max-height: 200px;
+            padding: 16px 52px 16px 16px;
+            border: 1px solid var(--deepseek-border);
+            border-radius: var(--deepseek-radius);
+            background: var(--deepseek-bg);
+            color: var(--deepseek-text-primary);
+            font-family: 'Inter', 'Vazirmatn', sans-serif;
+            font-size: 16px;
             line-height: 1.5;
             resize: none;
-            font-family: 'Inter', sans-serif;
             outline: none;
-            min-height: 24px;
-            max-height: 200px;
+            transition: var(--deepseek-transition);
+            box-shadow: var(--deepseek-shadow);
+        }
+
+        .message-input:focus {
+            border-color: var(--deepseek-primary);
+            box-shadow: 0 0 0 3px rgba(16, 163, 127, 0.1);
         }
 
         .message-input::placeholder {
-            color: var(--ds-text-tertiary);
+            color: var(--deepseek-text-tertiary);
         }
 
-        .input-actions {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            margin-top: 8px;
-        }
-
-        .send-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            background: var(--ds-green-primary);
-            color: white;
+        .send-button {
+            position: absolute;
+            left: 16px;
+            bottom: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
             border: none;
+            background: var(--deepseek-primary);
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all var(--transition-fast);
+            transition: var(--deepseek-transition);
+            opacity: 0.8;
         }
 
-        .send-btn:hover:not(:disabled) {
-            background: var(--ds-green-hover);
+        .send-button:hover {
+            opacity: 1;
             transform: scale(1.05);
         }
 
-        .send-btn:disabled {
+        .send-button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+            transform: none;
         }
 
-        /* صفحه احراز هویت */
-        .auth-container {
-            flex: 1;
+        /* مودال پشتیبانی */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal {
+            background: var(--deepseek-bg);
+            border-radius: var(--deepseek-radius);
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--deepseek-border);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideUp 0.3s ease-out;
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--deepseek-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--deepseek-text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: none;
+            background: transparent;
+            color: var(--deepseek-text-secondary);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 24px;
-            background: var(--ds-background-primary);
+            cursor: pointer;
+            transition: var(--deepseek-transition);
+        }
+
+        .modal-close:hover {
+            background: var(--deepseek-bg-secondary);
+            color: var(--deepseek-text-primary);
+        }
+
+        .modal-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        /* بخش احراز هویت */
+        .auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--deepseek-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 40px 20px;
         }
 
         .auth-card {
-            width: 100%;
-            max-width: 400px;
-            background: var(--ds-background-primary);
-            border: 1px solid var(--ds-border-light);
-            border-radius: var(--radius-lg);
-            padding: 32px;
-            box-shadow: var(--shadow-md);
+            background: var(--deepseek-bg);
+            border-radius: var(--deepseek-radius);
+            padding: 40px;
+            border: 1px solid var(--deepseek-border);
+            box-shadow: var(--deepseek-shadow);
             animation: slideUp 0.4s ease-out;
         }
 
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -381,65 +527,74 @@
         .auth-logo {
             width: 64px;
             height: 64px;
-            margin: 0 auto 16px;
-            border-radius: var(--radius-md);
-            background: linear-gradient(135deg, var(--ds-green-primary), #0d8c6d);
+            margin: 0 auto 20px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--deepseek-primary), var(--deepseek-primary-hover));
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 8px 20px rgba(16, 163, 127, 0.2);
         }
 
         .auth-logo img {
             width: 48px;
             height: 48px;
             border-radius: 8px;
+            filter: brightness(0) invert(1);
         }
 
         .auth-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--ds-text-primary);
+            font-size: 28px;
+            font-weight: 700;
             margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--deepseek-primary), var(--deepseek-primary-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
         }
 
         .auth-subtitle {
+            color: var(--deepseek-text-secondary);
             font-size: 14px;
-            color: var(--ds-text-secondary);
             line-height: 1.5;
         }
 
         .auth-form {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 20px;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
         }
 
         .form-label {
             font-size: 14px;
             font-weight: 500;
-            color: var(--ds-text-secondary);
+            color: var(--deepseek-text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .form-input {
             padding: 12px 16px;
-            border: 1px solid var(--ds-border-medium);
-            border-radius: var(--radius-md);
-            font-size: 15px;
-            background: var(--ds-background-primary);
-            color: var(--ds-text-primary);
-            font-family: 'Inter', sans-serif;
-            transition: all var(--transition-fast);
+            border: 1px solid var(--deepseek-border);
+            border-radius: var(--deepseek-radius-sm);
+            background: var(--deepseek-bg);
+            color: var(--deepseek-text-primary);
+            font-family: 'Inter', 'Vazirmatn', sans-serif;
+            font-size: 14px;
+            transition: var(--deepseek-transition);
         }
 
         .form-input:focus {
             outline: none;
-            border-color: var(--ds-green-primary);
+            border-color: var(--deepseek-primary);
             box-shadow: 0 0 0 3px rgba(16, 163, 127, 0.1);
         }
 
@@ -449,113 +604,131 @@
             margin-top: 8px;
         }
 
+        /* دکمه‌ها */
         .btn {
-            flex: 1;
             padding: 12px 20px;
-            border-radius: var(--radius-md);
             border: none;
-            font-size: 15px;
+            border-radius: var(--deepseek-radius-sm);
+            font-family: 'Inter', 'Vazirmatn', sans-serif;
+            font-size: 14px;
             font-weight: 500;
-            font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: all var(--transition-fast);
-            display: flex;
+            transition: var(--deepseek-transition);
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary {
-            background: var(--ds-green-primary);
+            background: var(--deepseek-primary);
             color: white;
+            flex: 1;
         }
 
-        .btn-primary:hover:not(:disabled) {
-            background: var(--ds-green-hover);
+        .btn-primary:hover {
+            background: var(--deepseek-primary-hover);
             transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(16, 163, 127, 0.3);
         }
 
         .btn-secondary {
-            background: var(--ds-background-secondary);
-            color: var(--ds-text-primary);
-            border: 1px solid var(--ds-border-medium);
+            background: var(--deepseek-bg-secondary);
+            color: var(--deepseek-text-primary);
+            flex: 1;
         }
 
-        .btn-secondary:hover:not(:disabled) {
-            background: var(--ds-background-tertiary);
+        .btn-secondary:hover {
+            background: var(--deepseek-bg-tertiary);
+            transform: translateY(-1px);
         }
 
         .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+            transform: none !important;
         }
 
-        /* صفحه پشتیبانی */
-        .support-container {
-            display: none;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 24px 16px;
-            height: 100%;
+        /* پنل پشتیبانی */
+        .support-messages {
+            max-height: 400px;
             overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 16px;
+            background: var(--deepseek-bg-secondary);
+            border-radius: var(--deepseek-radius-sm);
+            border: 1px solid var(--deepseek-border);
+        }
+
+        .support-message {
+            padding: 12px;
+            margin-bottom: 12px;
+            background: var(--deepseek-bg);
+            border-radius: var(--deepseek-radius-sm);
+            border: 1px solid var(--deepseek-border);
             animation: fadeIn 0.3s ease-out;
         }
 
-        .support-header {
-            margin-bottom: 24px;
+        .support-message.user {
+            background: var(--deepseek-user-message);
+            border-color: transparent;
         }
 
-        .support-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--ds-text-primary);
+        .support-message.admin {
+            background: var(--deepseek-ai-message);
+            border-left: 3px solid var(--deepseek-primary);
+        }
+
+        .support-message-header {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 8px;
+            font-size: 12px;
+            color: var(--deepseek-text-tertiary);
         }
 
-        .support-subtitle {
-            font-size: 14px;
-            color: var(--ds-text-secondary);
+        .support-message-text {
+            color: var(--deepseek-text-primary);
             line-height: 1.5;
+            font-size: 14px;
         }
 
         .support-form {
-            background: var(--ds-background-secondary);
-            border: 1px solid var(--ds-border-medium);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            margin-bottom: 24px;
+            display: flex;
+            gap: 12px;
         }
 
-        .support-form textarea {
-            width: 100%;
-            min-height: 120px;
-            padding: 16px;
-            border: 1px solid var(--ds-border-medium);
-            border-radius: var(--radius-md);
-            background: var(--ds-background-primary);
-            color: var(--ds-text-primary);
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
-            resize: vertical;
-            margin-bottom: 16px;
-            transition: all var(--transition-fast);
+        .support-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid var(--deepseek-border);
+            border-radius: var(--deepseek-radius-sm);
+            background: var(--deepseek-bg);
+            color: var(--deepseek-text-primary);
+            font-family: 'Inter', 'Vazirmatn', sans-serif;
+            font-size: 14px;
+            resize: none;
+            min-height: 48px;
+            max-height: 120px;
+            transition: var(--deepseek-transition);
         }
 
-        .support-form textarea:focus {
+        .support-input:focus {
             outline: none;
-            border-color: var(--ds-green-primary);
+            border-color: var(--deepseek-primary);
             box-shadow: 0 0 0 3px rgba(16, 163, 127, 0.1);
         }
 
-        /* فوتر */
+        /* Footer */
         .footer {
-            padding: 16px;
+            padding: 20px;
             text-align: center;
-            border-top: 1px solid var(--ds-border-light);
-            background: var(--ds-background-primary);
-            color: var(--ds-text-tertiary);
+            border-top: 1px solid var(--deepseek-border);
+            background: var(--deepseek-bg);
+            color: var(--deepseek-text-tertiary);
             font-size: 12px;
-            line-height: 1.5;
         }
 
         .footer-content {
@@ -566,36 +739,38 @@
             flex-wrap: wrap;
         }
 
-        .footer-link {
-            color: var(--ds-text-secondary);
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            color: var(--deepseek-primary);
             text-decoration: none;
-            transition: color var(--transition-fast);
+            transition: var(--deepseek-transition);
         }
 
-        .footer-link:hover {
-            color: var(--ds-green-primary);
-            text-decoration: underline;
+        .footer-logo:hover {
+            color: var(--deepseek-primary-hover);
+            transform: translateY(-1px);
         }
 
-        /* نوتیفیکیشن */
+        /* اعلان‌ها */
         .notification {
             position: fixed;
-            top: 20px;
+            top: 80px;
             left: 50%;
-            transform: translateX(-50%) translateY(-100%);
-            background: var(--ds-background-primary);
-            border: 1px solid var(--ds-border-medium);
-            border-radius: var(--radius-md);
+            transform: translateX(-50%) translateY(-20px);
             padding: 12px 20px;
-            box-shadow: var(--shadow-md);
+            background: var(--deepseek-bg);
+            border: 1px solid var(--deepseek-border);
+            border-radius: var(--deepseek-radius-sm);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             display: flex;
             align-items: center;
             gap: 12px;
-            z-index: 1000;
+            z-index: 3000;
             opacity: 0;
-            transition: all 0.3s ease;
-            max-width: 400px;
-            width: 90%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .notification.show {
@@ -603,157 +778,211 @@
             opacity: 1;
         }
 
+        .notification.success {
+            border-left: 4px solid var(--deepseek-primary);
+        }
+
+        .notification.error {
+            border-left: 4px solid #ef4444;
+        }
+
         .notification-icon {
             width: 20px;
             height: 20px;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .notification.success .notification-icon {
-            background: rgba(16, 163, 127, 0.1);
-            color: var(--ds-green-primary);
-        }
-
-        .notification.error .notification-icon {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
         }
 
         .notification-text {
             font-size: 14px;
-            color: var(--ds-text-primary);
-            flex: 1;
+            color: var(--deepseek-text-primary);
         }
 
-        /* استایل‌های کمکی */
+        /* Markdown Styling */
+        .message-text pre {
+            background: var(--deepseek-bg-tertiary);
+            padding: 16px;
+            border-radius: var(--deepseek-radius-sm);
+            overflow-x: auto;
+            margin: 12px 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+            direction: ltr;
+            border: 1px solid var(--deepseek-border);
+        }
+
+        .message-text code {
+            background: var(--deepseek-bg-tertiary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+            color: var(--deepseek-primary);
+        }
+
+        .message-text h1, .message-text h2, .message-text h3 {
+            margin: 16px 0 8px;
+            font-weight: 600;
+        }
+
+        .message-text p {
+            margin-bottom: 12px;
+        }
+
+        .message-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .message-text ul, .message-text ol {
+            margin: 8px 0 8px 20px;
+            padding: 0;
+        }
+
+        .message-text li {
+            margin-bottom: 4px;
+        }
+
+        /* وضعیت اتصال */
+        .connection-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--deepseek-text-tertiary);
+            padding: 4px 8px;
+            border-radius: 12px;
+            background: var(--deepseek-bg-secondary);
+        }
+
+        .connection-status.online::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--deepseek-primary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Utility Classes */
         .hidden {
             display: none !important;
         }
 
         .loading {
-            opacity: 0.7;
+            position: relative;
             pointer-events: none;
         }
 
-        .typing-indicator {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            padding: 8px 0;
-        }
-
-        .typing-dot {
-            width: 6px;
-            height: 6px;
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--deepseek-border);
+            border-top-color: var(--deepseek-primary);
             border-radius: 50%;
-            background: var(--ds-text-tertiary);
-            animation: typing 1.4s infinite ease-in-out both;
+            animation: spin 0.8s linear infinite;
         }
 
-        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
-        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-
-        @keyframes typing {
-            0%, 80%, 100% { transform: scale(0); }
-            40% { transform: scale(1); }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
-        /* اسکرول بار */
-        .messages-wrapper::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .messages-wrapper::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .messages-wrapper::-webkit-scrollbar-thumb {
-            background: var(--ds-border-medium);
-            border-radius: 4px;
-        }
-
-        .messages-wrapper::-webkit-scrollbar-thumb:hover {
-            background: var(--ds-border-light);
-        }
-
-        /* Responsive */
+        /* Responsive Design */
         @media (max-width: 768px) {
             .header {
-                padding: 12px;
+                padding: 0 16px;
             }
-            
-            .auth-card {
-                padding: 24px;
-                border: none;
-                box-shadow: none;
-            }
-            
-            .message {
-                padding: 20px 0;
-            }
-            
-            .input-container {
+
+            .messages-container {
                 padding: 16px;
+                gap: 16px;
             }
-            
+
+            .message-text {
+                padding: 12px;
+                font-size: 15px;
+            }
+
+            .auth-card {
+                padding: 32px 24px;
+            }
+
+            .modal {
+                width: 95%;
+                max-height: 85vh;
+            }
+
             .form-actions {
                 flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
             }
         }
 
         @media (max-width: 480px) {
-            .logo-text {
-                display: none;
+            .header-controls {
+                gap: 8px;
             }
-            
-            .auth-title {
-                font-size: 20px;
-            }
-            
-            .message-avatar {
+
+            .header-btn {
                 width: 32px;
                 height: 32px;
+            }
+
+            .logo-text {
+                font-size: 14px;
+            }
+
+            .auth-container {
+                padding: 20px 16px;
+            }
+
+            .auth-card {
+                padding: 24px 20px;
+            }
+
+            .auth-title {
+                font-size: 24px;
             }
         }
     </style>
 </head>
 <body data-theme="light">
-    <div class="app-container">
-        <!-- هدر -->
-        <header class="header">
-            <div class="logo-container">
-                <div class="logo">
-                    <img src="https://uploadkon.ir/do.php?imgf=626204_26photo-output.jpeg" alt="Acioai Logo">
-                </div>
-                <div class="logo-text">Acioai</div>
+    <!-- هدر -->
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo-icon">
+                <img src="https://uploadkon.ir/do.php?imgf=626204_26photo-output.jpeg" alt="Acioai Logo">
             </div>
-            
-            <div class="header-controls">
-                <!-- دکمه پشتیبانی -->
-                <button class="header-btn" id="supportBtn" title="پشتیبانی">
-                    <i class="fas fa-headset"></i>
-                </button>
-                
-                <!-- دکمه تغییر حالت -->
-                <button class="header-btn" id="themeToggle" title="تغییر حالت">
-                    <i class="fas fa-moon"></i>
-                </button>
-                
-                <!-- اطلاعات کاربر -->
-                <div id="userInfo" class="hidden">
-                    <div class="header-btn" title="پروفایل کاربر">
-                        <i class="fas fa-user"></i>
-                    </div>
-                </div>
+            <div class="logo-text">Acioai</div>
+        </div>
+        <div class="header-controls">
+            <button class="header-btn" id="supportBtn" title="پشتیبانی">
+                <i class="fas fa-headset"></i>
+            </button>
+            <button class="header-btn" id="themeToggle" title="تغییر تم">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div id="userInfo" class="hidden">
+                <div class="connection-status online">آنلاین</div>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <!-- صفحه اصلی احراز هویت -->
-        <section class="auth-container" id="authContainer">
+    <!-- بخش احراز هویت -->
+    <div class="auth-overlay" id="authOverlay">
+        <div class="auth-container">
             <div class="auth-card">
                 <div class="auth-header">
                     <div class="auth-logo">
@@ -764,11 +993,17 @@
                 </div>
                 <form class="auth-form" id="authForm">
                     <div class="form-group">
-                        <label for="nameInput" class="form-label">نام کامل</label>
+                        <label for="nameInput" class="form-label">
+                            <i class="fas fa-user"></i>
+                            نام کامل
+                        </label>
                         <input type="text" id="nameInput" class="form-input" placeholder="نام و نام خانوادگی" required>
                     </div>
                     <div class="form-group">
-                        <label for="emailInput" class="form-label">ایمیل</label>
+                        <label for="emailInput" class="form-label">
+                            <i class="fas fa-envelope"></i>
+                            ایمیل
+                        </label>
                         <input type="email" id="emailInput" class="form-input" placeholder="example@email.com" required>
                     </div>
                     <div class="form-actions">
@@ -783,28 +1018,27 @@
                     </div>
                 </form>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <!-- صفحه چت اصلی -->
-        <section class="chat-container hidden" id="chatContainer">
-            <div class="messages-wrapper">
-                <div class="messages-container" id="messagesContainer">
-                    <!-- پیام اولیه -->
-                    <div class="message-group">
-                        <div class="message ai">
-                            <div class="message-avatar">AI</div>
-                            <div class="message-content">
-                                <div class="message-text">
-                                    سلام! 👋<br><br>
-                                    من <strong>Acioai</strong> هستم، هوش مصنوعی توسعه‌یافته توسط <strong>تیم آکیو | Acio</strong>.<br><br>
-                                    چطور می‌تونم کمکتون کنم؟
-                                </div>
-                            </div>
+    <!-- بخش اصلی چت -->
+    <div class="app-container hidden" id="appContainer">
+        <main class="main-content">
+            <div class="messages-container" id="messagesContainer">
+                <!-- پیام اولیه -->
+                <div class="message ai">
+                    <div class="avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            <p>سلام! 👋</p>
+                            <p>من <strong>Acioai</strong> هستم، هوش مصنوعی توسعه‌یافته توسط <strong>تیم آکیو | Acio</strong>.</p>
+                            <p>چطور می‌تونم کمکتون کنم؟</p>
                         </div>
                     </div>
                 </div>
             </div>
-            
             <div class="input-container">
                 <div class="input-wrapper">
                     <textarea 
@@ -814,62 +1048,66 @@
                         rows="1"
                         autocomplete="off"
                     ></textarea>
-                    <div class="input-actions">
-                        <button class="send-btn" id="sendButton" disabled>
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- صفحه پشتیبانی -->
-        <section class="support-container" id="supportContainer">
-            <div class="support-header">
-                <h1 class="support-title">پشتیبانی Acioai</h1>
-                <p class="support-subtitle">پیام خود را برای تیم پشتیبانی ارسال کنید</p>
-            </div>
-            
-            <form class="support-form" id="supportForm">
-                <textarea 
-                    id="supportMessage" 
-                    placeholder="مشکل یا سوال خود را با جزئیات شرح دهید..."
-                ></textarea>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" id="backToChatBtn">
-                        <i class="fas fa-arrow-right"></i>
-                        بازگشت به چت
-                    </button>
-                    <button type="submit" class="btn btn-primary" id="submitSupportBtn">
+                    <button class="send-button" id="sendButton" disabled>
                         <i class="fas fa-paper-plane"></i>
-                        ارسال پیام
                     </button>
                 </div>
-            </form>
-            
-            <div class="support-info">
-                <h3 class="support-title" style="font-size: 18px; margin-bottom: 16px;">راه‌های ارتباطی دیگر</h3>
-                <div style="display: flex; flex-direction: column; gap: 8px; color: var(--ds-text-secondary); font-size: 14px;">
-                    <div>📧 ایمیل: support@acioai.com</div>
-                    <div>⏰ ساعت پاسخگویی: ۹ صبح تا ۵ عصر</div>
-                    <div>⚡ زمان پاسخگویی: حداکثر ۲۴ ساعت</div>
-                </div>
             </div>
-        </section>
+        </main>
+        <footer class="footer">
+            <div class="footer-content">
+                <span>تمامی حقوق محفوظ است © ۲۰۲۶</span>
+                <a href="https://aciocode.vercel.app" target="_blank" class="footer-logo">
+                    <i class="fas fa-code"></i>
+                    Acio
+                </a>
+            </div>
+        </footer>
     </div>
 
-    <!-- فوتر -->
-    <footer class="footer">
-        <div class="footer-content">
-            <span>تمامی حقوق محفوظ است © ۲۰۲۶</span>
-            <a href="https://aciocode.vercel.app" target="_blank" class="footer-link">Acio</a>
-            <span>•</span>
-            <span>Acioai v1.0.0</span>
+    <!-- مودال پشتیبانی -->
+    <div class="modal-overlay" id="supportModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-headset"></i>
+                    پشتیبانی Acioai
+                </h3>
+                <button class="modal-close" id="closeSupportModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-content">
+                <div class="support-messages" id="supportMessages">
+                    <!-- پیام‌های پشتیبانی اینجا نمایش داده می‌شوند -->
+                    <div class="support-message ai">
+                        <div class="support-message-header">
+                            <span>پشتیبانی Acioai</span>
+                            <span>هم اکنون</span>
+                        </div>
+                        <div class="support-message-text">
+                            سلام! 👋 لطفاً پیام خود را برای تیم پشتیبانی بنویسید.
+                        </div>
+                    </div>
+                </div>
+                <form class="support-form" id="supportForm">
+                    <textarea 
+                        class="support-input" 
+                        id="supportInput" 
+                        placeholder="پیام خود را برای پشتیبانی بنویسید..."
+                        rows="2"
+                    ></textarea>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                        ارسال
+                    </button>
+                </form>
+            </div>
         </div>
-    </footer>
+    </div>
 
-    <!-- نوتیفیکیشن -->
-    <div id="notification"></div>
+    <!-- اعلان‌ها -->
+    <div id="notificationContainer"></div>
 
     <script>
         // API Configuration
@@ -880,17 +1118,16 @@
         let currentUser = null;
         let currentTheme = 'light';
         let isTyping = false;
-        let typingTimeout = null;
+        let chatHistory = [];
 
         // DOM Elements
         const elements = {
-            authContainer: document.getElementById('authContainer'),
-            chatContainer: document.getElementById('chatContainer'),
-            supportContainer: document.getElementById('supportContainer'),
+            authOverlay: document.getElementById('authOverlay'),
+            appContainer: document.getElementById('appContainer'),
             themeToggle: document.getElementById('themeToggle'),
             supportBtn: document.getElementById('supportBtn'),
-            backToChatBtn: document.getElementById('backToChatBtn'),
-            userInfo: document.getElementById('userInfo'),
+            supportModal: document.getElementById('supportModal'),
+            closeSupportModal: document.getElementById('closeSupportModal'),
             nameInput: document.getElementById('nameInput'),
             emailInput: document.getElementById('emailInput'),
             loginBtn: document.getElementById('loginBtn'),
@@ -898,9 +1135,10 @@
             messagesContainer: document.getElementById('messagesContainer'),
             messageInput: document.getElementById('messageInput'),
             sendButton: document.getElementById('sendButton'),
+            supportMessages: document.getElementById('supportMessages'),
+            supportInput: document.getElementById('supportInput'),
             supportForm: document.getElementById('supportForm'),
-            supportMessage: document.getElementById('supportMessage'),
-            submitSupportBtn: document.getElementById('submitSupportBtn')
+            notificationContainer: document.getElementById('notificationContainer')
         };
 
         // Initialize Application
@@ -910,6 +1148,7 @@
             setupEventListeners();
             setupMessageInput();
             setupSupportForm();
+            checkConnection();
         }
 
         // Theme Management
@@ -930,9 +1169,6 @@
             
             const icon = elements.themeToggle.querySelector('i');
             icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-            
-            // Update active state
-            elements.themeToggle.classList.toggle('active', theme === 'dark');
         }
 
         // User Management
@@ -942,7 +1178,6 @@
                 try {
                     currentUser = JSON.parse(userData);
                     showChatInterface();
-                    updateUserInfo();
                 } catch (error) {
                     localStorage.removeItem('acioai_user');
                     showAuthInterface();
@@ -956,7 +1191,6 @@
             currentUser = user;
             localStorage.setItem('acioai_user', JSON.stringify(user));
             showChatInterface();
-            updateUserInfo();
         }
 
         function clearUser() {
@@ -965,32 +1199,16 @@
             showAuthInterface();
         }
 
-        function updateUserInfo() {
-            if (currentUser) {
-                elements.userInfo.classList.remove('hidden');
-            }
-        }
-
         // Interface Management
         function showAuthInterface() {
-            elements.authContainer.classList.remove('hidden');
-            elements.chatContainer.classList.add('hidden');
-            elements.supportContainer.classList.add('hidden');
-            elements.userInfo.classList.add('hidden');
+            elements.authOverlay.classList.remove('hidden');
+            elements.appContainer.classList.add('hidden');
         }
 
         function showChatInterface() {
-            elements.authContainer.classList.add('hidden');
-            elements.chatContainer.classList.remove('hidden');
-            elements.supportContainer.classList.add('hidden');
-            elements.userInfo.classList.remove('hidden');
+            elements.authOverlay.classList.add('hidden');
+            elements.appContainer.classList.remove('hidden');
             elements.messageInput.focus();
-        }
-
-        function showSupportInterface() {
-            elements.authContainer.classList.add('hidden');
-            elements.chatContainer.classList.add('hidden');
-            elements.supportContainer.classList.remove('hidden');
         }
 
         // API Communication
@@ -1004,8 +1222,7 @@
             
             try {
                 const response = await fetch(url, {
-                    headers: { 'Accept': 'application/json' },
-                    mode: 'cors'
+                    headers: { 'Accept': 'application/json' }
                 });
                 
                 if (!response.ok) {
@@ -1080,6 +1297,7 @@
             }
         }
 
+        // Chat Functions
         async function sendMessage(text) {
             if (!text.trim() || !currentUser || isTyping) return;
             
@@ -1096,7 +1314,7 @@
             try {
                 isTyping = true;
                 
-                // Try FAQ first
+                // Try API first
                 let response;
                 try {
                     response = await apiRequest('chat', {
@@ -1105,7 +1323,7 @@
                         text: text
                     });
                 } catch (faqError) {
-                    // If FAQ fails, try GPT4
+                    // If API fails, try GPT4
                     response = await callGPT4(text);
                 }
                 
@@ -1128,80 +1346,72 @@
             }
         }
 
-        async function sendSupportMessage(message) {
-            if (!message.trim() || !currentUser) {
-                showNotification('لطفاً پیام خود را وارد کنید', 'error');
-                return;
-            }
+        async function sendSupportMessage(text) {
+            if (!text.trim() || !currentUser) return;
             
             try {
-                elements.submitSupportBtn.disabled = true;
-                elements.submitSupportBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ارسال...';
+                setLoading(true);
                 
+                // Add user message to support chat
+                addSupportMessage(text, 'user');
+                
+                // Send to API
                 await apiRequest('support', {
                     userid: currentUser.id,
-                    message: message
+                    message: text
                 });
                 
-                elements.supportMessage.value = '';
+                elements.supportInput.value = '';
                 showNotification('پیام شما با موفقیت ارسال شد', 'success');
-                
-                setTimeout(() => {
-                    showChatInterface();
-                }, 1500);
                 
             } catch (error) {
                 showNotification(error.message || 'خطا در ارسال پیام', 'error');
             } finally {
-                elements.submitSupportBtn.disabled = false;
-                elements.submitSupportBtn.innerHTML = '<i class="fas fa-paper-plane"></i> ارسال پیام';
+                setLoading(false);
             }
         }
 
-        // Message Management
+        // Message Functions
         function addMessage(text, type = 'ai') {
-            const messageGroup = document.createElement('div');
-            messageGroup.className = 'message-group';
-            
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${type}`;
             
-            const avatarText = type === 'user' ? 
-                (currentUser?.name?.charAt(0) || 'U') : 'AI';
+            const avatarIcon = type === 'user' ? 'fa-user' : 'fa-robot';
             
             messageDiv.innerHTML = `
-                <div class="message-avatar">${avatarText}</div>
+                <div class="avatar">
+                    <i class="fas ${avatarIcon}"></i>
+                </div>
                 <div class="message-content">
                     <div class="message-text">${formatMessage(text)}</div>
                 </div>
             `;
             
-            messageGroup.appendChild(messageDiv);
-            elements.messagesContainer.appendChild(messageGroup);
+            elements.messagesContainer.appendChild(messageDiv);
             scrollToBottom();
+            
+            // Save to history
+            chatHistory.push({ text, type, timestamp: Date.now() });
             
             return messageDiv;
         }
 
         async function typeMessage(text, type = 'ai') {
-            const messageGroup = document.createElement('div');
-            messageGroup.className = 'message-group';
-            
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${type}`;
             
-            const avatarText = type === 'user' ? 
-                (currentUser?.name?.charAt(0) || 'U') : 'AI';
+            const avatarIcon = type === 'user' ? 'fa-user' : 'fa-robot';
             
             messageDiv.innerHTML = `
-                <div class="message-avatar">${avatarText}</div>
+                <div class="avatar">
+                    <i class="fas ${avatarIcon}"></i>
+                </div>
                 <div class="message-content">
-                    <div class="message-text typing"></div>
+                    <div class="message-text"></div>
                 </div>
             `;
             
-            messageGroup.appendChild(messageDiv);
-            elements.messagesContainer.appendChild(messageGroup);
+            elements.messagesContainer.appendChild(messageDiv);
             
             const textElement = messageDiv.querySelector('.message-text');
             const chars = text.split('');
@@ -1209,61 +1419,50 @@
             
             // Type character by character
             for (let i = 0; i < chars.length; i++) {
-                const char = chars[i];
-                
-                // Handle special characters and formatting
-                if (char === '\n') {
-                    currentText += '<br>';
-                } else if (char === ' ' && chars[i - 1] === ' ') {
-                    currentText += '&nbsp;';
-                } else {
-                    currentText += char;
-                }
-                
-                textElement.innerHTML = formatMessage(currentText) + '<span class="typing-cursor"></span>';
+                currentText += chars[i];
+                textElement.innerHTML = formatMessage(currentText);
                 
                 // Random typing speed for natural feel
-                await delay(Math.random() * 20 + 10);
+                await delay(Math.random() * 10 + 5);
                 
                 // Scroll to bottom every few characters
-                if (i % 10 === 0) {
+                if (i % 5 === 0) {
                     scrollToBottom();
                 }
             }
             
-            // Remove typing cursor
-            textElement.innerHTML = formatMessage(text);
-            textElement.classList.remove('typing');
-            
             scrollToBottom();
+            
+            // Save to history
+            chatHistory.push({ text, type, timestamp: Date.now() });
+            
             return messageDiv;
         }
 
-        function formatMessage(text) {
-            // Simple markdown-like formatting
-            return text
-                .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-                .replace(/`([^`]+)`/g, '<code>$1</code>')
-                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-                .replace(/\*([^*]+)\*/g, '<em>$1</em>')
-                .replace(/\n/g, '<br>');
-        }
-
         function showTypingIndicator() {
-            const typingDiv = document.createElement('div');
-            typingDiv.className = 'typing-indicator';
-            typingDiv.id = 'typing-indicator';
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message ai';
+            messageDiv.id = 'typing-indicator';
             
-            typingDiv.innerHTML = `
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
+            messageDiv.innerHTML = `
+                <div class="avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <div class="message-text">
+                        <div class="typing-indicator">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                </div>
             `;
             
-            elements.messagesContainer.appendChild(typingDiv);
+            elements.messagesContainer.appendChild(messageDiv);
             scrollToBottom();
             
-            return typingDiv.id;
+            return messageDiv.id;
         }
 
         function removeTypingIndicator(id) {
@@ -1273,21 +1472,57 @@
             }
         }
 
-        // UI Helpers
+        function addSupportMessage(text, type = 'user') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `support-message ${type}`;
+            
+            const time = new Date().toLocaleTimeString('fa-IR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            const sender = type === 'user' ? 'شما' : 'پشتیبانی Acioai';
+            
+            messageDiv.innerHTML = `
+                <div class="support-message-header">
+                    <span>${sender}</span>
+                    <span>${time}</span>
+                </div>
+                <div class="support-message-text">${text}</div>
+            `;
+            
+            elements.supportMessages.appendChild(messageDiv);
+            elements.supportMessages.scrollTop = elements.supportMessages.scrollHeight;
+            
+            return messageDiv;
+        }
+
+        // Utility Functions
+        function formatMessage(text) {
+            return text
+                .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+                .replace(/`([^`]+)`/g, '<code>$1</code>')
+                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+                .replace(/\n/g, '<br>')
+                .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+                .replace(/^# (.*$)/gm, '<h1>$1</h1>');
+        }
+
         function scrollToBottom() {
-            const wrapper = document.querySelector('.messages-wrapper');
-            if (wrapper) {
-                requestAnimationFrame(() => {
-                    wrapper.scrollTop = wrapper.scrollHeight;
-                });
-            }
+            requestAnimationFrame(() => {
+                elements.messagesContainer.scrollTop = elements.messagesContainer.scrollHeight;
+            });
         }
 
         function showNotification(message, type = 'success') {
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
             
-            const icon = type === 'success' ? 'check-circle' : 'exclamation-circle';
+            const icon = type === 'success' ? 'check-circle' : 
+                        type === 'error' ? 'exclamation-circle' : 
+                        'info-circle';
             
             notification.innerHTML = `
                 <div class="notification-icon">
@@ -1296,7 +1531,7 @@
                 <div class="notification-text">${message}</div>
             `;
             
-            document.getElementById('notification').appendChild(notification);
+            elements.notificationContainer.appendChild(notification);
             
             // Show notification
             setTimeout(() => notification.classList.add('show'), 10);
@@ -1309,21 +1544,15 @@
         }
 
         function setLoading(loading) {
-            const buttons = [elements.loginBtn, elements.registerBtn];
+            const buttons = [elements.loginBtn, elements.registerBtn, elements.sendButton];
             
             buttons.forEach(btn => {
                 if (btn) {
                     btn.disabled = loading;
                     if (loading) {
                         btn.classList.add('loading');
-                        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> لطفاً صبر کنید...';
                     } else {
                         btn.classList.remove('loading');
-                        if (btn.id === 'loginBtn') {
-                            btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> ورود';
-                        } else {
-                            btn.innerHTML = '<i class="fas fa-user-plus"></i> ثبت‌نام';
-                        }
                     }
                 }
             });
@@ -1334,6 +1563,50 @@
             elements.sendButton.disabled = !hasText || isTyping;
         }
 
+        function setupMessageInput() {
+            elements.messageInput.addEventListener('input', () => {
+                // Auto-resize textarea
+                elements.messageInput.style.height = 'auto';
+                elements.messageInput.style.height = Math.min(elements.messageInput.scrollHeight, 200) + 'px';
+                
+                updateSendButton();
+            });
+            
+            elements.messageInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (!isTyping && elements.messageInput.value.trim()) {
+                        sendMessage(elements.messageInput.value.trim());
+                    }
+                }
+            });
+        }
+
+        function setupSupportForm() {
+            elements.supportForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const message = elements.supportInput.value.trim();
+                if (message) {
+                    sendSupportMessage(message);
+                }
+            });
+            
+            elements.supportInput.addEventListener('input', () => {
+                elements.supportInput.style.height = 'auto';
+                elements.supportInput.style.height = Math.min(elements.supportInput.scrollHeight, 120) + 'px';
+            });
+        }
+
+        function checkConnection() {
+            if (!navigator.onLine) {
+                showNotification('اتصال اینترنت قطع شد', 'error');
+            }
+        }
+
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
         // Event Listeners Setup
         function setupEventListeners() {
             // Theme toggle
@@ -1341,19 +1614,22 @@
                 setTheme(currentTheme === 'dark' ? 'light' : 'dark');
             });
             
-            // Support button
+            // Support modal
             elements.supportBtn.addEventListener('click', () => {
-                if (currentUser) {
-                    showSupportInterface();
-                } else {
-                    showNotification('لطفاً ابتدا وارد شوید', 'error');
+                elements.supportModal.style.display = 'flex';
+            });
+            
+            elements.closeSupportModal.addEventListener('click', () => {
+                elements.supportModal.style.display = 'none';
+            });
+            
+            elements.supportModal.addEventListener('click', (e) => {
+                if (e.target === elements.supportModal) {
+                    elements.supportModal.style.display = 'none';
                 }
             });
             
-            // Back to chat button
-            elements.backToChatBtn.addEventListener('click', showChatInterface);
-            
-            // Login button
+            // Login
             elements.loginBtn.addEventListener('click', () => {
                 const email = elements.emailInput.value.trim();
                 if (!validateEmail(email)) {
@@ -1363,7 +1639,7 @@
                 loginUser(email);
             });
             
-            // Register button
+            // Register
             elements.registerBtn.addEventListener('click', () => {
                 const name = elements.nameInput.value.trim();
                 const email = elements.emailInput.value.trim();
@@ -1388,110 +1664,54 @@
                 }
             });
             
-            // Enter key in chat
-            elements.messageInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                // Ctrl/Cmd + K to focus input
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
                     e.preventDefault();
-                    if (!isTyping && elements.messageInput.value.trim()) {
-                        sendMessage(elements.messageInput.value.trim());
+                    elements.messageInput.focus();
+                }
+                
+                // Escape to close modals
+                if (e.key === 'Escape') {
+                    if (elements.supportModal.style.display === 'flex') {
+                        elements.supportModal.style.display = 'none';
                     }
+                    document.activeElement.blur();
                 }
             });
             
-            // Support form submission
-            elements.supportForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                sendSupportMessage(elements.supportMessage.value.trim());
-            });
-            
-            // Enter key in auth form
+            // Handle auth form enter key
             [elements.nameInput, elements.emailInput].forEach(input => {
                 input.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter') {
                         e.preventDefault();
-                        const email = elements.emailInput.value.trim();
-                        if (validateEmail(email)) {
-                            if (elements.nameInput.value.trim()) {
-                                elements.registerBtn.click();
-                            } else {
-                                elements.loginBtn.click();
-                            }
+                        if (elements.nameInput.value.trim()) {
+                            elements.registerBtn.click();
+                        } else {
+                            elements.loginBtn.click();
                         }
                     }
                 });
             });
             
-            // Double click on logo to logout
-            document.querySelector('.logo').addEventListener('dblclick', () => {
-                if (currentUser && confirm('آیا می‌خواهید خارج شوید؟')) {
-                    clearUser();
-                    showNotification('خروج با موفقیت انجام شد', 'success');
-                }
+            // Online/offline detection
+            window.addEventListener('online', () => {
+                showNotification('اتصال اینترنت برقرار شد', 'success');
             });
             
-            // Auto-focus on input when chat is shown
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (!mutation.target.classList.contains('hidden')) {
-                        if (mutation.target.id === 'chatContainer') {
-                            setTimeout(() => elements.messageInput.focus(), 100);
-                        }
-                    }
-                });
-            });
-            
-            observer.observe(elements.chatContainer, { attributes: true, attributeFilter: ['class'] });
-        }
-
-        function setupMessageInput() {
-            elements.messageInput.addEventListener('input', () => {
-                // Auto-resize textarea
-                elements.messageInput.style.height = 'auto';
-                elements.messageInput.style.height = Math.min(elements.messageInput.scrollHeight, 200) + 'px';
-                
-                updateSendButton();
+            window.addEventListener('offline', () => {
+                showNotification('اتصال اینترنت قطع شد', 'error');
             });
         }
 
-        function setupSupportForm() {
-            elements.supportMessage.addEventListener('input', () => {
-                // Auto-resize textarea
-                elements.supportMessage.style.height = 'auto';
-                elements.supportMessage.style.height = Math.min(elements.supportMessage.scrollHeight, 300) + 'px';
-            });
-        }
-
-        // Validation
         function validateEmail(email) {
             const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return re.test(email);
         }
 
-        // Utility Functions
-        function delay(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        // Initialize when DOM is loaded
+        // Initialize on load
         document.addEventListener('DOMContentLoaded', init);
-        
-        // Keyboard shortcuts
-        document.addEventListener('keydown', (e) => {
-            // Ctrl/Cmd + K to focus input
-            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                e.preventDefault();
-                if (currentUser) {
-                    elements.messageInput.focus();
-                } else {
-                    elements.emailInput.focus();
-                }
-            }
-            
-            // Escape to go back
-            if (e.key === 'Escape' && !elements.supportContainer.classList.contains('hidden')) {
-                showChatInterface();
-            }
-        });
     </script>
 </body>
 </html>
