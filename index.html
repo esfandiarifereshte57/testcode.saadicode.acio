@@ -2,322 +2,1549 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#0088cc">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="پاترونوس">
-    <meta name="description" content="پیام‌رسان امن و سریع پاترونوس - از تیم آکیو">
-    <meta name="keywords" content="پیام‌رسان, چت, امن, سریع, پاترونوس, آکیو">
-    <meta name="author" content="تیم آکیو - ۲۰۲۵">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acioai 1.0.0 | هوش مصنوعی تیم آکیو</title>
     
-    <!-- Favicon and App Icons -->
-    <link rel="icon" type="image/x-icon" href="https://uploadkon.ir/uploads/867323_25IMG-4467.jpeg">
-    <link rel="apple-touch-icon" href="https://uploadkon.ir/uploads/867323_25IMG-4467.jpeg">
+    <!-- فونت فارسی Vazirmatn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <title>پاترونوس | پیام‌رسان امن و سریع</title>
-    
-    <!-- Fonts & Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* ============================================================
-           PATRONUS PREMIUM STYLESHEET (Advanced Glassmorphism UI)
-           ============================================================ */
+        /* Reset و متغیرها */
         :root {
-            --p-primary: #0088cc; --p-primary-dark: #0077b5;
-            --p-bg: #f0f2f5; --p-side: #ffffff; --p-surface: #ffffff;
-            --p-text: #000000; --p-text-sub: #707579; --p-border: #dfe1e5;
-            --p-msg-in: #ffffff; --p-msg-out: #effdde; --p-accent: #2196f3;
-            --p-radius: 15px; --p-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            --p-anim: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --success-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --dark-color: #121826;
+            --light-color: #f8f9fa;
+            --gray-color: #6c757d;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
 
-        /* Themes Configuration */
-        body.theme-dark {
-            --p-bg: #0e1621; --p-side: #17212b; --p-surface: #17212b;
-            --p-text: #ffffff; --p-text-sub: #8b96a1; --p-border: #232e3c;
-            --p-msg-in: #182533; --p-msg-out: #2b5278; --p-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        [data-theme="dark"] {
+            --primary-color: #5a7dff;
+            --secondary-color: #4a1fb8;
+            --dark-color: #f8f9fa;
+            --light-color: #121826;
+            --gray-color: #a0a0a0;
         }
-        body.theme-blue { --p-primary: #2196f3; --p-bg: #e3f2fd; }
-        body.theme-green { --p-primary: #4caf50; --p-bg: #e8f5e9; }
-        body.theme-purple { --p-primary: #9c27b0; --p-bg: #f3e5f5; }
-        body.theme-red { --p-primary: #f44336; --p-bg: #ffebee; }
 
-        * { box-sizing: border-box; font-family: 'Vazirmatn', sans-serif; -webkit-tap-highlight-color: transparent; outline: none; }
-        body, html { margin: 0; padding: 0; height: 100vh; overflow: hidden; background: var(--p-bg); color: var(--p-text); transition: var(--p-anim); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        /* Splash & Loader */
-        #splash { position: fixed; inset: 0; background: #fff; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        body.theme-dark #splash { background: #0e1621; }
-        .logo-anim { width: 120px; border-radius: 35px; animation: pulse 2s infinite; box-shadow: var(--p-shadow); }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            transition: var(--transition);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-        /* Auth Box */
-        #auth-box { display: none; height: 100vh; align-items: center; justify-content: center; background: linear-gradient(135deg, #0088cc, #004466); }
-        .auth-card { background: var(--p-surface); padding: 40px; border-radius: 30px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
-        .auth-card h2 { margin-bottom: 20px; }
-        .auth-input { width: 100%; padding: 15px; margin: 10px 0; border-radius: 15px; border: 1px solid #ddd; }
-        .auth-btn { width: 100%; padding: 15px; background: var(--p-primary); color: #fff; border: none; border-radius: 15px; font-weight: bold; cursor: pointer; }
-        .auth-message { margin-top: 15px; font-size: 14px; color: #f44336; }
+        /* هدر */
+        .app-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
 
-        /* Main Layout */
-        #app-wrapper { display: none; height: 100vh; grid-template-columns: 380px 1fr; }
-        #app-wrapper.active { display: grid; }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-        /* Sidebar */
-        .sidebar { background: var(--p-side); border-left: 1px solid var(--p-border); display: flex; flex-direction: column; position: relative; z-index: 10; }
-        .sidebar-header { padding: 15px; display: flex; align-items: center; gap: 10px; }
-        .search-container { flex: 1; background: var(--p-bg); border-radius: 20px; padding: 8px 15px; display: flex; align-items: center; gap: 10px; }
-        .search-container input { background: transparent; border: none; flex: 1; color: var(--p-text); }
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
 
-        .chat-list { flex: 1; overflow-y: auto; }
-        .chat-item { padding: 12px 18px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.2s; border-bottom: 1px solid rgba(0,0,0,0.03); }
-        .chat-item:hover { background: rgba(0,0,0,0.05); }
-        .chat-item.active { background: var(--p-primary); color: #fff; }
-        .chat-item.active .m-preview { color: rgba(255,255,255,0.8); }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
 
-        .p-avatar { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; background: #ddd; position: relative; }
-        .online-status { position: absolute; bottom: 2px; right: 2px; width: 12px; height: 12px; background: #4caf50; border: 2px solid var(--p-side); border-radius: 50%; }
+        .logo i {
+            font-size: 2rem;
+            color: #ffd166;
+        }
 
-        /* Chat Window */
-        .chat-window { display: flex; flex-direction: column; background: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-blend-mode: overlay; background-color: var(--p-bg); background-size: 350px; }
-        .chat-header { background: var(--p-surface); padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--p-border); box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
-        
-        .messages-container { flex: 1; overflow-y: auto; padding: 20px 7%; display: flex; flex-direction: column; gap: 10px; scroll-behavior: smooth; }
-        .bubble { max-width: 70%; padding: 10px 15px; border-radius: 18px; position: relative; font-size: 14.5px; line-height: 1.5; box-shadow: 0 1px 2px rgba(0,0,0,0.1); animation: fadeInUp 0.3s; }
-        .bubble.sent { align-self: flex-end; background: var(--p-msg-out); border-bottom-right-radius: 4px; color: #000; }
-        .bubble.received { align-self: flex-start; background: var(--p-msg-in); border-bottom-left-radius: 4px; }
-        .b-meta { font-size: 10px; margin-top: 4px; opacity: 0.6; text-align: left; }
+        .version {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+        }
 
-        .input-bar { padding: 15px 7%; background: transparent; display: flex; align-items: center; gap: 10px; }
-        .input-inner { background: var(--p-surface); flex: 1; border-radius: 25px; padding: 5px 15px; display: flex; align-items: center; box-shadow: var(--p-shadow); }
-        .input-inner input { flex: 1; padding: 10px; border: none; background: transparent; color: var(--p-text); font-size: 15px; }
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
 
-        /* Modals & Advanced Settings */
-        .p-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); z-index: 2000; display: none; align-items: center; justify-content: center; }
-        .p-modal-content { background: var(--p-surface); width: 90%; max-width: 550px; border-radius: 25px; max-height: 85vh; overflow-y: auto; animation: zoomIn 0.3s; padding: 25px; }
-        .setting-row { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--p-border); }
-        
-        /* Footer */
-        .footer-tag { font-size: 11px; text-align: center; padding: 10px; color: var(--p-text-sub); border-top: 1px solid var(--p-border); }
+        /* بخش احراز هویت */
+        .auth-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 80px);
+            padding: 2rem;
+        }
 
-        @media (max-width: 900px) {
-            #app-wrapper { grid-template-columns: 1fr; }
-            .chat-window { position: fixed; inset: 0; z-index: 100; transform: translateX(100%); transition: 0.3s; }
-            .chat-window.active { transform: translateX(0); }
+        .auth-container {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .auth-card {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .auth-description {
+            color: var(--gray-color);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* بخش چت */
+        .chat-section {
+            display: none;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .chat-container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+            height: calc(100vh - 180px);
+        }
+
+        /* جریان چت */
+        .chat-flow {
+            display: flex;
+            flex-direction: column;
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            background: var(--light-color);
+        }
+
+        .message {
+            margin-bottom: 1.5rem;
+            max-width: 80%;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            margin-right: auto;
+        }
+
+        .message.ai {
+            margin-left: auto;
+        }
+
+        .message.admin {
+            margin-left: auto;
+            border-right: 3px solid var(--primary-color);
+        }
+
+        .message-content {
+            padding: 1rem 1.25rem;
+            border-radius: var(--border-radius);
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.ai .message-content {
+            background: #f0f0f0;
+            color: var(--dark-color);
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.admin .message-content {
+            background: #e3f2fd;
+            color: var(--dark-color);
+            border-bottom-left-radius: 4px;
+        }
+
+        .message-timestamp {
+            font-size: 0.75rem;
+            color: var(--gray-color);
+            margin-top: 0.5rem;
+            text-align: left;
+        }
+
+        .typing-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.5rem 1rem;
+            background: #f0f0f0;
+            border-radius: var(--border-radius);
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--gray-color);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+
+        /* فرم ارسال پیام */
+        .message-form {
+            padding: 1.5rem;
+            background: var(--light-color);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 1rem 1.25rem;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--light-color);
+            color: var(--dark-color);
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+
+        /* سایدبار */
+        .sidebar {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .user-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .user-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .subscription-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+        }
+
+        .subscription-badge.go { background: linear-gradient(135deg, #ff9a00, #ff5e00); }
+        .subscription-badge.pro { background: linear-gradient(135deg, #00b09b, #96c93d); }
+        .subscription-badge.plus { background: linear-gradient(135deg, #667eea, #764ba2); }
+
+        .days-left {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+        }
+
+        /* پشتیبانی */
+        .support-section {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+        }
+
+        .support-section h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .support-form {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .support-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: 'Vazirmatn', sans-serif;
+            background: var(--light-color);
+            color: var(--dark-color);
+        }
+
+        /* دکمه‌ها */
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-color), #27ae60);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger-color), #c0392b);
+            color: white;
+        }
+
+        .btn-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* مودال */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: var(--box-shadow);
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* اطلاعیه‌ها */
+        .notification {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            color: white;
+            font-weight: 500;
+            z-index: 3000;
+            animation: slideDown 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .notification.success { background: var(--success-color); }
+        .notification.error { background: var(--danger-color); }
+        .notification.warning { background: var(--warning-color); }
+
+        /* پنل ادمین */
+        .admin-panel {
+            display: none;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .admin-card {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .admin-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* آمار */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray-color);
+            font-size: 0.875rem;
+        }
+
+        /* لیست پیام‌ها */
+        .messages-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .message-item {
+            background: var(--light-color);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            transition: var(--transition);
+        }
+
+        .message-item:hover {
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .message-sender {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            color: var(--gray-color);
+        }
+
+        .message-text {
+            line-height: 1.5;
+            color: var(--dark-color);
+        }
+
+        /* ناوبری */
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            background: var(--light-color);
+            border: 2px solid transparent;
+            border-radius: var(--border-radius);
+            color: var(--dark-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-tab.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .nav-tab:hover:not(.active) {
+            border-color: var(--primary-color);
+        }
+
+        /* قابلیت‌های واکنش‌گرا */
+        @media (max-width: 1024px) {
+            .chat-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .sidebar {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .app-header {
+                padding: 1rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .message {
+                max-width: 100%;
+            }
+        }
+
+        /* کلاس‌های کمکی */
+        .hidden {
+            display: none !important;
+        }
+
+        .visible {
+            display: block !important;
+        }
+
+        .flex {
+            display: flex !important;
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-3 { margin-bottom: 1rem; }
+        .mb-4 { margin-bottom: 1.5rem; }
+        .mt-2 { margin-top: 0.5rem; }
+        .mt-3 { margin-top: 1rem; }
+
+        /* اسکرول بار */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
         }
     </style>
 </head>
-<body>
-
-    <div id="splash">
-        <img src="https://uploadkon.ir/uploads/867323_25IMG-4467.jpeg" class="logo-anim">
-        <h1 style="margin-top: 20px; font-weight: 900; color: #0088cc;">PATRONUS</h1>
-    </div>
-
-    <div id="auth-box" style="display:none; height:100vh; align-items:center; justify-content:center; background: linear-gradient(135deg, #0088cc, #004466);">
-        <div style="background:var(--p-surface); padding:40px; border-radius:30px; width:100%; max-width:400px; text-align:center; box-shadow: 0 20px 50px rgba(0,0,0,0.2);">
-            <h2 id="lang-auth-title">ورود به پاترونوس</h2>
-            <input type="text" id="auth-uid" placeholder="آیدی کاربری" style="width:100%; padding:15px; margin:10px 0; border-radius:15px; border:1px solid #ddd;">
-            <input type="password" id="auth-pwd" placeholder="رمز عبور" style="width:100%; padding:15px; margin:10px 0; border-radius:15px; border:1px solid #ddd;">
-            <button onclick="Engine.login()" style="width:100%; padding:15px; background:var(--p-primary); color:#fff; border:none; border-radius:15px; font-weight:bold; cursor:pointer;">ورود</button>
-            <p style="margin-top:20px; font-size:14px; cursor:pointer" onclick="alert('لطفاً با ادمین تماس بگیرید')">حساب ندارید؟ ثبت نام</p>
-        </div>
-    </div>
-
-    <div id="app-wrapper">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <button onclick="Engine.openSettings()" style="background:none; border:none; font-size:20px; color:var(--p-text); cursor:pointer"><i class="fas fa-bars"></i></button>
-                <div class="search-container">
-                    <i class="fas fa-search" style="color:var(--p-text-sub)"></i>
-                    <input type="text" id="search-input" placeholder="جستجو...">
+<body data-theme="light">
+    <!-- هدر -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <h1>Acioai</h1>
                 </div>
+                <span class="version">نسخه 1.0.0</span>
             </div>
-            <div class="chat-list" id="dom-chat-list"></div>
-            <div class="footer-tag">طراحی و توسعه توسط <a href="https://aciocode.vercel.app" style="color:var(--p-primary); text-decoration:none;">تیم آکیو</a></div>
-        </aside>
-
-        <main class="chat-window" id="dom-chat-view">
-            <header class="chat-header">
-                <div style="display:flex; align-items:center; gap:12px">
-                    <button class="mobile-only" onclick="Engine.closeChat()" style="background:none; border:none; font-size:18px;"><i class="fas fa-arrow-right"></i></button>
-                    <div id="active-avatar" class="p-avatar" style="width:45px; height:45px;"></div>
-                    <div>
-                        <b id="active-name">Patronus</b><br>
-                        <small id="active-status" style="color:#4caf50">online</small>
+            
+            <div class="header-controls">
+                <!-- کلید تغییر حالت تاریک/روشن -->
+                <button id="darkModeToggle" class="btn btn-icon" title="تغییر حالت">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <!-- اطلاعات کاربر -->
+                <div id="userInfo" class="hidden">
+                    <div class="user-info">
+                        <span id="userName" class="user-name"></span>
+                        <div class="subscription-badge plus" id="subscriptionBadge">
+                            <span id="subscriptionType">Plus</span>
+                            <span id="daysLeft" class="days-left">۰ روز</span>
+                        </div>
                     </div>
                 </div>
-                <div style="display:flex; gap:20px; color:var(--p-text-sub)">
-                    <i class="fas fa-search"></i>
-                    <i class="fas fa-ellipsis-v"></i>
-                </div>
-            </header>
-            <div class="messages-container" id="dom-messages"></div>
-            <div class="input-bar">
-                <div class="input-inner">
-                    <i class="far fa-smile" style="color:var(--p-text-sub); cursor:pointer"></i>
-                    <input type="text" id="main-input" placeholder="پیام...">
-                    <i class="fas fa-paperclip" style="color:var(--p-text-sub); cursor:pointer"></i>
-                </div>
-                <button onclick="Engine.sendMessage()" style="width:50px; height:50px; border-radius:50%; background:var(--p-primary); color:#fff; border:none; cursor:pointer; font-size:18px;"><i class="fas fa-paper-plane"></i></button>
+                
+                <!-- دکمه خروج -->
+                <button id="logoutBtn" class="btn btn-danger btn-icon hidden" title="خروج">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
             </div>
-        </main>
-    </div>
+        </div>
+    </header>
 
-    <div id="modal-settings" class="p-modal">
-        <div class="p-modal-content">
-            <div style="display:flex; justify-content:space-between; align-items:center">
-                <h2>تنظیمات پیشرفته</h2>
-                <button onclick="Engine.closeModals()" style="background:none; border:none; font-size:24px;">&times;</button>
+    <!-- ناوبری -->
+    <nav class="nav-tabs hidden" id="navTabs">
+        <button class="nav-tab active" data-tab="chat">
+            <i class="fas fa-comments"></i> چت هوش مصنوعی
+        </button>
+        <button class="nav-tab" data-tab="admin">
+            <i class="fas fa-user-shield"></i> پنل ادمین
+        </button>
+        <button class="nav-tab" data-tab="support">
+            <i class="fas fa-headset"></i> پشتیبانی
+        </button>
+        <button class="nav-tab" data-tab="stats">
+            <i class="fas fa-chart-bar"></i> آمار و گزارشات
+        </button>
+    </nav>
+
+    <!-- بخش احراز هویت -->
+    <main id="authSection" class="auth-section">
+        <div class="auth-container">
+            <div class="auth-card">
+                <h2><i class="fas fa-user-circle"></i> خوش آمدید به Acioai</h2>
+                <p class="auth-description">
+                    هوش مصنوعی پیشرفته تیم آکیو | Acio برای پاسخ به سوالات شما آماده است.
+                    لطفاً برای شروع، ثبت‌نام کنید یا وارد شوید.
+                </p>
+                
+                <form id="authForm" class="auth-form">
+                    <div class="form-group mb-3">
+                        <label for="nameInput" class="mb-2">
+                            <i class="fas fa-user"></i> نام کامل
+                        </label>
+                        <input type="text" id="nameInput" class="message-input" placeholder="نام و نام خانوادگی خود را وارد کنید" required>
+                    </div>
+                    
+                    <div class="form-group mb-4">
+                        <label for="emailInput" class="mb-2">
+                            <i class="fas fa-envelope"></i> ایمیل
+                        </label>
+                        <input type="email" id="emailInput" class="message-input" placeholder="example@email.com" required>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="button" id="registerBtn" class="btn btn-primary mb-2">
+                            <i class="fas fa-user-plus"></i> ثبت‌نام جدید
+                        </button>
+                        <button type="button" id="loginBtn" class="btn btn-success">
+                            <i class="fas fa-sign-in-alt"></i> ورود با ایمیل
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="setting-row">
-                <span><i class="fas fa-language"></i> زبان اپلیکیشن</span>
-                <select id="lang-select" onchange="Engine.setLang(this.value)">
-                    <option value="fa">فارسی</option>
-                    <option value="en">English</option>
-                    <option value="ar">العربية</option>
-                    <option value="tr">Türkçe</option>
-                    <option value="ru">Русский</option>
-                </select>
+        </div>
+    </main>
+
+    <!-- بخش چت اصلی -->
+    <section id="chatSection" class="chat-section hidden">
+        <div class="chat-container">
+            <!-- جریان چت -->
+            <div class="chat-flow">
+                <div class="chat-header">
+                    <h3><i class="fas fa-robot"></i> Acioai هوش مصنوعی</h3>
+                    <div class="chat-status">
+                        <span id="connectionStatus" class="connection-status">
+                            <i class="fas fa-circle" style="color: #2ecc71;"></i> متصل
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="messages-container" id="messagesContainer">
+                    <!-- پیام‌ها اینجا نمایش داده می‌شوند -->
+                    <div class="message ai">
+                        <div class="message-content">
+                            سلام! من Acioai هستم، هوش مصنوعی توسعه‌یافته توسط تیم آکیو | Acio.
+                            چطور می‌توانم به شما کمک کنم؟
+                        </div>
+                        <div class="message-timestamp">هم اکنون</div>
+                    </div>
+                </div>
+                
+                <form class="message-form" id="chatForm">
+                    <div class="input-group">
+                        <input type="text" class="message-input" id="messageInput" 
+                               placeholder="پیام خود را بنویسید..." required>
+                        <button type="submit" class="btn btn-primary btn-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="setting-row">
-                <span><i class="fas fa-palette"></i> انتخاب تم</span>
-                <div style="display:flex; gap:5px">
-                    <div onclick="Engine.setTheme('dark')" style="width:25px; height:25px; background:#1c242f; border-radius:50%; cursor:pointer"></div>
-                    <div onclick="Engine.setTheme('blue')" style="width:25px; height:25px; background:#2196f3; border-radius:50%; cursor:pointer"></div>
-                    <div onclick="Engine.setTheme('purple')" style="width:25px; height:25px; background:#9c27b0; border-radius:50%; cursor:pointer"></div>
+            
+            <!-- سایدبار -->
+            <div class="sidebar">
+                <!-- کارت کاربر -->
+                <div class="user-card">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-name" id="sidebarUserName">کاربر</div>
+                    <div class="subscription-badge plus" id="sidebarSubscription">
+                        <span>Plus</span>
+                        <span class="days-left" id="sidebarDaysLeft">۰ روز</span>
+                    </div>
+                </div>
+                
+                <!-- آمار استفاده -->
+                <div class="support-section">
+                    <h4><i class="fas fa-chart-line"></i> آمار استفاده امروز</h4>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="dailyUsage">۰</div>
+                            <div class="stat-label">پیام‌های امروز</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalMessages">۰</div>
+                            <div class="stat-label">کل پیام‌ها</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ارسال به پشتیبانی -->
+                <div class="support-section">
+                    <h4><i class="fas fa-headset"></i> ارتباط با پشتیبانی</h4>
+                    <form class="support-form" id="supportForm">
+                        <input type="text" class="support-input" id="supportMessage" 
+                               placeholder="پیام به پشتیبانی...">
+                        <button type="submit" class="btn btn-warning btn-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
-            <div class="setting-row">
-                <span><i class="fas fa-bell"></i> صدای اعلان‌ها</span>
-                <input type="checkbox" checked>
+        </div>
+    </section>
+
+    <!-- پنل ادمین -->
+    <section id="adminPanel" class="admin-panel hidden">
+        <div class="admin-header">
+            <h2><i class="fas fa-user-shield"></i> پنل مدیریت Acioai</h2>
+            <div class="admin-controls">
+                <button id="refreshAdmin" class="btn btn-primary">
+                    <i class="fas fa-sync-alt"></i> بروزرسانی
+                </button>
             </div>
-            <div class="setting-row">
-                <span><i class="fas fa-shield-alt"></i> تایید دو مرحله‌ای</span>
-                <button style="font-size:12px">فعالسازی</button>
+        </div>
+        
+        <!-- آمار کلی -->
+        <div class="stats-grid mb-4">
+            <div class="stat-card">
+                <div class="stat-value" id="adminTotalUsers">۰</div>
+                <div class="stat-label">کاربران فعال</div>
             </div>
-            <br>
-            <button onclick="Engine.logout()" style="width:100%; padding:12px; background:#f44336; color:#fff; border:none; border-radius:10px; font-weight:bold;">خروج از حساب</button>
+            <div class="stat-card">
+                <div class="stat-value" id="adminTotalMessages">۰</div>
+                <div class="stat-label">پیام‌های امروز</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="adminPendingSupport">۰</div>
+                <div class="stat-label">پیام‌های پشتیبانی</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="adminFAQCount">۰</div>
+                <div class="stat-label">سوالات FAQ</div>
+            </div>
+        </div>
+        
+        <!-- پیام‌های پشتیبانی -->
+        <div class="admin-grid">
+            <div class="admin-card">
+                <h4><i class="fas fa-comments"></i> آخرین پیام‌های پشتیبانی</h4>
+                <div class="messages-list" id="adminMessages">
+                    <!-- پیام‌های پشتیبانی اینجا نمایش داده می‌شوند -->
+                    <div class="text-center mt-3">
+                        <div class="typing-indicator">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                        <p>در حال بارگذاری پیام‌ها...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- کاربران آنلاین -->
+            <div class="admin-card">
+                <h4><i class="fas fa-users"></i> کاربران فعال</h4>
+                <div class="messages-list" id="activeUsers">
+                    <!-- لیست کاربران -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- مودال اطلاعیه -->
+    <div id="notificationModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle"></h3>
+            <p id="modalMessage"></p>
+            <div class="text-center mt-3">
+                <button id="modalClose" class="btn btn-primary">باشه</button>
+            </div>
         </div>
     </div>
 
+    <!-- اسکریپت‌های جاوااسکریپت -->
     <script>
-        const API = 'https://script.google.com/macros/s/AKfycbx58pC2wvnCrM4a_3XeIESwR1lW_Wn7Qcw7J6jtOXozGITO3JLu4tTzFUE_iBUQxoPh/exec';
-        
-        const Engine = {
-            user: JSON.parse(localStorage.getItem('p_session')),
-            chatId: null,
-            lang: 'fa',
+        // API Configuration
+        const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbz4hqKZwnFi3L8GOzxYy9SOocjxWq959OBTvvBCGYVGnwYARRMAxuOXMz5f7OmiJnanIw/exec';
+        const GPT4_API_URL = 'https://gpt4.api-sina-free.workers.dev/gpt4';
 
-            init: function() {
-                setTimeout(() => {
-                    document.getElementById('splash').style.display = 'none';
-                    if(this.user) {
-                        this.startApp();
-                    } else {
-                        document.getElementById('auth-box').style.display = 'flex';
-                    }
-                }, 2500);
-                
-                document.getElementById('main-input').addEventListener('keypress', (e) => {
-                    if(e.key === 'Enter') this.sendMessage();
-                });
-            },
+        // State Management
+        let currentUser = null;
+        let currentTheme = 'light';
+        let dailyUsage = 0;
+        let isAdminMode = false;
+        let adminPollingInterval = null;
 
-            async call(data) {
-                try {
-                    const r = await fetch(API, { method: 'POST', body: JSON.stringify(data) });
-                    return await r.json();
-                } catch(e) { return {ok:false}; }
-            },
-
-            login: async function() {
-                const id = document.getElementById('auth-uid').value;
-                const ps = document.getElementById('auth-pwd').value;
-                const res = await this.call({ action:'login', userid:id, password:ps });
-                if(res.ok) {
-                    this.user = res.user;
-                    localStorage.setItem('p_session', JSON.stringify(res.user));
-                    location.reload();
-                } else { alert('خطا در ورود'); }
-            },
-
-            startApp: function() {
-                document.getElementById('auth-box').style.display = 'none';
-                document.getElementById('app-wrapper').classList.add('active');
-                this.loadChats();
-                setInterval(() => this.loadChats(), 10000);
-            },
-
-            loadChats: async function() {
-                const res = await this.call({ action:'getChats', userId: this.user.userid });
-                if(res.ok) {
-                    const list = document.getElementById('dom-chat-list');
-                    list.innerHTML = '';
-                    res.chats.forEach(c => {
-                        list.innerHTML += `
-                            <div class="chat-item ${this.chatId === c.id ? 'active' : ''}" onclick="Engine.openChat('${c.id}', '${c.name}')">
-                                <div class="p-avatar">
-                                    <img src="https://ui-avatars.com/api/?name=${c.name}&background=random" style="width:100%; border-radius:50%">
-                                    ${c.online ? '<div class="online-status"></div>' : ''}
-                                </div>
-                                <div style="flex:1">
-                                    <div style="display:flex; justify-content:space-between"><b>${c.name}</b> <small>${c.lastMessageTime ? 'now' : ''}</small></div>
-                                    <div class="m-preview" style="font-size:12px; opacity:0.7">${c.lastMessage || '...'}</div>
-                                </div>
-                            </div>
-                        `;
-                    });
-                }
-            },
-
-            openChat: function(id, name) {
-                this.chatId = id;
-                document.getElementById('active-name').innerText = name;
-                document.getElementById('active-avatar').innerHTML = `<img src="https://ui-avatars.com/api/?name=${name}&background=random" style="width:100%; border-radius:50%">`;
-                document.getElementById('dom-chat-view').classList.add('active');
-                this.loadMessages();
-            },
-
-            loadMessages: async function() {
-                if(!this.chatId) return;
-                const res = await this.call({ action:'getMessages', chatId: this.chatId });
-                if(res.ok) {
-                    const cont = document.getElementById('dom-messages');
-                    cont.innerHTML = '';
-                    res.messages.forEach(m => {
-                        const isMe = m.senderId === this.user.userid;
-                        cont.innerHTML += `
-                            <div class="bubble ${isMe ? 'sent' : 'received'} animate__animated animate__fadeInUp">
-                                ${m.text}
-                                <div class="b-meta">${new Date(m.timestamp).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</div>
-                            </div>
-                        `;
-                    });
-                    cont.scrollTop = cont.scrollHeight;
-                }
-            },
-
-            sendMessage: async function() {
-                const inp = document.getElementById('main-input');
-                const txt = inp.value;
-                if(!txt || !this.chatId) return;
-                inp.value = '';
-                await this.call({ action:'sendMessage', chatId:this.chatId, senderId:this.user.userid, text:txt });
-                this.loadMessages();
-            },
-
-            setTheme: (t) => document.body.className = 'theme-' + t,
-            openSettings: () => document.getElementById('modal-settings').style.display = 'flex',
-            closeModals: () => document.querySelectorAll('.p-modal').forEach(m => m.style.display = 'none'),
-            closeChat: () => document.getElementById('dom-chat-view').classList.remove('active'),
-            logout: () => { localStorage.clear(); location.reload(); }
+        // DOM Elements
+        const elements = {
+            authSection: document.getElementById('authSection'),
+            chatSection: document.getElementById('chatSection'),
+            adminPanel: document.getElementById('adminPanel'),
+            navTabs: document.getElementById('navTabs'),
+            userInfo: document.getElementById('userInfo'),
+            userName: document.getElementById('userName'),
+            logoutBtn: document.getElementById('logoutBtn'),
+            darkModeToggle: document.getElementById('darkModeToggle'),
+            messagesContainer: document.getElementById('messagesContainer'),
+            messageInput: document.getElementById('messageInput'),
+            chatForm: document.getElementById('chatForm'),
+            supportForm: document.getElementById('supportForm'),
+            supportMessage: document.getElementById('supportMessage'),
+            adminMessages: document.getElementById('adminMessages'),
+            notificationModal: document.getElementById('notificationModal'),
+            modalClose: document.getElementById('modalClose'),
+            modalTitle: document.getElementById('modalTitle'),
+            modalMessage: document.getElementById('modalMessage')
         };
 
-        Engine.init();
+        // Initialize Application
+        function initApp() {
+            loadTheme();
+            checkAuth();
+            setupEventListeners();
+            setupAdminPolling();
+        }
+
+        // Theme Management
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('acioai_theme') || 'light';
+            setTheme(savedTheme);
+        }
+
+        function setTheme(theme) {
+            currentTheme = theme;
+            document.body.setAttribute('data-theme', theme);
+            localStorage.setItem('acioai_theme', theme);
+            
+            const icon = elements.darkModeToggle.querySelector('i');
+            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Authentication Management
+        function checkAuth() {
+            const userData = localStorage.getItem('acioai_user');
+            if (userData) {
+                currentUser = JSON.parse(userData);
+                showChatSection();
+                updateUserInfo();
+                loadChatHistory();
+            }
+        }
+
+        function saveUserData(userId, name, email, subscription = 'Plus', daysLeft = 30) {
+            currentUser = { userId, name, email, subscription, daysLeft };
+            localStorage.setItem('acioai_user', JSON.stringify(currentUser));
+        }
+
+        // API Calls
+        async function apiRequest(action, params = {}) {
+            try {
+                const url = new URL(API_BASE_URL);
+                url.searchParams.append('action', action);
+                
+                Object.entries(params).forEach(([key, value]) => {
+                    if (value) url.searchParams.append(key, value);
+                });
+                
+                const response = await fetch(url, {
+                    headers: { 'Accept': 'application/json' }
+                });
+                
+                const data = await response.json();
+                
+                if (!data.ok) {
+                    throw new Error(data.error || 'خطا در ارتباط با سرور');
+                }
+                
+                return data;
+            } catch (error) {
+                console.error('API Error:', error);
+                showNotification('خطا', error.message, 'error');
+                throw error;
+            }
+        }
+
+        async function callGPT4(text) {
+            try {
+                const response = await fetch(`${GPT4_API_URL}?text=${encodeURIComponent(text)}`);
+                const data = await response.json();
+                return data.result || data.Result || 'پاسخی دریافت نشد';
+            } catch (error) {
+                console.error('GPT4 Error:', error);
+                return 'خطا در ارتباط با سرویس هوش مصنوعی';
+            }
+        }
+
+        // User Actions
+        async function registerUser(name, email) {
+            try {
+                const data = await apiRequest('register', { name, email });
+                saveUserData(data.Result.userId, name, email);
+                showChatSection();
+                showNotification('موفقیت', 'ثبت‌نام با موفقیت انجام شد!', 'success');
+            } catch (error) {
+                // Already handled by apiRequest
+            }
+        }
+
+        async function loginUser(email) {
+            try {
+                const data = await apiRequest('login', { email });
+                const name = data.Result.name || 'کاربر';
+                saveUserData(data.Result.userId, name, email);
+                showChatSection();
+                showNotification('موفقیت', 'ورود با موفقیت انجام شد!', 'success');
+            } catch (error) {
+                // Already handled by apiRequest
+            }
+        }
+
+        async function sendMessage(text) {
+            if (!currentUser || !text.trim()) return;
+            
+            // Add user message to chat
+            addMessageToChat(text, 'user');
+            
+            // Clear input
+            elements.messageInput.value = '';
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            try {
+                // First try FAQ search
+                const faqResponse = await apiRequest('chat', {
+                    userid: currentUser.userId,
+                    name: currentUser.name,
+                    text: text
+                });
+                
+                // Remove typing indicator
+                removeTypingIndicator();
+                
+                // Add AI response
+                addMessageToChat(faqResponse.Result, 'ai');
+                
+                // Update usage
+                dailyUsage++;
+                updateUsageStats();
+                
+            } catch (error) {
+                // If FAQ fails, try GPT4
+                removeTypingIndicator();
+                showTypingIndicator('در حال دریافت پاسخ از هوش مصنوعی...');
+                
+                try {
+                    const gptResponse = await callGPT4(text);
+                    removeTypingIndicator();
+                    
+                    // Check if it's about creator
+                    const lowerText = text.toLowerCase();
+                    if (lowerText.includes('سازنده') || lowerText.includes('تیم') || lowerText.includes('acio') || lowerText.includes('آکیو')) {
+                        addMessageToChat('سازنده من تیم آکیو | Acio است. من Acioai هستم، هوش مصنوعی توسعه‌یافته توسط این تیم.', 'ai');
+                    } else {
+                        addMessageToChat(gptResponse, 'ai');
+                    }
+                    
+                    dailyUsage++;
+                    updateUsageStats();
+                    
+                } catch (gptError) {
+                    removeTypingIndicator();
+                    addMessageToChat('متاسفانه در حال حاضر قادر به پاسخگویی نیستم. لطفاً مجدداً تلاش کنید.', 'ai');
+                }
+            }
+            
+            // Scroll to bottom
+            scrollToBottom();
+        }
+
+        async function sendSupportMessage(message) {
+            if (!currentUser || !message.trim()) return;
+            
+            try {
+                await apiRequest('support', {
+                    userid: currentUser.userId,
+                    message: message
+                });
+                
+                elements.supportMessage.value = '';
+                showNotification('موفقیت', 'پیام شما به پشتیبانی ارسال شد.', 'success');
+                
+            } catch (error) {
+                // Already handled by apiRequest
+            }
+        }
+
+        async function fetchAdminMessages() {
+            if (!currentUser) return;
+            
+            try {
+                const data = await apiRequest('fetch_admin', {
+                    userid: currentUser.userId
+                });
+                
+                if (data.Result && data.Result.messages) {
+                    updateAdminMessages(data.Result.messages);
+                }
+            } catch (error) {
+                console.error('Failed to fetch admin messages:', error);
+            }
+        }
+
+        // UI Updates
+        function showChatSection() {
+            elements.authSection.classList.add('hidden');
+            elements.chatSection.classList.remove('hidden');
+            elements.navTabs.classList.remove('hidden');
+            elements.userInfo.classList.remove('hidden');
+            elements.logoutBtn.classList.remove('hidden');
+            
+            updateUserInfo();
+            switchTab('chat');
+        }
+
+        function updateUserInfo() {
+            if (!currentUser) return;
+            
+            elements.userName.textContent = currentUser.name;
+            
+            // Update sidebar
+            document.getElementById('sidebarUserName').textContent = currentUser.name;
+            document.getElementById('sidebarDaysLeft').textContent = `${currentUser.daysLeft} روز`;
+            
+            // Update subscription badge
+            const badge = document.getElementById('subscriptionBadge');
+            badge.className = `subscription-badge ${currentUser.subscription.toLowerCase()}`;
+            badge.querySelector('#subscriptionType').textContent = currentUser.subscription;
+            badge.querySelector('#daysLeft').textContent = `${currentUser.daysLeft} روز`;
+            
+            // Update sidebar subscription
+            const sidebarBadge = document.getElementById('sidebarSubscription');
+            sidebarBadge.className = `subscription-badge ${currentUser.subscription.toLowerCase()}`;
+            sidebarBadge.querySelector('span').textContent = currentUser.subscription;
+        }
+
+        function addMessageToChat(text, type = 'user') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('fa-IR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            messageDiv.innerHTML = `
+                <div class="message-content">${escapeHtml(text)}</div>
+                <div class="message-timestamp">${timeString}</div>
+            `;
+            
+            elements.messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function showTypingIndicator(text = 'Acioai در حال تایپ...') {
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typingIndicator';
+            typingDiv.className = 'message ai';
+            typingDiv.innerHTML = `
+                <div class="message-content">
+                    <div class="typing-indicator">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <span>${text}</span>
+                    </div>
+                </div>
+            `;
+            
+            elements.messagesContainer.appendChild(typingDiv);
+            scrollToBottom();
+        }
+
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+
+        function updateUsageStats() {
+            document.getElementById('dailyUsage').textContent = dailyUsage;
+            document.getElementById('totalMessages').textContent = dailyUsage + Math.floor(Math.random() * 50);
+        }
+
+        function updateAdminMessages(messages) {
+            const container = elements.adminMessages;
+            if (!messages || messages.length === 0) {
+                container.innerHTML = '<p class="text-center">پیام پشتیبانی جدیدی وجود ندارد.</p>';
+                return;
+            }
+            
+            let html = '';
+            messages.forEach(msg => {
+                const time = new Date(msg.timestamp || Date.now()).toLocaleString('fa-IR');
+                html += `
+                    <div class="message-item">
+                        <div class="message-header">
+                            <span class="message-sender">کاربر #${msg.userId || 'ناشناس'}</span>
+                            <span class="message-time">${time}</span>
+                        </div>
+                        <div class="message-text">${escapeHtml(msg.text || msg.message || 'بدون متن')}</div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function switchTab(tabName) {
+            // Update active tab
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.tab === tabName);
+            });
+            
+            // Show corresponding section
+            elements.chatSection.classList.toggle('hidden', tabName !== 'chat');
+            elements.adminPanel.classList.toggle('hidden', tabName !== 'admin');
+            
+            // If admin tab, start polling
+            if (tabName === 'admin') {
+                startAdminPolling();
+            } else {
+                stopAdminPolling();
+            }
+        }
+
+        function showNotification(title, message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <span><strong>${title}:</strong> ${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+
+        function showModal(title, message) {
+            elements.modalTitle.textContent = title;
+            elements.modalMessage.textContent = message;
+            elements.notificationModal.style.display = 'flex';
+        }
+
+        // Utility Functions
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function scrollToBottom() {
+            setTimeout(() => {
+                elements.messagesContainer.scrollTo({
+                    top: elements.messagesContainer.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+
+        function loadChatHistory() {
+            // Load chat history from localStorage if available
+            const history = localStorage.getItem('acioai_chat_history');
+            if (history) {
+                try {
+                    const messages = JSON.parse(history);
+                    messages.forEach(msg => {
+                        addMessageToChat(msg.text, msg.type);
+                    });
+                } catch (e) {
+                    console.error('Failed to load chat history:', e);
+                }
+            }
+        }
+
+        function saveChatHistory() {
+            const messages = [];
+            document.querySelectorAll('.message').forEach(msg => {
+                const text = msg.querySelector('.message-content').textContent;
+                const type = msg.classList.contains('user') ? 'user' : 'ai';
+                messages.push({ text, type });
+            });
+            localStorage.setItem('acioai_chat_history', JSON.stringify(messages));
+        }
+
+        // Admin Polling
+        function setupAdminPolling() {
+            adminPollingInterval = null;
+        }
+
+        function startAdminPolling() {
+            fetchAdminMessages();
+            adminPollingInterval = setInterval(fetchAdminMessages, 2000);
+        }
+
+        function stopAdminPolling() {
+            if (adminPollingInterval) {
+                clearInterval(adminPollingInterval);
+                adminPollingInterval = null;
+            }
+        }
+
+        // Event Listeners
+        function setupEventListeners() {
+            // Dark mode toggle
+            elements.darkModeToggle.addEventListener('click', () => {
+                setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+            });
+            
+            // Registration
+            document.getElementById('registerBtn').addEventListener('click', () => {
+                const name = document.getElementById('nameInput').value.trim();
+                const email = document.getElementById('emailInput').value.trim();
+                
+                if (!name || !email) {
+                    showNotification('خطا', 'لطفاً تمام فیلدها را پر کنید.', 'error');
+                    return;
+                }
+                
+                if (!validateEmail(email)) {
+                    showNotification('خطا', 'لطفاً یک ایمیل معتبر وارد کنید.', 'error');
+                    return;
+                }
+                
+                registerUser(name, email);
+            });
+            
+            // Login
+            document.getElementById('loginBtn').addEventListener('click', () => {
+                const email = document.getElementById('emailInput').value.trim();
+                
+                if (!email) {
+                    showNotification('خطا', 'لطفاً ایمیل خود را وارد کنید.', 'error');
+                    return;
+                }
+                
+                if (!validateEmail(email)) {
+                    showNotification('خطا', 'لطفاً یک ایمیل معتبر وارد کنید.', 'error');
+                    return;
+                }
+                
+                loginUser(email);
+            });
+            
+            // Chat form submission
+            elements.chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const message = elements.messageInput.value.trim();
+                if (message) {
+                    sendMessage(message);
+                }
+            });
+            
+            // Support form submission
+            elements.supportForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const message = elements.supportMessage.value.trim();
+                if (message) {
+                    sendSupportMessage(message);
+                }
+            });
+            
+            // Tab navigation
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    switchTab(tab.dataset.tab);
+                });
+            });
+            
+            // Logout
+            elements.logoutBtn.addEventListener('click', () => {
+                localStorage.removeItem('acioai_user');
+                currentUser = null;
+                location.reload();
+            });
+            
+            // Modal close
+            elements.modalClose.addEventListener('click', () => {
+                elements.notificationModal.style.display = 'none';
+            });
+            
+            // Close modal on outside click
+            elements.notificationModal.addEventListener('click', (e) => {
+                if (e.target === elements.notificationModal) {
+                    elements.notificationModal.style.display = 'none';
+                }
+            });
+            
+            // Admin refresh
+            document.getElementById('refreshAdmin')?.addEventListener('click', fetchAdminMessages);
+            
+            // Quick access with Enter key (with Ctrl for new line)
+            elements.messageInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.ctrlKey) {
+                    e.preventDefault();
+                    elements.chatForm.dispatchEvent(new Event('submit'));
+                }
+            });
+            
+            // Auto-focus on input
+            elements.messageInput.addEventListener('focus', () => {
+                elements.messageInput.style.borderColor = 'var(--primary-color)';
+            });
+            
+            elements.messageInput.addEventListener('blur', () => {
+                elements.messageInput.style.borderColor = '#ddd';
+            });
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', initApp);
+        
+        // Save chat history before unload
+        window.addEventListener('beforeunload', saveChatHistory);
+        
+        // Demo data for statistics (replace with real API calls)
+        function updateDemoStats() {
+            // These would come from API in real implementation
+            document.getElementById('adminTotalUsers').textContent = Math.floor(Math.random() * 1000) + 500;
+            document.getElementById('adminTotalMessages').textContent = Math.floor(Math.random() * 5000) + 1000;
+            document.getElementById('adminPendingSupport').textContent = Math.floor(Math.random() * 20) + 5;
+            document.getElementById('adminFAQCount').textContent = Math.floor(Math.random() * 4000) + 1000;
+        }
+        
+        // Update demo stats every 30 seconds
+        setInterval(updateDemoStats, 30000);
+        updateDemoStats(); // Initial update
     </script>
 </body>
 </html>
