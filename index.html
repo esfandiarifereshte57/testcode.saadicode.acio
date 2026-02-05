@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acioai | هوش مصنوعی تیم آکیو</title>
+    <title>Acioai 1.0.0 | هوش مصنوعی تیم آکیو | Acio</title>
     
     <!-- فونت Vazirmatn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,32 +14,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Reset و متغیرها */
+        /* Reset و متغیرهای دقیق DeepSeek */
         :root {
-            --primary: #10a37f;
-            --primary-dark: #0d8c6d;
-            --primary-light: #e6f7f3;
-            --surface: #ffffff;
-            --surface-dark: #1a1a1a;
-            --text-primary: #202123;
-            --text-secondary: #565869;
-            --text-tertiary: #8e8ea0;
-            --border: #e5e5e5;
-            --border-dark: #40414f;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            --shadow-dark: 0 4px 20px rgba(0, 0, 0, 0.2);
-            --radius: 12px;
-            --radius-sm: 8px;
-            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        [data-theme="dark"] {
-            --surface: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-secondary: #c5c5d2;
-            --text-tertiary: #8e8ea0;
-            --border: #40414f;
-            --shadow: var(--shadow-dark);
+            --deepseek-bg: #343541;
+            --deepseek-bg-secondary: #444654;
+            --deepseek-bg-tertiary: #40414f;
+            --deepseek-border: #565869;
+            --deepseek-text-primary: #ececf1;
+            --deepseek-text-secondary: #c5c5d2;
+            --deepseek-text-tertiary: #8e8ea0;
+            --deepseek-primary: #10a37f;
+            --deepseek-primary-hover: #0d8c6d;
+            --deepseek-user-message: #444654;
+            --deepseek-ai-message: #343541;
+            --deepseek-shadow: 0 0 15px rgba(0,0,0,0.3);
+            --deepseek-radius: 12px;
+            --deepseek-radius-sm: 6px;
+            --deepseek-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -50,21 +41,22 @@
 
         html {
             scroll-behavior: smooth;
+            height: 100%;
         }
 
         body {
             font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: var(--surface);
-            color: var(--text-primary);
-            line-height: 1.6;
-            transition: var(--transition);
+            background: var(--deepseek-bg);
+            color: var(--deepseek-text-primary);
+            line-height: 1.5;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* اسکرول بار زیبا */
+        /* اسکرول بار */
         ::-webkit-scrollbar {
-            width: 6px;
+            width: 8px;
+            height: 8px;
         }
 
         ::-webkit-scrollbar-track {
@@ -72,395 +64,134 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 3px;
+            background: var(--deepseek-border);
+            border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
+            background: var(--deepseek-text-tertiary);
         }
 
-        /* Layout */
+        /* Layout اصلی */
         .app-container {
-            max-width: 900px;
-            margin: 0 auto;
-            height: 100vh;
             display: flex;
             flex-direction: column;
+            height: 100vh;
+            max-width: 100%;
+            margin: 0 auto;
             position: relative;
         }
 
-        /* Header */
+        /* هدر */
         .header {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
-            background: var(--surface);
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-            background: rgba(var(--surface-rgb), 0.8);
-        }
-
-        .header-content {
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--deepseek-bg);
+            border-bottom: 1px solid var(--deepseek-border);
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
         }
 
-        .logo-section {
+        .logo-container {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 12px;
         }
 
-        .logo {
-            width: 32px;
-            height: 32px;
+        .logo-icon {
+            width: 30px;
+            height: 30px;
             border-radius: 6px;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--primary), #0d8c6d);
         }
 
-        .logo img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-            border-radius: 4px;
+        .logo-icon img {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            border-radius: 6px;
         }
 
         .logo-text {
-            font-size: 1.25rem;
+            font-size: 16px;
             font-weight: 600;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--deepseek-text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .logo-subtitle {
+            font-size: 12px;
+            color: var(--deepseek-text-tertiary);
+            margin-top: -3px;
         }
 
         .header-controls {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 12px;
         }
 
-        /* Theme Toggle */
-        .theme-toggle {
-            background: none;
-            border: none;
-            width: 40px;
-            height: 40px;
+        /* دکمه‌های هدر */
+        .header-btn {
+            width: 36px;
+            height: 36px;
             border-radius: 8px;
+            border: none;
+            background: transparent;
+            color: var(--deepseek-text-secondary);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: var(--text-secondary);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
+            transition: var(--deepseek-transition);
         }
 
-        .theme-toggle:hover {
-            background: var(--primary-light);
-            color: var(--primary);
+        .header-btn:hover {
+            background: var(--deepseek-bg-secondary);
+            color: var(--deepseek-text-primary);
         }
 
-        .theme-toggle i {
-            font-size: 1.25rem;
-            transition: transform 0.3s ease;
-        }
-
-        [data-theme="dark"] .theme-toggle:hover {
-            background: rgba(16, 163, 127, 0.1);
-        }
-
-        /* Support Button */
-        .support-toggle {
-            background: none;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .support-toggle:hover {
-            background: var(--primary-light);
-            color: var(--primary);
-        }
-
-        .support-toggle i {
-            font-size: 1.25rem;
-        }
-
-        [data-theme="dark"] .support-toggle:hover {
-            background: rgba(16, 163, 127, 0.1);
-        }
-
-        /* User Info */
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.5rem 0.75rem;
-            border-radius: 8px;
-            background: var(--primary-light);
-            color: var(--primary-dark);
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .user-avatar {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        /* Authentication Section */
-        .auth-section {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .auth-container {
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .auth-card {
-            background: var(--surface);
-            border-radius: var(--radius);
-            padding: 2.5rem 2rem;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            animation: slideUp 0.4s ease-out;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .auth-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .auth-logo {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 1rem;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .auth-logo img {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-
-        .auth-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .auth-subtitle {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .auth-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .form-label {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .form-input {
-            padding: 0.875rem 1rem;
-            border: 1.5px solid var(--border);
-            border-radius: var(--radius-sm);
-            font-family: 'Vazirmatn', sans-serif;
-            font-size: 0.95rem;
-            background: var(--surface);
-            color: var(--text-primary);
-            transition: var(--transition);
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(16, 163, 127, 0.1);
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 0.5rem;
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 0.875rem 1.5rem;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-family: 'Vazirmatn', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            border-radius: 100%;
-            transform: scale(1, 1) translate(-50%);
-            transform-origin: 50% 50%;
-        }
-
-        .btn:focus:not(:active)::after {
-            animation: ripple 1s ease-out;
-        }
-
-        @keyframes ripple {
-            0% {
-                transform: scale(0, 0);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(20, 20);
-                opacity: 0;
-            }
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            flex: 1;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(16, 163, 127, 0.3);
-        }
-
-        .btn-secondary {
-            background: var(--primary-light);
-            color: var(--primary-dark);
-            flex: 1;
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        /* Chat Section */
-        .chat-section {
+        /* بخش اصلی چت */
+        .main-content {
             flex: 1;
             display: flex;
             flex-direction: column;
+            padding-top: 60px;
             overflow: hidden;
         }
 
+        /* کانتینر پیام‌ها */
         .messages-container {
             flex: 1;
             overflow-y: auto;
-            padding: 1.5rem;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
         }
 
-        /* Message Styles */
+        /* پیام‌ها */
         .message {
-            max-width: 85%;
-            animation: messageSlide 0.3s ease-out;
+            display: flex;
+            gap: 16px;
+            animation: messageAppear 0.3s ease-out;
+            padding: 8px 0;
         }
 
-        @keyframes messageSlide {
+        @keyframes messageAppear {
             from {
                 opacity: 0;
                 transform: translateY(10px);
@@ -472,132 +203,79 @@
         }
 
         .message.user {
-            align-self: flex-end;
+            flex-direction: row-reverse;
         }
 
-        .message.ai {
-            align-self: flex-start;
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message.user .avatar {
+            background: linear-gradient(135deg, var(--deepseek-primary), var(--deepseek-primary-hover));
+            color: white;
+        }
+
+        .message.ai .avatar {
+            background: transparent;
+        }
+
+        .message.ai .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(1.1);
         }
 
         .message-content {
-            position: relative;
-        }
-
-        .message.user .message-content {
-            background: var(--primary);
-            color: white;
-            border-radius: 18px 4px 18px 18px;
-            padding: 0.875rem 1.25rem;
-            box-shadow: 0 2px 8px rgba(16, 163, 127, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .message.ai .message-content {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 4px 18px 18px 18px;
-            padding: 1.25rem;
-            box-shadow: var(--shadow);
-        }
-
-        .message.ai .message-content::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            right: -1px;
-            width: 24px;
-            height: 24px;
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-            border-left: 1px solid var(--border);
-            transform: rotate(45deg);
-            transform-origin: top right;
-            border-radius: 0 0 0 4px;
+            flex: 1;
+            max-width: calc(100% - 48px);
         }
 
         .message-text {
-            line-height: 1.7;
-            font-size: 0.95rem;
+            padding: 16px;
+            border-radius: var(--deepseek-radius);
+            background: var(--deepseek-user-message);
+            font-size: 15px;
+            line-height: 1.6;
+            white-space: pre-wrap;
             word-break: break-word;
-            font-weight: 400;
+            border: 1px solid transparent;
         }
 
-        .message-text p {
-            margin-bottom: 0.75rem;
+        .message.ai .message-text {
+            background: var(--deepseek-ai-message);
+            border: 1px solid var(--deepseek-border);
         }
 
-        .message-text p:last-child {
-            margin-bottom: 0;
+        .message.user .message-text {
+            background: linear-gradient(135deg, var(--deepseek-primary), var(--deepseek-primary-hover));
+            color: white;
+            border: none;
         }
 
-        .message-text a {
-            color: var(--primary);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: var(--transition);
-        }
-
-        .message-text a:hover {
-            border-bottom-color: var(--primary);
-        }
-
-        .message-meta {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-            font-size: 0.75rem;
-            color: var(--text-tertiary);
-        }
-
-        .message-time {
-            font-family: 'Vazirmatn', monospace;
-        }
-
-        .message-status {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        /* Typing Animation */
+        /* تایپینگ انیمیشن */
         .typing-indicator {
             display: inline-flex;
             align-items: center;
-            gap: 0.375rem;
-            padding: 1rem 1.25rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 4px 18px 18px 18px;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-
-        .typing-indicator::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            right: -1px;
-            width: 24px;
-            height: 24px;
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-            border-left: 1px solid var(--border);
-            transform: rotate(45deg);
-            transform-origin: top right;
-            border-radius: 0 0 0 4px;
-        }
-
-        .typing-dots {
-            display: flex;
-            gap: 0.25rem;
+            gap: 4px;
+            padding: 4px 0;
         }
 
         .typing-dot {
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: var(--text-tertiary);
+            background: var(--deepseek-text-tertiary);
             animation: typingDot 1.4s infinite ease-in-out both;
         }
 
@@ -605,119 +283,115 @@
         .typing-dot:nth-child(2) { animation-delay: -0.16s; }
 
         @keyframes typingDot {
-            0%, 80%, 100% { transform: scale(0); }
-            40% { transform: scale(1); }
+            0%, 80%, 100% { 
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            40% { 
+                transform: scale(1.2);
+                opacity: 1;
+            }
         }
 
-        .typing-text {
-            color: var(--text-tertiary);
-            font-size: 0.875rem;
-            margin-right: 0.5rem;
-        }
-
-        /* Input Area */
+        /* ناحیه ورود متن */
         .input-container {
-            padding: 1.25rem;
-            border-top: 1px solid var(--border);
-            background: var(--surface);
+            padding: 20px;
+            border-top: 1px solid var(--deepseek-border);
+            background: var(--deepseek-bg);
+            position: relative;
         }
 
         .input-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
             position: relative;
-            display: flex;
-            gap: 0.75rem;
         }
 
         .message-input {
-            flex: 1;
-            padding: 0.875rem 1rem;
-            padding-right: 3rem;
-            border: 1.5px solid var(--border);
-            border-radius: var(--radius);
-            font-family: 'Vazirmatn', sans-serif;
-            font-size: 0.95rem;
-            background: var(--surface);
-            color: var(--text-primary);
-            resize: none;
+            width: 100%;
             min-height: 56px;
             max-height: 200px;
+            padding: 16px 52px 16px 16px;
+            border: 1px solid var(--deepseek-border);
+            border-radius: var(--deepseek-radius);
+            background: var(--deepseek-bg);
+            color: var(--deepseek-text-primary);
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 15px;
             line-height: 1.5;
-            transition: var(--transition);
+            resize: none;
+            outline: none;
+            transition: var(--deepseek-transition);
         }
 
         .message-input:focus {
-            outline: none;
-            border-color: var(--primary);
+            border-color: var(--deepseek-primary);
             box-shadow: 0 0 0 3px rgba(16, 163, 127, 0.1);
         }
 
         .message-input::placeholder {
-            color: var(--text-tertiary);
+            color: var(--deepseek-text-tertiary);
+        }
+
+        .message-input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         .send-button {
             position: absolute;
-            left: 0.75rem;
-            bottom: 0.75rem;
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            background: var(--primary);
-            color: white;
+            left: 16px;
+            bottom: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
             border: none;
+            background: var(--deepseek-primary);
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--deepseek-transition);
+            opacity: 0.8;
         }
 
         .send-button:hover {
-            background: var(--primary-dark);
-            transform: rotate(15deg) scale(1.05);
+            opacity: 1;
+            transform: scale(1.05);
         }
 
         .send-button:disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
-            transform: none !important;
+            transform: none;
         }
 
-        /* Footer */
-        .footer {
-            padding: 1rem;
+        /* کووتا */
+        .quota-container {
+            max-width: 800px;
+            margin: 0 auto 10px;
+            padding: 0 20px;
             text-align: center;
-            border-top: 1px solid var(--border);
-            background: var(--surface);
-            color: var(--text-tertiary);
-            font-size: 0.75rem;
+            font-size: 13px;
+            color: var(--deepseek-text-tertiary);
         }
 
-        .footer-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
+        .quota-text {
+            background: var(--deepseek-bg-secondary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            border: 1px solid var(--deepseek-border);
         }
 
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.375rem;
+        .quota-warning {
+            color: #ef4444;
             font-weight: 500;
-            color: var(--primary);
-            text-decoration: none;
-            transition: var(--transition);
         }
 
-        .footer-logo:hover {
-            color: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        /* Support Modal */
-        .modal-overlay {
+        /* پروفایل کاربر */
+        .profile-modal {
             position: fixed;
             top: 0;
             left: 0;
@@ -727,152 +401,274 @@
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
-            padding: 1rem;
-            animation: fadeIn 0.3s ease;
+            z-index: 2000;
+            padding: 20px;
         }
 
-        .modal {
-            background: var(--surface);
-            border-radius: var(--radius);
+        .profile-card {
+            background: var(--deepseek-bg);
+            border-radius: var(--deepseek-radius);
             width: 100%;
             max-width: 500px;
-            max-height: 80vh;
+            border: 1px solid var(--deepseek-border);
+            box-shadow: var(--deepseek-shadow);
             overflow: hidden;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            animation: modalSlide 0.3s ease;
         }
 
-        @keyframes modalSlide {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .profile-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--deepseek-border);
+            text-align: center;
         }
 
-        .modal-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .modal-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--deepseek-primary), var(--deepseek-primary-hover));
+            margin: 0 auto 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: var(--transition);
+            color: white;
+            font-size: 32px;
+            font-weight: 600;
         }
 
-        .modal-close:hover {
-            background: var(--primary-light);
-            color: var(--primary);
+        .profile-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
         }
 
-        .modal-content {
-            padding: 1.5rem;
-            overflow-y: auto;
-            max-height: calc(80vh - 120px);
+        .profile-subscription {
+            color: var(--deepseek-primary);
+            font-weight: 500;
+            font-size: 14px;
+            padding: 4px 12px;
+            background: rgba(16, 163, 127, 0.1);
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .profile-details {
+            padding: 24px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .profile-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--deepseek-border);
+        }
+
+        .profile-label {
+            color: var(--deepseek-text-secondary);
+            font-size: 14px;
+        }
+
+        .profile-value {
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        /* پشتیبانی */
+        .support-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .support-card {
+            background: var(--deepseek-bg);
+            border-radius: var(--deepseek-radius);
+            width: 100%;
+            max-width: 600px;
+            height: 80vh;
+            border: 1px solid var(--deepseek-border);
+            box-shadow: var(--deepseek-shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .support-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--deepseek-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .support-title {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .support-messages {
-            margin-bottom: 1.5rem;
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 16px;
         }
 
         .support-message {
-            padding: 1rem;
-            border-radius: var(--radius-sm);
-            background: var(--primary-light);
-            border: 1px solid rgba(16, 163, 127, 0.2);
-        }
-
-        .support-message.admin {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-right: 3px solid var(--primary);
-        }
-
-        .support-message-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.75rem;
-            color: var(--text-tertiary);
-        }
-
-        .support-message-text {
-            color: var(--text-primary);
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 12px;
             line-height: 1.5;
         }
 
-        .support-input-group {
-            display: flex;
-            gap: 0.75rem;
+        .support-message.user {
+            align-self: flex-end;
+            background: var(--deepseek-primary);
+            color: white;
         }
 
-        .support-input {
-            flex: 1;
-            padding: 0.875rem 1rem;
-            border: 1.5px solid var(--border);
-            border-radius: var(--radius-sm);
-            font-family: 'Vazirmatn', sans-serif;
-            font-size: 0.95rem;
-            background: var(--surface);
-            color: var(--text-primary);
-            resize: none;
-            min-height: 48px;
-            max-height: 120px;
-            transition: var(--transition);
+        .support-message.admin {
+            align-self: flex-start;
+            background: var(--deepseek-bg-secondary);
+            border: 1px solid var(--deepseek-border);
         }
 
-        .support-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(16, 163, 127, 0.1);
-        }
-
-        /* Notifications */
-        .notification {
-            position: fixed;
-            top: 1rem;
-            left: 50%;
-            transform: translateX(-50%) translateY(-100%);
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 0.875rem 1rem;
-            box-shadow: var(--shadow);
+        .support-admin-header {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            z-index: 1000;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .admin-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .admin-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--deepseek-primary);
+        }
+
+        .admin-badge {
+            color: #3b82f6;
+            font-size: 12px;
+        }
+
+        .support-input-area {
+            padding: 20px;
+            border-top: 1px solid var(--deepseek-border);
+        }
+
+        /* تبلیغات */
+        .ad-container {
+            max-width: 800px;
+            margin: 10px auto;
+            padding: 0 20px;
+        }
+
+        .ad-card {
+            background: linear-gradient(135deg, var(--deepseek-bg-secondary), var(--deepseek-bg-tertiary));
+            border-radius: var(--deepseek-radius);
+            padding: 16px;
+            border: 1px solid var(--deepseek-border);
+            cursor: pointer;
+            transition: var(--deepseek-transition);
+        }
+
+        .ad-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--deepseek-shadow);
+        }
+
+        .ad-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .ad-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--deepseek-primary), var(--deepseek-primary-hover));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .ad-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .ad-description {
+            color: var(--deepseek-text-secondary);
+            font-size: 14px;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .ad-button {
+            width: 100%;
+            padding: 10px;
+            background: var(--deepseek-primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--deepseek-transition);
+        }
+
+        .ad-button:hover {
+            background: var(--deepseek-primary-hover);
+        }
+
+        /* اعلان‌ها */
+        .notification {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            padding: 12px 20px;
+            background: var(--deepseek-bg);
+            border: 1px solid var(--deepseek-border);
+            border-radius: var(--deepseek-radius-sm);
+            box-shadow: var(--deepseek-shadow);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 3000;
             opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .notification.show {
@@ -880,146 +676,16 @@
             opacity: 1;
         }
 
-        .notification-icon {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
+        .notification.error {
+            border-left: 4px solid #ef4444;
         }
 
-        .notification.success .notification-icon {
-            background: #d1fae5;
-            color: #059669;
+        .notification.warning {
+            border-left: 4px solid #f59e0b;
         }
 
-        .notification.error .notification-icon {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-
-        .notification.warning .notification-icon {
-            background: #fef3c7;
-            color: #d97706;
-        }
-
-        .notification-text {
-            font-size: 0.875rem;
-            color: var(--text-primary);
-        }
-
-        /* Markdown-like styling */
-        .message-text pre {
-            background: var(--surface-dark);
-            color: var(--text-primary);
-            padding: 1rem;
-            border-radius: var(--radius-sm);
-            overflow-x: auto;
-            margin: 0.75rem 0;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            font-size: 0.85rem;
-            direction: ltr;
-            border: 1px solid var(--border);
-        }
-
-        .message-text code {
-            background: var(--primary-light);
-            color: var(--primary-dark);
-            padding: 0.125rem 0.375rem;
-            border-radius: 4px;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            font-size: 0.85rem;
-        }
-
-        .message-text strong {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .message-text em {
-            font-style: italic;
-            color: var(--text-secondary);
-        }
-
-        .message-text ul, .message-text ol {
-            margin: 0.5rem 0 0.5rem 1.5rem;
-            padding-right: 0;
-        }
-
-        /* Loading States */
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
-        }
-
-        .pulse {
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .app-container {
-                max-width: 100%;
-            }
-            
-            .auth-card {
-                padding: 2rem 1.5rem;
-            }
-            
-            .messages-container {
-                padding: 1rem;
-            }
-            
-            .message {
-                max-width: 95%;
-            }
-            
-            .input-container {
-                padding: 1rem;
-            }
-            
-            .form-actions {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-            }
-            
-            .modal {
-                max-width: 95%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header {
-                padding: 0.75rem;
-            }
-            
-            .logo-text {
-                font-size: 1rem;
-            }
-            
-            .auth-title {
-                font-size: 1.5rem;
-            }
-            
-            .auth-card {
-                padding: 1.5rem 1rem;
-                border: none;
-                box-shadow: none;
-            }
-            
-            .support-input-group {
-                flex-direction: column;
-            }
+        .notification.info {
+            border-left: 4px solid var(--deepseek-primary);
         }
 
         /* Utility Classes */
@@ -1027,357 +693,257 @@
             display: none !important;
         }
 
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
         }
 
-        .fade-in {
-            animation: fadeIn 0.3s ease-out;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 16px;
+            }
+            
+            .messages-container {
+                padding: 16px;
+                gap: 16px;
+            }
+            
+            .message-text {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .input-container {
+                padding: 16px;
+            }
+            
+            .support-message {
+                max-width: 90%;
+            }
         }
 
-        .slide-up {
-            animation: slideUp 0.4s ease-out;
-        }
-        
-        /* Message Avatar */
-        .message-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            margin-top: 4px;
-        }
-        
-        .message-avatar img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-        }
-        
-        /* Message Wrapper */
-        .message-wrapper {
-            display: flex;
-            gap: 0.75rem;
-            max-width: 100%;
-        }
-        
-        .message.ai .message-wrapper {
-            flex-direction: row;
-        }
-        
-        .message.user .message-wrapper {
-            flex-direction: row-reverse;
-        }
-        
-        .message.ai .message-avatar {
-            order: 1;
-        }
-        
-        .message.user .message-avatar {
-            order: 2;
-        }
-        
-        .message.ai .message-content {
-            order: 2;
-        }
-        
-        .message.user .message-content {
-            order: 1;
+        @media (max-width: 480px) {
+            .header-controls {
+                gap: 8px;
+            }
+            
+            .header-btn {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .logo-text {
+                font-size: 14px;
+            }
+            
+            .logo-subtitle {
+                font-size: 10px;
+            }
         }
     </style>
 </head>
-<body data-theme="light">
-    <div class="app-container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <div class="logo-section">
-                    <div class="logo">
-                        <img src="https://uploadkon.ir/do.php?imgf=626204_26photo-output.jpeg" alt="Acioai Logo">
-                    </div>
-                    <div class="logo-text">Acioai</div>
-                </div>
-                <div class="header-controls">
-                    <button class="support-toggle" id="supportToggle" aria-label="پشتیبانی">
-                        <i class="fas fa-headset"></i>
-                    </button>
-                    <button class="theme-toggle" id="themeToggle" aria-label="تغییر حالت">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    <div id="userInfo" class="user-info hidden">
-                        <div class="user-avatar" id="userAvatar">A</div>
-                        <span id="userName">کاربر</span>
-                    </div>
-                </div>
+<body>
+    <!-- هدر -->
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo-icon">
+                <img src="https://uploadkon.ir/do.php?imgf=4fa104_26photo-output.jpeg" alt="Acioai Logo">
             </div>
-        </header>
+            <div>
+                <div class="logo-text">Acioai 1.0.0</div>
+                <div class="logo-subtitle">ساخته‌شده توسط تیم آکیو | Acio</div>
+            </div>
+        </div>
+        <div class="header-controls">
+            <button class="header-btn" id="supportBtn" title="پشتیبانی">
+                <i class="fas fa-headset"></i>
+            </button>
+            <button class="header-btn" id="profileBtn" title="پروفایل">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </header>
 
-        <!-- Authentication Section -->
-        <section class="auth-section" id="authSection">
-            <div class="auth-container">
-                <div class="auth-card">
-                    <div class="auth-header">
-                        <div class="auth-logo">
-                            <img src="https://uploadkon.ir/do.php?imgf=626204_26photo-output.jpeg" alt="Acioai Logo">
-                        </div>
-                        <h1 class="auth-title">Acioai</h1>
-                        <p class="auth-subtitle">هوش مصنوعی توسعه‌یافته توسط تیم آکیو | Acio</p>
-                    </div>
-                    <form class="auth-form" id="authForm">
-                        <div class="form-group">
-                            <label for="nameInput" class="form-label">
-                                <i class="fas fa-user"></i>
-                                نام کامل
-                            </label>
-                            <input type="text" id="nameInput" class="form-input" placeholder="نام و نام خانوادگی" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="emailInput" class="form-label">
-                                <i class="fas fa-envelope"></i>
-                                ایمیل
-                            </label>
-                            <input type="email" id="emailInput" class="form-input" placeholder="example@email.com" required>
-                        </div>
-                        <div class="form-actions">
-                            <button type="button" class="btn btn-secondary" id="loginBtn">
-                                <i class="fas fa-sign-in-alt"></i>
-                                ورود
-                            </button>
-                            <button type="button" class="btn btn-primary" id="registerBtn">
-                                <i class="fas fa-user-plus"></i>
-                                ثبت‌نام
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
+    <!-- بخش اصلی چت -->
+    <div class="main-content">
+        <!-- تبلیغات -->
+        <div class="ad-container" id="adContainer">
+            <!-- تبلیغات از API لود می‌شوند -->
+        </div>
 
-        <!-- Chat Section -->
-        <section class="chat-section hidden" id="chatSection">
-            <div class="messages-container" id="messagesContainer">
-                <!-- Messages will be inserted here -->
-                <div class="message ai fade-in">
-                    <div class="message-wrapper">
-                        <div class="message-avatar">
-                            <img src="https://uploadkon.ir/do.php?imgf=626204_26photo-output.jpeg" alt="Acioai Logo">
-                        </div>
-                        <div class="message-content">
-                            <div class="message-text">
-                                <p>سلام! 👋</p>
-                                <p>من <strong>Acioai</strong> هستم، هوش مصنوعی توسعه‌یافته توسط <strong>تیم آکیو | Acio</strong>.</p>
-                                <p>چطور می‌تونم کمکتون کنم؟</p>
-                            </div>
-                            <div class="message-meta">
-                                <span class="message-time">هم اکنون</span>
-                                <div class="message-status">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
-                            </div>
-                        </div>
+        <!-- کووتا -->
+        <div class="quota-container" id="quotaContainer">
+            <div class="quota-text" id="quotaText">پیام‌های باقی‌مانده امروز: 24</div>
+        </div>
+
+        <!-- کانتینر پیام‌ها -->
+        <div class="messages-container" id="messagesContainer">
+            <!-- پیام اولیه -->
+            <div class="message ai">
+                <div class="avatar">
+                    <img src="https://uploadkon.ir/do.php?imgf=4fa104_26photo-output.jpeg" alt="Acioai">
+                </div>
+                <div class="message-content">
+                    <div class="message-text">
+                        سلام! 👋 من Acioai هستم، هوش مصنوعی توسعه‌یافته توسط تیم آکیو | Acio.
+                        چطور می‌تونم کمکتون کنم؟
                     </div>
                 </div>
             </div>
-            <div class="input-container">
-                <div class="input-wrapper">
-                    <textarea 
-                        class="message-input" 
-                        id="messageInput" 
-                        placeholder="پیام خود را اینجا تایپ کنید... (برای ارسال Enter، برای خط جدید Shift+Enter)"
-                        rows="1"
-                        autocomplete="off"
-                    ></textarea>
-                    <button class="send-button" id="sendButton" disabled>
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                </div>
-            </div>
-        </section>
+        </div>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <a href="https://aciocode.vercel.app" target="_blank" class="footer-logo">
-                    <i class="fas fa-code"></i>
-                    Acio
-                </a>
-                <span>•</span>
-                <span>تمامی حقوق محفوظ است © ۲۰۲۶ Acio</span>
+        <!-- ناحیه ورود متن -->
+        <div class="input-container">
+            <div class="input-wrapper">
+                <textarea 
+                    class="message-input" 
+                    id="messageInput" 
+                    placeholder="پیام خود را اینجا بنویسید..."
+                    rows="1"
+                    autocomplete="off"
+                ></textarea>
+                <button class="send-button" id="sendButton">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
             </div>
-        </footer>
+        </div>
     </div>
 
-    <!-- Support Modal -->
-    <div class="modal-overlay" id="supportModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 class="modal-title">
+    <!-- پروفایل کاربر -->
+    <div class="profile-modal" id="profileModal">
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-avatar" id="profileAvatar">A</div>
+                <h3 class="profile-name" id="profileName">کاربر</h3>
+                <div class="profile-subscription" id="profileSubscription">Free</div>
+            </div>
+            <div class="profile-details">
+                <div class="profile-item">
+                    <span class="profile-label">سطح اشتراک</span>
+                    <span class="profile-value" id="subscriptionLevel">Free</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">پیام مجاز روزانه</span>
+                    <span class="profile-value" id="dailyLimit">25</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">پیام باقی‌مانده</span>
+                    <span class="profile-value" id="remainingMessages">24</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">وضعیت حافظه</span>
+                    <span class="profile-value" id="memoryStatus">غیرفعال</span>
+                </div>
+                <div class="profile-item">
+                    <span class="profile-label">شناسه کاربر</span>
+                    <span class="profile-value" id="userId">-</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- پشتیبانی -->
+    <div class="support-modal" id="supportModal">
+        <div class="support-card">
+            <div class="support-header">
+                <h3 class="support-title">
                     <i class="fas fa-headset"></i>
-                    پشتیبانی Acioai
+                    چت با پشتیبانی
                 </h3>
-                <button class="modal-close" id="closeSupportModal">
+                <button class="header-btn" id="closeSupportModal">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div class="modal-content">
-                <div class="support-messages" id="supportMessages">
-                    <div class="support-message admin">
-                        <div class="support-message-header">
-                            <span>پشتیبانی Acioai</span>
-                            <span>هم اکنون</span>
-                        </div>
-                        <div class="support-message-text">
-                            سلام! 👋 لطفاً پیام خود را برای تیم پشتیبانی بنویسید. ما در اسرع وقت پاسخ خواهیم داد.
-                        </div>
+            <div class="support-messages" id="supportMessages">
+                <div class="support-message admin">
+                    <div class="support-admin-header">
+                        <div class="admin-avatar">A</div>
+                        <span class="admin-name">Admin</span>
+                        <i class="fas fa-check-circle admin-badge"></i>
                     </div>
+                    <div>سلام! 👋 چطور می‌تونم کمکتون کنم؟</div>
                 </div>
-                <div class="support-input-group">
+            </div>
+            <div class="support-input-area">
+                <div class="input-wrapper">
                     <textarea 
-                        class="support-input" 
+                        class="message-input" 
                         id="supportInput" 
                         placeholder="پیام خود را برای پشتیبانی بنویسید..."
-                        rows="3"
+                        rows="2"
                     ></textarea>
-                    <button class="btn btn-primary" id="sendSupportButton">
+                    <button class="send-button" id="sendSupportButton">
                         <i class="fas fa-paper-plane"></i>
-                        ارسال
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Notification Container -->
+    <!-- اعلان‌ها -->
     <div id="notificationContainer"></div>
 
     <script>
         // API Configuration
-        const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbz4hqKZwnFi3L8GOzxYy9SOocjxWq959OBTvvBCGYVGnwYARRMAxuOXMz5f7OmiJnanIw/exec';
-        const GPT4_API_URL = 'https://gpt4.api-sina-free.workers.dev/gpt4';
-
+        const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbxiq1R7JoKZ_zfOCHwVwmCzZrkV43Kp_hZnDyVkF3zFCCBnVWLylQ-fQAio_xHL4Srd/exec';
+        
         // Application State
         let currentUser = null;
-        let currentTheme = 'light';
         let isTyping = false;
-        let messageQueue = [];
+        let messageCount = 0;
+        let dailyLimit = 25;
+        let supportInterval = null;
+        let updateInterval = null;
 
         // DOM Elements
         const elements = {
-            authSection: document.getElementById('authSection'),
-            chatSection: document.getElementById('chatSection'),
-            themeToggle: document.getElementById('themeToggle'),
-            supportToggle: document.getElementById('supportToggle'),
-            supportModal: document.getElementById('supportModal'),
-            closeSupportModal: document.getElementById('closeSupportModal'),
-            userInfo: document.getElementById('userInfo'),
-            userAvatar: document.getElementById('userAvatar'),
-            userName: document.getElementById('userName'),
-            nameInput: document.getElementById('nameInput'),
-            emailInput: document.getElementById('emailInput'),
-            loginBtn: document.getElementById('loginBtn'),
-            registerBtn: document.getElementById('registerBtn'),
             messagesContainer: document.getElementById('messagesContainer'),
             messageInput: document.getElementById('messageInput'),
             sendButton: document.getElementById('sendButton'),
+            quotaText: document.getElementById('quotaText'),
+            quotaContainer: document.getElementById('quotaContainer'),
+            profileModal: document.getElementById('profileModal'),
+            supportModal: document.getElementById('supportModal'),
+            profileBtn: document.getElementById('profileBtn'),
+            supportBtn: document.getElementById('supportBtn'),
+            closeSupportModal: document.getElementById('closeSupportModal'),
             supportMessages: document.getElementById('supportMessages'),
             supportInput: document.getElementById('supportInput'),
             sendSupportButton: document.getElementById('sendSupportButton'),
+            profileAvatar: document.getElementById('profileAvatar'),
+            profileName: document.getElementById('profileName'),
+            profileSubscription: document.getElementById('profileSubscription'),
+            subscriptionLevel: document.getElementById('subscriptionLevel'),
+            dailyLimit: document.getElementById('dailyLimit'),
+            remainingMessages: document.getElementById('remainingMessages'),
+            memoryStatus: document.getElementById('memoryStatus'),
+            userId: document.getElementById('userId'),
+            adContainer: document.getElementById('adContainer'),
             notificationContainer: document.getElementById('notificationContainer')
         };
 
         // Initialize Application
         function init() {
-            loadTheme();
             loadUser();
             setupEventListeners();
             setupMessageInput();
-            setupSupportForm();
-            checkConnection();
+            checkDailyLimit();
+            startUpdateInterval();
+            loadAds();
         }
 
-        // Theme Management
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('acioai_theme');
-            if (savedTheme) {
-                setTheme(savedTheme);
-            } else {
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                setTheme(prefersDark ? 'dark' : 'light');
-            }
-        }
-
-        function setTheme(theme) {
-            currentTheme = theme;
-            document.body.setAttribute('data-theme', theme);
-            localStorage.setItem('acioai_theme', theme);
-            
-            const icon = elements.themeToggle.querySelector('i');
-            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-        }
-
-        // User Management
+        // Load User from localStorage
         function loadUser() {
             const userData = localStorage.getItem('acioai_user');
             if (userData) {
                 try {
                     currentUser = JSON.parse(userData);
-                    showChatInterface();
-                    updateUserInfo();
+                    updateQuotaDisplay();
+                    updateProfile();
                 } catch (error) {
                     localStorage.removeItem('acioai_user');
-                    showAuthInterface();
                 }
-            } else {
-                showAuthInterface();
-            }
-        }
-
-        function saveUser(user) {
-            currentUser = user;
-            localStorage.setItem('acioai_user', JSON.stringify(user));
-            showChatInterface();
-            updateUserInfo();
-        }
-
-        function clearUser() {
-            currentUser = null;
-            localStorage.removeItem('acioai_user');
-            showAuthInterface();
-        }
-
-        // Interface Management
-        function showAuthInterface() {
-            elements.authSection.classList.remove('hidden');
-            elements.chatSection.classList.add('hidden');
-            elements.userInfo.classList.add('hidden');
-        }
-
-        function showChatInterface() {
-            elements.authSection.classList.add('hidden');
-            elements.chatSection.classList.remove('hidden');
-            elements.userInfo.classList.remove('hidden');
-            elements.messageInput.focus();
-        }
-
-        function updateUserInfo() {
-            if (currentUser) {
-                const name = currentUser.name || 'کاربر';
-                const firstLetter = name.charAt(0);
-                
-                elements.userName.textContent = name;
-                elements.userAvatar.textContent = firstLetter;
             }
         }
 
@@ -1391,9 +957,7 @@
             });
             
             try {
-                const response = await fetch(url, {
-                    headers: { 'Accept': 'application/json' }
-                });
+                const response = await fetch(url);
                 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -1401,74 +965,21 @@
                 
                 const data = await response.json();
                 
-                if (!data.ok) {
-                    throw new Error(data.error || 'خطا در اجرای درخواست');
+                if (!data.ok && data.error) {
+                    throw new Error(data.error);
                 }
                 
                 return data;
             } catch (error) {
                 console.error('API Request Error:', error);
-                showNotification('خطا در ارتباط با سرور', 'error');
+                handleError(error.message);
                 throw error;
             }
         }
 
-        async function callGPT4(text) {
-            try {
-                const response = await fetch(`${GPT4_API_URL}?text=${encodeURIComponent(text)}`);
-                if (!response.ok) throw new Error('خطا در ارتباط با سرویس');
-                
-                const data = await response.json();
-                return data.result || data.Result || 'پاسخی دریافت نشد';
-            } catch (error) {
-                console.error('GPT4 Error:', error);
-                throw new Error('خطا در دریافت پاسخ از هوش مصنوعی');
-            }
-        }
-
-        // User Actions
-        async function registerUser(name, email) {
-            try {
-                setLoading(true);
-                
-                const data = await apiRequest('register', { name, email });
-                
-                saveUser({
-                    id: data.Result.userId,
-                    name: data.Result.name,
-                    email: email
-                });
-                
-                showNotification('ثبت‌نام با موفقیت انجام شد', 'success');
-            } catch (error) {
-                showNotification(error.message || 'خطا در ثبت‌نام', 'error');
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        async function loginUser(email) {
-            try {
-                setLoading(true);
-                
-                const data = await apiRequest('login', { email });
-                
-                saveUser({
-                    id: data.Result.userId,
-                    name: data.Result.name,
-                    email: email
-                });
-                
-                showNotification('ورود با موفقیت انجام شد', 'success');
-            } catch (error) {
-                showNotification(error.message || 'خطا در ورود', 'error');
-            } finally {
-                setLoading(false);
-            }
-        }
-
+        // Send Message to AI
         async function sendMessage(text) {
-            if (!text.trim() || !currentUser || isTyping) return;
+            if (!text.trim() || !currentUser || isTyping || messageCount >= dailyLimit) return;
             
             // Clear input and disable
             elements.messageInput.value = '';
@@ -1476,99 +987,109 @@
             
             // Add user message
             addMessage(text, 'user');
+            messageCount++;
+            updateQuotaDisplay();
             
             // Show typing indicator
             const typingId = showTypingIndicator();
             
             try {
                 isTyping = true;
+                elements.sendButton.disabled = true;
                 
-                // Try API first
-                let response;
-                try {
-                    response = await apiRequest('chat', {
-                        userid: currentUser.id,
-                        name: currentUser.name,
-                        text: text
-                    });
-                } catch (faqError) {
-                    // If API fails, try GPT4
-                    response = await callGPT4(text);
-                }
+                // Send to API
+                const response = await apiRequest('chat', {
+                    userid: currentUser.id,
+                    name: currentUser.name,
+                    text: text
+                });
                 
                 // Remove typing indicator
                 removeTypingIndicator(typingId);
                 
-                // Get response text
-                const responseText = response.Result || response;
-                
                 // Type response character by character
-                await typeMessage(responseText, 'ai');
+                await typeMessage(response.Result || 'پاسخی دریافت نشد', 'ai');
+                
+                // Load ads every 5 messages
+                if (messageCount % 5 === 0) {
+                    loadAds();
+                }
                 
             } catch (error) {
                 removeTypingIndicator(typingId);
                 addMessage('متأسفانه در دریافت پاسخ مشکلی پیش آمد. لطفاً مجدداً تلاش کنید.', 'ai');
-                showNotification('خطا در دریافت پاسخ', 'error');
             } finally {
                 isTyping = false;
+                elements.sendButton.disabled = false;
                 elements.messageInput.focus();
             }
         }
 
+        // Send Support Message
         async function sendSupportMessage(text) {
             if (!text.trim() || !currentUser) return;
             
             try {
-                setLoading(true, [elements.sendSupportButton]);
-                
                 // Add user message to support chat
                 addSupportMessage(text, 'user');
                 
                 // Send to API
-                await apiRequest('support', {
+                await apiRequest('support_send', {
                     userid: currentUser.id,
                     message: text
                 });
                 
                 elements.supportInput.value = '';
-                showNotification('پیام شما با موفقیت ارسال شد', 'success');
+                showNotification('پیام شما ارسال شد', 'info');
                 
             } catch (error) {
-                showNotification(error.message || 'خطا در ارسال پیام', 'error');
-            } finally {
-                setLoading(false, [elements.sendSupportButton]);
+                showNotification('خطا در ارسال پیام', 'error');
             }
         }
 
-        // Message Management
+        // Fetch Support Messages
+        async function fetchSupportMessages() {
+            if (!currentUser) return;
+            
+            try {
+                const data = await apiRequest('support_fetch', {
+                    userid: currentUser.id
+                });
+                
+                if (data.Result && data.Result.messages) {
+                    updateSupportMessages(data.Result.messages);
+                }
+            } catch (error) {
+                console.error('Failed to fetch support messages:', error);
+            }
+        }
+
+        // Load Ads
+        async function loadAds() {
+            try {
+                const data = await apiRequest('ads');
+                
+                if (data.Result && data.Result.ads) {
+                    displayAds(data.Result.ads);
+                }
+            } catch (error) {
+                console.error('Failed to load ads:', error);
+            }
+        }
+
+        // Message Functions
         function addMessage(text, type = 'ai') {
             const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${type} fade-in`;
-            
-            const time = new Date().toLocaleTimeString('fa-IR', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            
-            // Format text with markdown-like formatting
-            const formattedText = formatMessage(text);
+            messageDiv.className = `message ${type}`;
             
             const avatar = type === 'ai' 
-                ? '<div class="message-avatar"><img src="https://uploadkon.ir/do.php?imgf=626204_26photo-output.jpeg" alt="Acioai Logo"></div>'
-                : '<div class="message-avatar"><div class="user-avatar">' + (currentUser?.name?.charAt(0) || 'U') + '</div></div>';
+                ? '<div class="avatar"><img src="https://uploadkon.ir/do.php?imgf=4fa104_26photo-output.jpeg" alt="Acioai"></div>'
+                : '<div class="avatar">' + (currentUser?.name?.charAt(0) || 'U') + '</div>';
             
             messageDiv.innerHTML = `
-                <div class="message-wrapper">
-                    ${avatar}
-                    <div class="message-content">
-                        <div class="message-text">${formattedText}</div>
-                        <div class="message-meta">
-                            <span class="message-time">${time}</span>
-                            <div class="message-status">
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-                        </div>
-                    </div>
+                ${avatar}
+                <div class="message-content">
+                    <div class="message-text">${formatMessage(text)}</div>
                 </div>
             `;
             
@@ -1580,29 +1101,16 @@
 
         async function typeMessage(text, type = 'ai') {
             const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${type} fade-in`;
-            
-            const time = new Date().toLocaleTimeString('fa-IR', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
+            messageDiv.className = `message ${type}`;
             
             const avatar = type === 'ai' 
-                ? '<div class="message-avatar"><img src="https://uploadkon.ir/do.php?imgf=626204_26photo-output.jpeg" alt="Acioai Logo"></div>'
-                : '<div class="message-avatar"><div class="user-avatar">' + (currentUser?.name?.charAt(0) || 'U') + '</div></div>';
+                ? '<div class="avatar"><img src="https://uploadkon.ir/do.php?imgf=4fa104_26photo-output.jpeg" alt="Acioai"></div>'
+                : '<div class="avatar">' + (currentUser?.name?.charAt(0) || 'U') + '</div>';
             
             messageDiv.innerHTML = `
-                <div class="message-wrapper">
-                    ${avatar}
-                    <div class="message-content">
-                        <div class="message-text"></div>
-                        <div class="message-meta">
-                            <span class="message-time">${time}</span>
-                            <div class="message-status">
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-                        </div>
-                    </div>
+                ${avatar}
+                <div class="message-content">
+                    <div class="message-text"></div>
                 </div>
             `;
             
@@ -1610,25 +1118,18 @@
             
             const textElement = messageDiv.querySelector('.message-text');
             const chars = text.split('');
+            let currentText = '';
             
             // Type character by character
             for (let i = 0; i < chars.length; i++) {
-                const char = chars[i];
-                
-                // Handle special characters and formatting
-                if (char === '\n') {
-                    textElement.innerHTML += '<br>';
-                } else if (char === ' ' && chars[i - 1] === ' ') {
-                    textElement.innerHTML += '&nbsp;';
-                } else {
-                    textElement.textContent += char;
-                }
+                currentText += chars[i];
+                textElement.innerHTML = formatMessage(currentText);
                 
                 // Random typing speed for natural feel
                 await delay(Math.random() * 20 + 10);
                 
                 // Scroll to bottom every few characters
-                if (i % 10 === 0) {
+                if (i % 5 === 0) {
                     scrollToBottom();
                 }
             }
@@ -1637,47 +1138,30 @@
             return messageDiv;
         }
 
-        function formatMessage(text) {
-            // Convert markdown-like formatting to HTML
-            return text
-                .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-                .replace(/`([^`]+)`/g, '<code>$1</code>')
-                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-                .replace(/\*([^*]+)\*/g, '<em>$1</em>')
-                .replace(/\n/g, '<br>')
-                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
-                .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-                .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-                .replace(/^# (.*$)/gm, '<h1>$1</h1>');
-        }
-
         function showTypingIndicator() {
-            const typingDiv = document.createElement('div');
-            typingDiv.className = 'message ai fade-in';
-            typingDiv.id = 'typing-indicator';
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message ai';
+            messageDiv.id = 'typing-indicator';
             
-            typingDiv.innerHTML = `
-                <div class="message-wrapper">
-                    <div class="message-avatar">
-                        <img src="https://uploadkon.ir/do.php?imgf=626204_26photo-output.jpeg" alt="Acioai Logo">
-                    </div>
-                    <div class="message-content">
+            messageDiv.innerHTML = `
+                <div class="avatar">
+                    <img src="https://uploadkon.ir/do.php?imgf=4fa104_26photo-output.jpeg" alt="Acioai">
+                </div>
+                <div class="message-content">
+                    <div class="message-text">
                         <div class="typing-indicator">
-                            <span class="typing-text">Acioai در حال تایپ...</span>
-                            <div class="typing-dots">
-                                <div class="typing-dot"></div>
-                                <div class="typing-dot"></div>
-                                <div class="typing-dot"></div>
-                            </div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
                         </div>
                     </div>
                 </div>
             `;
             
-            elements.messagesContainer.appendChild(typingDiv);
+            elements.messagesContainer.appendChild(messageDiv);
             scrollToBottom();
             
-            return typingDiv.id;
+            return messageDiv.id;
         }
 
         function removeTypingIndicator(id) {
@@ -1689,27 +1173,84 @@
 
         function addSupportMessage(text, type = 'user') {
             const messageDiv = document.createElement('div');
-            messageDiv.className = `support-message ${type === 'user' ? '' : 'admin'}`;
+            messageDiv.className = `support-message ${type}`;
             
-            const time = new Date().toLocaleTimeString('fa-IR', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            
-            const sender = type === 'user' ? 'شما' : 'پشتیبانی Acioai';
-            
-            messageDiv.innerHTML = `
-                <div class="support-message-header">
-                    <span>${sender}</span>
-                    <span>${time}</span>
-                </div>
-                <div class="support-message-text">${text}</div>
-            `;
+            if (type === 'user') {
+                messageDiv.innerHTML = `<div>${text}</div>`;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="support-admin-header">
+                        <div class="admin-avatar">A</div>
+                        <span class="admin-name">Admin</span>
+                        <i class="fas fa-check-circle admin-badge"></i>
+                    </div>
+                    <div>${text}</div>
+                `;
+            }
             
             elements.supportMessages.appendChild(messageDiv);
             elements.supportMessages.scrollTop = elements.supportMessages.scrollHeight;
             
             return messageDiv;
+        }
+
+        // Display Ads
+        function displayAds(ads) {
+            if (!ads || ads.length === 0) {
+                elements.adContainer.classList.add('hidden');
+                return;
+            }
+            
+            elements.adContainer.classList.remove('hidden');
+            
+            const ad = ads[0]; // نمایش اولین تبلیغ
+            elements.adContainer.innerHTML = `
+                <div class="ad-card" onclick="window.open('${ad.link}', '_blank')">
+                    <div class="ad-header">
+                        <div class="ad-icon">
+                            <i class="fas fa-megaphone"></i>
+                        </div>
+                        <div class="ad-title">${ad.title}</div>
+                    </div>
+                    <div class="ad-description">${ad.description}</div>
+                    <button class="ad-button">مشاهده</button>
+                </div>
+            `;
+        }
+
+        // Update Functions
+        function updateQuotaDisplay() {
+            const remaining = dailyLimit - messageCount;
+            elements.quotaText.textContent = `پیام‌های باقی‌مانده امروز: ${remaining}`;
+            
+            if (remaining <= 0) {
+                elements.quotaText.classList.add('quota-warning');
+                elements.quotaText.textContent = 'سهمیه پیام روزانه شما به پایان رسیده است';
+                elements.messageInput.disabled = true;
+                elements.messageInput.placeholder = 'سهمیه روزانه تمام شد';
+            } else {
+                elements.quotaText.classList.remove('quota-warning');
+                elements.messageInput.disabled = false;
+            }
+        }
+
+        function updateProfile() {
+            if (!currentUser) return;
+            
+            elements.profileName.textContent = currentUser.name;
+            elements.profileAvatar.textContent = currentUser.name.charAt(0);
+            elements.userId.textContent = currentUser.id;
+            
+            // اطلاعات دمو
+            elements.subscriptionLevel.textContent = 'Free';
+            elements.profileSubscription.textContent = 'Free';
+            elements.dailyLimit.textContent = '25';
+            elements.remainingMessages.textContent = (25 - messageCount).toString();
+            elements.memoryStatus.textContent = 'غیرفعال';
+        }
+
+        function updateSupportMessages(messages) {
+            // پیاده‌سازی آپدیت پیام‌های پشتیبانی
         }
 
         // UI Helpers
@@ -1723,14 +1264,7 @@
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
             
-            const icon = type === 'success' ? 'check-circle' : 
-                        type === 'error' ? 'exclamation-circle' : 
-                        'info-circle';
-            
             notification.innerHTML = `
-                <div class="notification-icon">
-                    <i class="fas fa-${icon}"></i>
-                </div>
                 <div class="notification-text">${message}</div>
             `;
             
@@ -1746,24 +1280,9 @@
             }, 3000);
         }
 
-        function setLoading(loading, buttons = null) {
-            const btnList = buttons || [elements.loginBtn, elements.registerBtn];
-            
-            btnList.forEach(btn => {
-                if (btn) {
-                    btn.disabled = loading;
-                    if (loading) {
-                        btn.classList.add('loading');
-                    } else {
-                        btn.classList.remove('loading');
-                    }
-                }
-            });
-        }
-
         function updateSendButton() {
             const hasText = elements.messageInput.value.trim().length > 0;
-            elements.sendButton.disabled = !hasText || isTyping;
+            elements.sendButton.disabled = !hasText || isTyping || messageCount >= dailyLimit;
         }
 
         function setupMessageInput() {
@@ -1778,39 +1297,8 @@
             elements.messageInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
-                    if (!isTyping && elements.messageInput.value.trim()) {
+                    if (!isTyping && elements.messageInput.value.trim() && messageCount < dailyLimit) {
                         sendMessage(elements.messageInput.value.trim());
-                    }
-                }
-                
-                // Ctrl/Cmd + / for clearing
-                if (e.key === '/' && (e.ctrlKey || e.metaKey)) {
-                    e.preventDefault();
-                    elements.messageInput.value = '';
-                    updateSendButton();
-                }
-            });
-        }
-
-        function setupSupportForm() {
-            elements.supportInput.addEventListener('input', () => {
-                elements.supportInput.style.height = 'auto';
-                elements.supportInput.style.height = Math.min(elements.supportInput.scrollHeight, 120) + 'px';
-            });
-            
-            elements.sendSupportButton.addEventListener('click', () => {
-                const message = elements.supportInput.value.trim();
-                if (message) {
-                    sendSupportMessage(message);
-                }
-            });
-            
-            elements.supportInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    const message = elements.supportInput.value.trim();
-                    if (message) {
-                        sendSupportMessage(message);
                     }
                 }
             });
@@ -1818,134 +1306,137 @@
 
         // Event Listeners
         function setupEventListeners() {
-            // Theme toggle
-            elements.themeToggle.addEventListener('click', () => {
-                setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+            // Send message
+            elements.sendButton.addEventListener('click', () => {
+                if (!isTyping && elements.messageInput.value.trim() && messageCount < dailyLimit) {
+                    sendMessage(elements.messageInput.value.trim());
+                }
             });
             
-            // Support modal toggle
-            elements.supportToggle.addEventListener('click', () => {
+            // Profile modal
+            elements.profileBtn.addEventListener('click', () => {
+                elements.profileModal.style.display = 'flex';
+                updateProfile();
+            });
+            
+            // Support modal
+            elements.supportBtn.addEventListener('click', () => {
                 if (!currentUser) {
                     showNotification('لطفاً ابتدا وارد شوید', 'error');
                     return;
                 }
                 elements.supportModal.style.display = 'flex';
                 elements.supportInput.focus();
+                startSupportPolling();
             });
             
             elements.closeSupportModal.addEventListener('click', () => {
                 elements.supportModal.style.display = 'none';
+                stopSupportPolling();
             });
             
-            elements.supportModal.addEventListener('click', (e) => {
-                if (e.target === elements.supportModal) {
-                    elements.supportModal.style.display = 'none';
-                }
-            });
-            
-            // Login button
-            elements.loginBtn.addEventListener('click', () => {
-                const email = elements.emailInput.value.trim();
-                if (!validateEmail(email)) {
-                    showNotification('لطفاً یک ایمیل معتبر وارد کنید', 'error');
-                    return;
-                }
-                loginUser(email);
-            });
-            
-            // Register button
-            elements.registerBtn.addEventListener('click', () => {
-                const name = elements.nameInput.value.trim();
-                const email = elements.emailInput.value.trim();
-                
-                if (!name || !email) {
-                    showNotification('لطفاً تمام فیلدها را پر کنید', 'error');
-                    return;
-                }
-                
-                if (!validateEmail(email)) {
-                    showNotification('لطفاً یک ایمیل معتبر وارد کنید', 'error');
-                    return;
-                }
-                
-                registerUser(name, email);
-            });
-            
-            // Send button
-            elements.sendButton.addEventListener('click', () => {
-                if (!isTyping && elements.messageInput.value.trim()) {
-                    sendMessage(elements.messageInput.value.trim());
-                }
-            });
-            
-            // Enter key in auth form
-            [elements.nameInput, elements.emailInput].forEach(input => {
-                input.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        const email = elements.emailInput.value.trim();
-                        if (validateEmail(email)) {
-                            if (elements.nameInput.value.trim()) {
-                                elements.registerBtn.click();
-                            } else {
-                                elements.loginBtn.click();
-                            }
+            // Close modals on outside click
+            [elements.profileModal, elements.supportModal].forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                        if (modal === elements.supportModal) {
+                            stopSupportPolling();
                         }
                     }
                 });
             });
             
-            // Double click on logo to logout
-            document.querySelector('.logo').addEventListener('dblclick', () => {
-                if (currentUser && confirm('آیا می‌خواهید خارج شوید؟')) {
-                    clearUser();
-                    showNotification('خروج با موفقیت انجام شد', 'success');
+            // Send support message
+            elements.sendSupportButton.addEventListener('click', () => {
+                if (elements.supportInput.value.trim()) {
+                    sendSupportMessage(elements.supportInput.value.trim());
                 }
             });
             
-            // Check for connection
-            window.addEventListener('online', checkConnection);
-            window.addEventListener('offline', () => {
-                showNotification('اتصال اینترنت قطع شد', 'error');
-            });
-            
-            // Close modal with Escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    elements.supportModal.style.display = 'none';
-                }
-                
-                // Ctrl/Cmd + K to focus input
-                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            elements.supportInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
-                    if (currentUser) {
-                        elements.messageInput.focus();
-                    } else {
-                        elements.emailInput.focus();
+                    if (elements.supportInput.value.trim()) {
+                        sendSupportMessage(elements.supportInput.value.trim());
                     }
                 }
             });
         }
 
-        // Validation
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
+        // Support Polling
+        function startSupportPolling() {
+            supportInterval = setInterval(fetchSupportMessages, 10000); // هر 10 ثانیه
+        }
+
+        function stopSupportPolling() {
+            if (supportInterval) {
+                clearInterval(supportInterval);
+                supportInterval = null;
+            }
+        }
+
+        // Update Interval (هر 1 ثانیه)
+        function startUpdateInterval() {
+            updateInterval = setInterval(() => {
+                // آپدیت کووتا و دیگر اطلاعات
+                updateQuotaDisplay();
+            }, 1000);
         }
 
         // Utility Functions
+        function formatMessage(text) {
+            return text
+                .replace(/\n/g, '<br>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        }
+
         function delay(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
 
-        function checkConnection() {
-            if (!navigator.onLine) {
-                showNotification('اتصال اینترنت قطع شد', 'error');
+        function checkDailyLimit() {
+            const today = new Date().toDateString();
+            const lastReset = localStorage.getItem('acioai_last_reset');
+            
+            if (lastReset !== today) {
+                messageCount = 0;
+                localStorage.setItem('acioai_last_reset', today);
+                localStorage.setItem('acioai_message_count', '0');
+            } else {
+                const savedCount = localStorage.getItem('acioai_message_count');
+                messageCount = savedCount ? parseInt(savedCount) : 0;
             }
+            
+            updateQuotaDisplay();
+        }
+
+        function handleError(error) {
+            let message = 'خطا در ارتباط با سرور';
+            
+            if (error.includes('DAILY_LIMIT')) {
+                message = 'سهمیه پیام روزانه شما تمام شده است';
+                messageCount = dailyLimit;
+                updateQuotaDisplay();
+            } else if (error.includes('NETWORK')) {
+                message = 'اتصال اینترنت خود را بررسی کنید';
+            } else if (error.includes('SYSTEM_OFFLINE')) {
+                message = 'سیستم موقتاً در دسترس نیست';
+            }
+            
+            showNotification(message, 'error');
+        }
+
+        // Save message count to localStorage
+        function saveMessageCount() {
+            localStorage.setItem('acioai_message_count', messageCount.toString());
         }
 
         // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', init);
+        
+        // Save message count before unload
+        window.addEventListener('beforeunload', saveMessageCount);
     </script>
 </body>
 </html>
